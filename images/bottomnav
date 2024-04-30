@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+
+class discount extends StatefulWidget {
+  const discount({super.key});
+
+  @override
+  State<discount> createState() => _discountState();
+}
+
+class _discountState extends State<discount> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      
+       margin: EdgeInsets.all(30),
+      decoration: BoxDecoration(color: Colors.black, border: Border.all(width: 0.5), ),
+      child: Row(children: [
+        ListTile(
+          title: Text("Earn up to 5% APR",style: TextStyle(fontSize: 30),),
+
+        ),
+       Column(
+         mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+        
+        
+
+
+         Image.asset("images/discount.png")
+       ],
+
+       )
+
+
+
+
+      ],
+
+
+      ),
+
+
+    );
+  }
+}

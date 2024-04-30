@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "631972301685",
+    "firebase_url": "https://naqla-d42d2-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "naqla-d42d2",
+    "storage_bucket": "naqla-d42d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631972301685:android:b4d749f44072ceec3de13c",
+        "android_client_info": {
+          "package_name": "com.example.graduation"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWRZ3SONosQRbDgCsbroYZR3vQrs9ytfs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
