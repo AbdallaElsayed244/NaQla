@@ -65,7 +65,7 @@ class _UserLoginState extends State<UserLogin> {
                     ),
                   ),
                   const Text(
-                    "Sign in to continue.",
+                    "Sign in to continue as user.",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 17,
@@ -112,7 +112,7 @@ class _UserLoginState extends State<UserLogin> {
                         try {
                           await LoginUser();
                           Navigator.of(context).push(PageAnimationTransition(
-                              page: const Orderinfo(),
+                              page: const Frieght(),
                               pageAnimationType: ScaleAnimationTransition()));
                           // Handle successful user creation (optional)
                         } on FirebaseAuthException catch (e) {

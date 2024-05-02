@@ -28,7 +28,7 @@ if (flutterVersionName == null) {
 android {
     namespace "com.example.graduation"
     compileSdkVersion flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
+    ndkVersion "25.1.8937393"
 
 
     compileOptions {
@@ -53,6 +53,7 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+       
     }
 
     buildTypes {

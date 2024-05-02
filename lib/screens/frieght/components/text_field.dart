@@ -4,8 +4,13 @@ class TextFrieght extends StatelessWidget {
   final String name;
   final Function()? navigate;
   final TextInputType type;
+  final TextEditingController? controller;
   const TextFrieght(
-      {super.key, required this.name, this.navigate, required this.type});
+      {super.key,
+      required this.name,
+      this.navigate,
+      required this.type,
+      this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +21,8 @@ class TextFrieght extends StatelessWidget {
           color: Colors.grey[200], borderRadius: BorderRadius.circular(20)),
       width: 350,
       height: 70,
-      child: TextField(
+      child: TextFormField(
+          controller: controller,
           textInputAction: TextInputAction.done,
           keyboardType: type,
           decoration: InputDecoration(

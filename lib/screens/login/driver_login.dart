@@ -65,7 +65,7 @@ class _DriverLoginState extends State<DriverLogin> {
                     ),
                   ),
                   const Text(
-                    "Sign in to continue.",
+                    "Sign in to continue as Driver.",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 17,
@@ -112,7 +112,7 @@ class _DriverLoginState extends State<DriverLogin> {
                         try {
                           await LoginUser();
                           Navigator.of(context).push(PageAnimationTransition(
-                              page: const Orders(),
+                              page: Orders(),
                               pageAnimationType: ScaleAnimationTransition()));
                           // Handle successful user creation (optional)
                         } on FirebaseAuthException catch (e) {

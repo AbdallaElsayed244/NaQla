@@ -2,12 +2,19 @@
 
 import 'dart:io';
 
+import 'package:Mowasil/helper/controllers/signup_ctrl.dart';
+import 'package:Mowasil/helper/models/users.dart';
 import 'package:Mowasil/helper/show_snack_bar.dart';
-import 'package:Mowasil/screens/login/2driver_reg.dart';
+import 'package:Mowasil/screens/OrdersList/main.dart';
 import 'package:Mowasil/screens/login/components/custom_scaffold.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -25,24 +32,86 @@ class _DriverRegState extends State<DriverReg> {
   GlobalKey<FormState> formkey = GlobalKey();
   File? _image1;
   File? _image2;
+  File? _image3;
+  File? _image4;
   String? phone;
   String? password;
-  String? username;
+  String? email;
   bool isloading = false;
   final picker = ImagePicker();
+  final controller = Get.put(SignupCtrl());
+  String imageUrl1 = "";
+  String imageUrl2 = "";
+  String imageUrl3 = "";
+  String imageUrl4 = "";
 
   Future getImageGallery(int containerIndex) async {
     final XFile? pickedFile = await picker.pickImage(
       source: ImageSource.gallery,
       imageQuality: 80,
     );
+    print("${pickedFile?.path}");
+    if (pickedFile == null) return;
+
+    setState(() {
+      isloading = true; // Set loading state to true
+    });
+
+    Reference refrenceRoot = FirebaseStorage.instance.ref();
+    Reference referenceDirImages = refrenceRoot.child("images");
+
+    String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+
+    Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
+    try {
+      await referenceImageToUpload.putFile(File(pickedFile!.path));
+      if (containerIndex == 1) {
+        setState(() {
+          isloading = true; // Set loading state to true
+        });
+        imageUrl1 = await referenceImageToUpload.getDownloadURL();
+        setState(() {
+          isloading = false; // Set loading state to true
+        });
+      } else if (containerIndex == 2) {
+        setState(() {
+          isloading = true; // Set loading state to true
+        });
+        imageUrl2 = await referenceImageToUpload.getDownloadURL();
+        setState(() {
+          isloading = false; // Set loading state to true
+        });
+      } else if (containerIndex == 3) {
+        setState(() {
+          isloading = true; // Set loading state to true
+        });
+        imageUrl3 = await referenceImageToUpload.getDownloadURL();
+        setState(() {
+          isloading = false; // Set loading state to true
+        });
+      } else if (containerIndex == 4) {
+        setState(() {
+          isloading = true; // Set loading state to true
+        });
+        imageUrl4 = await referenceImageToUpload.getDownloadURL();
+        setState(() {
+          isloading = false; // Set loading state to true
+        });
+      }
+    } catch (e) {
+      showSnackBar(context, "erorr occourd");
+    }
+
     if (pickedFile != null) {
-      // Check for null
       setState(() {
         if (containerIndex == 1) {
-          _image1 = File(pickedFile.path); // Access path from XFile
-        } else {
+          _image1 = File(pickedFile.path);
+        } else if (containerIndex == 2) {
           _image2 = File(pickedFile.path);
+        } else if (containerIndex == 3) {
+          _image3 = File(pickedFile.path);
+        } else if (containerIndex == 4) {
+          _image4 = File(pickedFile.path);
         }
       });
     } else {
@@ -52,6 +121,7 @@ class _DriverRegState extends State<DriverReg> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context);
     return ModalProgressHUD(
       inAsyncCall: isloading,
       child: Scaffold(
@@ -60,7 +130,7 @@ class _DriverRegState extends State<DriverReg> {
           child: Column(
             children: [
               Expanded(
-                  flex: 7,
+                  flex: 2,
                   child: Container(
                     padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                     decoration: BoxDecoration(
@@ -94,7 +164,8 @@ class _DriverRegState extends State<DriverReg> {
                                   height: 120,
                                   width: 150,
                                   decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black12),
+                                      border:
+                                          Border.all(color: Color(0xff3F6596)),
                                       borderRadius: BorderRadius.circular(0)),
                                   child: _image1 != null
                                       ? Image.file(
@@ -112,23 +183,24 @@ class _DriverRegState extends State<DriverReg> {
                             ),
                             Text("Profile Photo",
                                 style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.bold)),
+                                    fontSize: 23, fontWeight: FontWeight.bold)),
                             SizedBox(
                               height: 13,
                             ),
                             TextFormField(
+                              controller: controller.email,
                               onChanged: (data) {
-                                username = data;
+                                email = data;
                               },
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return "Please enter user name";
+                                  return "Please enter email";
                                 }
                                 return null;
                               },
                               decoration: InputDecoration(
-                                  label: Text("User Name"),
-                                  hintText: "enter user name",
+                                  label: Text("email"),
+                                  hintText: "enter email",
                                   hintStyle: TextStyle(
                                       color: Color.fromARGB(247, 90, 94, 98)),
                                   border: OutlineInputBorder(
@@ -148,6 +220,7 @@ class _DriverRegState extends State<DriverReg> {
                               height: 13,
                             ),
                             TextFormField(
+                              controller: controller.passowrd,
                               obscureText: true,
                               obscuringCharacter: "*",
                               validator: (value) {
@@ -210,38 +283,154 @@ class _DriverRegState extends State<DriverReg> {
                                   )),
                             ),
                             SizedBox(
-                              height: 13,
+                              height: 33,
                             ),
-                            Center(
-                              child: InkWell(
-                                onTap: () {
-                                  getImageGallery(2);
-                                },
-                                child: Container(
-                                  height: 180,
-                                  width: 350,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black12),
-                                      borderRadius: BorderRadius.circular(0)),
-                                  child: _image2 != null
-                                      ? Image.file(
-                                          _image2!.absolute,
-                                          fit: BoxFit.cover,
-                                        )
-                                      : Center(
-                                          child: Icon(
-                                            Icons.add_photo_alternate_outlined,
-                                            size: 35,
+                            Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Flexible(
+                                      // Use Flexible for responsive width
+                                      child: Column(
+                                        children: [
+                                          Center(
+                                            child: InkWell(
+                                              onTap: () {
+                                                getImageGallery(2);
+                                              },
+                                              child: Container(
+                                                height: 85
+                                                    .h, // Use ScreenUtil for responsive height
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Color(0xff3F6596)),
+                                                  borderRadius:
+                                                      BorderRadius.circular(0),
+                                                ),
+                                                child: _image2 != null
+                                                    ? Image.file(
+                                                        _image2!.absolute,
+                                                        fit: BoxFit.cover,
+                                                      )
+                                                    : Center(
+                                                        child: Icon(
+                                                          Icons
+                                                              .add_photo_alternate_outlined,
+                                                          size: 30
+                                                              .sp, // Use ScreenUtil for responsive icon size
+                                                        ),
+                                                      ),
+                                              ),
+                                            ),
                                           ),
-                                        ),
+                                          SizedBox(
+                                              height: 13
+                                                  .h), // Use ScreenUtil for responsive spacing
+                                          Text(
+                                            "National Card",
+                                            style: TextStyle(
+                                                fontSize: 23.sp,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                        width: 20
+                                            .w), // Use ScreenUtil for responsive spacing
+                                    Flexible(
+                                      // Use Flexible for responsive width
+                                      child: Column(
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              getImageGallery(
+                                                  3); // Pass 1 for container 1
+                                            },
+                                            child: Container(
+                                              height: 85
+                                                  .h, // Use ScreenUtil for responsive height
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Color(0xff3F6596)),
+                                                borderRadius:
+                                                    BorderRadius.circular(0),
+                                              ),
+                                              child: _image3 != null
+                                                  ? Image.file(
+                                                      _image3!.absolute,
+                                                      fit: BoxFit.cover,
+                                                    )
+                                                  : Center(
+                                                      child: Icon(
+                                                        Icons
+                                                            .add_photo_alternate_outlined,
+                                                        size: 30
+                                                            .sp, // Use ScreenUtil for responsive icon size
+                                                      ),
+                                                    ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                              height: 13
+                                                  .h), // Use ScreenUtil for responsive spacing
+                                          Text(
+                                            "Driver License",
+                                            style: TextStyle(
+                                                fontSize: 23.sp,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
+                                SizedBox(
+                                  height: 23,
+                                ),
+                                Center(
+                                  child: InkWell(
+                                    onTap: () {
+                                      getImageGallery(
+                                          4); // Pass 2 for container 2
+                                    },
+                                    child: Container(
+                                      height: 150,
+                                      width: 180,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Color(0xff3F6596)),
+                                        borderRadius: BorderRadius.circular(0),
+                                      ),
+                                      child: _image4 != null
+                                          ? Image.file(
+                                              _image4!.absolute,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Center(
+                                              child: Icon(
+                                                Icons
+                                                    .add_photo_alternate_outlined,
+                                                size: 50,
+                                              ),
+                                            ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Text(
+                                  "Certificate of Vehicle Registration",
+                                  style: TextStyle(
+                                      fontSize: 23,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
                             ),
-                            Text("National Card",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold)),
                             SizedBox(
-                              height: 10,
+                              height: 25,
                             ),
                             SizedBox(
                               width: 240,
@@ -254,11 +443,25 @@ class _DriverRegState extends State<DriverReg> {
                                     try {
                                       await registerUser();
 
+                                      final user = UserModel(
+                                          nationalcard: imageUrl2,
+                                          license: imageUrl3,
+                                          vehiclereg: imageUrl4,
+                                          email: controller.email.text.trim(),
+                                          username:
+                                              controller.username.text.trim(),
+                                          profilePhoto: imageUrl1);
+                                      SignupCtrl.instance.CreateUser(user);
+                                      showSnackBar(
+                                          context, "Registration Successful");
+
                                       Navigator.of(context).push(
                                           PageAnimationTransition(
-                                              page: const ndPageDriver(),
+                                              page: Orders(),
                                               pageAnimationType:
                                                   RightToLeftTransition()));
+                                      showSnackBar(
+                                          context, "Registration Successful");
                                       // Handle successful user creation (optional)
                                     } on FirebaseAuthException catch (e) {
                                       if (e.code == 'weak-password') {
@@ -277,7 +480,7 @@ class _DriverRegState extends State<DriverReg> {
                                   } else {}
                                 },
                                 child: Text(
-                                  "Next ➜",
+                                  "Create Account",
                                   style: TextStyle(
                                       fontSize: 23,
                                       color:
@@ -309,6 +512,6 @@ class _DriverRegState extends State<DriverReg> {
 
   Future<void> registerUser() async {
     UserCredential user = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: username!, password: password!);
+        .createUserWithEmailAndPassword(email: email!, password: password!);
   }
 }

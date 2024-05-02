@@ -35,11 +35,11 @@ class Brand extends StatelessWidget {
               ),
             ),
             Text(
-              "مُوَصِل  Mowasil",
+              'نَقْلة  NaQla',
               style: TextStyle(
                 fontFamily: "organetto-light",
                 color: Colors.white,
-                fontSize: adaptFontSize(maxHeight),
+                fontSize: adaptFontSize(maxHeight * 1.5),
                 height: 2,
               ),
             ),

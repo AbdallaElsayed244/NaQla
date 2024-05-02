@@ -1,4 +1,5 @@
 import 'package:Mowasil/helper/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:Mowasil/screens/HomeScreen/components/Brand.dart';
 import 'package:animate_gradient/animate_gradient.dart';
@@ -25,14 +26,18 @@ class BackGround extends StatelessWidget {
           BackgroundColor,
         ],
         secondaryColors: const [Color(0xff5994C0), Color(0xff5994C0)],
-        child: Row(
-          children: [
-            Container(
+        child: Padding(
+          padding: EdgeInsets.only(top: screenHeight / 70),
+          child: Row(
+            children: [
+              Container(
                 decoration: const BoxDecoration(),
                 width: screenWeight / 1.01,
                 height: screenHeight / .9,
-                child: const Brand()),
-          ],
+                child: const Brand(),
+              ),
+            ],
+          ),
         ),
       ),
     );

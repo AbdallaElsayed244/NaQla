@@ -27,7 +27,7 @@ class _NewAccountState extends State<NewAccount> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     // Adjust font size based on screen width.
-    double fontSize = screenWidth < 800 ? 22 : 20;
+    double fontSize = screenWidth < 100 ? 22 : 20;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,

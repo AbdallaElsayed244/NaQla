@@ -1,19 +1,15 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
-// ignore: avoid_web_libraries_in_flutter
-
+import 'dart:io';
 import 'package:Mowasil/helper/app_colors.dart';
-import 'package:Mowasil/screens/OrdersList/main.dart';
+import 'package:Mowasil/helper/show_snack_bar.dart';
 import 'package:Mowasil/screens/frieght/components/text_field.dart';
 import 'package:Mowasil/screens/login/maps/googlemap.dart';
-
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:page_animation_transition/animations/scale_animation_transition.dart';
 import 'package:page_animation_transition/page_animation_transition.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
-
 import '../oder_info/orderinfo.dart';
 
 class Frieght extends StatefulWidget {
@@ -24,7 +20,61 @@ class Frieght extends StatefulWidget {
 }
 
 class _FrieghtState extends State<Frieght> {
+  TextEditingController nameController = new TextEditingController();
+  TextEditingController ageController = new TextEditingController();
+  TextEditingController locationController = new TextEditingController();
   final GlobalKey<_FrieghtState> dropDownTextFieldKey = GlobalKey();
+
+  File? _image1;
+
+  bool isloading = false;
+  final picker = ImagePicker();
+
+  String imageUrl1 = "";
+
+  Future getImageGallery(int containerIndex) async {
+    final XFile? pickedFile = await picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 80,
+    );
+    print("${pickedFile?.path}");
+    if (pickedFile == null) return;
+
+    setState(() {
+      isloading = true; // Set loading state to true
+    });
+
+    Reference refrenceRoot = FirebaseStorage.instance.ref();
+    Reference referenceDirImages = refrenceRoot.child("images");
+
+    String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+
+    Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
+    try {
+      await referenceImageToUpload.putFile(File(pickedFile!.path));
+      if (containerIndex == 1) {
+        setState(() {
+          isloading = true; // Set loading state to true
+        });
+        imageUrl1 = await referenceImageToUpload.getDownloadURL();
+        setState(() {
+          isloading = false; // Set loading state to true
+        });
+      }
+    } catch (e) {
+      showSnackBar(context, "erorr occourd");
+    }
+
+    if (pickedFile != null) {
+      setState(() {
+        if (containerIndex == 1) {
+          _image1 = File(pickedFile.path);
+        }
+      });
+    } else {
+      print("No Image Picked");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +102,7 @@ class _FrieghtState extends State<Frieght> {
                 ),
                 TextFrieght(
                     type: TextInputType.streetAddress,
+                    controller: locationController,
                     name: "Destination",
                     navigate: () {}),
                 TextFrieght(
@@ -108,6 +159,60 @@ class _FrieghtState extends State<Frieght> {
                     type: TextInputType.number,
                     name: "Offer Your Car",
                     navigate: () {}),
+                Padding(
+                  padding: const EdgeInsets.only(left: 80),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            "Picture of your cargo",
+                            style: TextStyle(
+                                fontSize: 19,
+                                color: const Color.fromARGB(255, 29, 28, 28),
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Container(
+                            width: 150,
+                            height: 150,
+                            child: Center(
+                              child: InkWell(
+                                onTap: () {
+                                  getImageGallery(1);
+                                },
+                                child: Container(
+                                  height: 85
+                                      .h, // Use ScreenUtil for responsive height
+                                  decoration: BoxDecoration(
+                                    border:
+                                        Border.all(color: Color(0xff3F6596)),
+                                    borderRadius: BorderRadius.circular(0),
+                                  ),
+                                  child: _image1 != null
+                                      ? Image.file(
+                                          _image1!.absolute,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Center(
+                                          child: Icon(
+                                            Icons.add_photo_alternate_outlined,
+                                            size: 30
+                                                .sp, // Use ScreenUtil for responsive icon size
+                                          ),
+                                        ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(PageAnimationTransition(

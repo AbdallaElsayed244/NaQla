@@ -35,7 +35,7 @@ class CustomScaffold extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height / 1.6,
             decoration: BoxDecoration(
-              color: Color(0xff3F6596),
+              color: BackgroundColor,
               borderRadius: BorderRadius.circular(70),
             ),
           ),

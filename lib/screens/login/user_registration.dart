@@ -2,12 +2,18 @@
 
 import 'dart:io';
 
+import 'package:Mowasil/helper/controllers/signup_ctrl.dart';
+import 'package:Mowasil/helper/models/users.dart';
 import 'package:Mowasil/helper/show_snack_bar.dart';
-import 'package:Mowasil/screens/login/2driver_reg.dart';
+
 import 'package:Mowasil/screens/login/components/custom_scaffold.dart';
+import 'package:Mowasil/screens/oder_info/orderinfo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -30,12 +36,27 @@ class _UserRegState extends State<UserReg> {
   String? email;
   bool isloading = false;
   final picker = ImagePicker();
+  final controller = Get.put(SignupCtrl());
+  String imageUrl = "";
 
   Future getImageGallery(int containerIndex) async {
     final XFile? pickedFile = await picker.pickImage(
       source: ImageSource.gallery,
       imageQuality: 80,
     );
+    print("${pickedFile?.path}");
+    if (pickedFile == null) return;
+    Reference refrenceRoot = FirebaseStorage.instance.ref();
+    Reference referenceDirImages = refrenceRoot.child("images");
+
+    String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+
+    Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
+    try {
+      await referenceImageToUpload.putFile(File(pickedFile!.path));
+      imageUrl = await referenceImageToUpload.getDownloadURL();
+    } catch (e) {}
+
     if (pickedFile != null) {
       // Check for null
       setState(() {
@@ -117,6 +138,7 @@ class _UserRegState extends State<UserReg> {
                               height: 13,
                             ),
                             TextFormField(
+                              controller: controller.email,
                               onChanged: (data) {
                                 email = data;
                               },
@@ -148,6 +170,7 @@ class _UserRegState extends State<UserReg> {
                               height: 13,
                             ),
                             TextFormField(
+                              controller: controller.passowrd,
                               obscureText: true,
                               obscuringCharacter: "*",
                               validator: (value) {
@@ -226,9 +249,25 @@ class _UserRegState extends State<UserReg> {
                                     try {
                                       await registerUser();
 
+                                      final user = UserModel(
+                                          nationalcard: controller
+                                              .nationalcard.text
+                                              .trim(),
+                                          license:
+                                              controller.license.text.trim(),
+                                          vehiclereg:
+                                              controller.vehiclereg.text.trim(),
+                                          email: controller.email.text.trim(),
+                                          username:
+                                              controller.username.text.trim(),
+                                          profilePhoto: controller
+                                              .profilePhoto.text
+                                              .trim());
+                                      SignupCtrl.instance.CreateUser(user);
+
                                       Navigator.of(context).push(
                                           PageAnimationTransition(
-                                              page: const ndPageDriver(),
+                                              page: Orderinfo(),
                                               pageAnimationType:
                                                   RightToLeftTransition()));
                                       // Handle successful user creation (optional)
