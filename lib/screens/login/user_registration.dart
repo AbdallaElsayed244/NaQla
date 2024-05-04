@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructorimport 'dart:io';
 
 import 'dart:io';
 
@@ -8,13 +8,11 @@ import 'package:Mowasil/helper/show_snack_bar.dart';
 
 import 'package:Mowasil/screens/login/components/custom_scaffold.dart';
 import 'package:Mowasil/screens/oder_info/orderinfo.dart';
+import 'package:Mowasil/screens/phoneVerif/phone_verif_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:page_animation_transition/animations/right_to_left_transition.dart';
@@ -30,7 +28,6 @@ class UserReg extends StatefulWidget {
 class _UserRegState extends State<UserReg> {
   GlobalKey<FormState> formkey = GlobalKey();
   File? _image1;
-  File? _image2;
   String? phone;
   String? password;
   String? email;
@@ -45,7 +42,12 @@ class _UserRegState extends State<UserReg> {
       imageQuality: 80,
     );
     print("${pickedFile?.path}");
-    if (pickedFile == null) return;
+    if (pickedFile == null) {
+      isloading = false; // Set isloading to false if no image is picked
+      setState(() {});
+      return;
+    }
+
     Reference refrenceRoot = FirebaseStorage.instance.ref();
     Reference referenceDirImages = refrenceRoot.child("images");
 
@@ -55,15 +57,15 @@ class _UserRegState extends State<UserReg> {
     try {
       await referenceImageToUpload.putFile(File(pickedFile!.path));
       imageUrl = await referenceImageToUpload.getDownloadURL();
-    } catch (e) {}
+    } catch (e) {
+      showSnackBar(context.mounted as BuildContext, "erorr occourd");
+    }
 
     if (pickedFile != null) {
       // Check for null
       setState(() {
         if (containerIndex == 1) {
           _image1 = File(pickedFile.path); // Access path from XFile
-        } else {
-          _image2 = File(pickedFile.path);
         }
       });
     } else {
@@ -122,7 +124,7 @@ class _UserRegState extends State<UserReg> {
                                           _image1!.absolute,
                                           fit: BoxFit.cover,
                                         )
-                                      : Center(
+                                      : const Center(
                                           child: Icon(
                                             Icons.add_photo_alternate_outlined,
                                             size: 35,
@@ -204,12 +206,25 @@ class _UserRegState extends State<UserReg> {
                               height: 13,
                             ),
                             TextFormField(
+                              controller: controller.phone,
                               onChanged: (data) {
-                                phone = data;
+                                formkey.currentState?.validate();
+                                // Check if the entered phone number doesn't start with the country code
+                                if (!data.startsWith("+2") &&
+                                    !data.startsWith("01")) {
+                                  // If not, add the Egypt country code
+                                  controller.phone.text = "+2$data";
+                                }
+                                phone = controller.phone
+                                    .text; // Update phone variable if needed
                               },
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return "Please enter phone";
+                                } else if (!RegExp(
+                                        r'^(\+201|01|00201)[0-2,5]{1}[0-9]{8}$')
+                                    .hasMatch(value)) {
+                                  return "Please enter valid phone number";
                                 }
                                 return null;
                               },
@@ -248,6 +263,9 @@ class _UserRegState extends State<UserReg> {
                                     setState(() {});
                                     try {
                                       await registerUser();
+                                      await phoneauth(
+                                        controller.phone.text.trim(),
+                                      );
 
                                       final user = UserModel(
                                           nationalcard: controller
@@ -260,14 +278,12 @@ class _UserRegState extends State<UserReg> {
                                           email: controller.email.text.trim(),
                                           username:
                                               controller.username.text.trim(),
-                                          profilePhoto: controller
-                                              .profilePhoto.text
-                                              .trim());
+                                          profilePhoto: imageUrl);
                                       SignupCtrl.instance.CreateUser(user);
 
                                       Navigator.of(context).push(
                                           PageAnimationTransition(
-                                              page: Orderinfo(),
+                                              page: PhoneVerfU(),
                                               pageAnimationType:
                                                   RightToLeftTransition()));
                                       // Handle successful user creation (optional)
@@ -321,5 +337,9 @@ class _UserRegState extends State<UserReg> {
   Future<void> registerUser() async {
     UserCredential user = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email!, password: password!);
+  }
+
+  Future<void> phoneauth(String phone) async {
+    await SignupCtrl.instance.phoneAuth(phone);
   }
 }

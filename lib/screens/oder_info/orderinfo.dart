@@ -1,8 +1,7 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, sort_child_properties_last, prefer_const_literals_to_create_immutables, unused_local_variable, deprecated_member_use, unused_import, avoid_web_libraries_in_flutter, unnecessary_import, use_super_parameters, must_be_immutable
 
 import 'package:Mowasil/helper/app_colors.dart';
-import 'package:Mowasil/screens/OrdersList/components/order.dart';
-import 'package:Mowasil/screens/OrdersList/components/orderData.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';

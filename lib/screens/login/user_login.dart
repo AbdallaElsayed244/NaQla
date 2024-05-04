@@ -1,5 +1,6 @@
 import 'package:Mowasil/helper/show_snack_bar.dart';
-import 'package:Mowasil/screens/OrdersList/main.dart';
+import 'package:Mowasil/screens/HomeScreen/home_screen.dart';
+import 'package:Mowasil/screens/OrdersList/Order.dart';
 import 'package:Mowasil/screens/frieght/frieght_page.dart';
 import 'package:Mowasil/screens/login/components/new_account.dart';
 import 'package:Mowasil/screens/login/components/text_fields.dart';
@@ -7,6 +8,8 @@ import 'package:Mowasil/screens/login/components/login_button.dart';
 import 'package:Mowasil/screens/oder_info/orderinfo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:page_animation_transition/animations/right_to_left_transition.dart';
 import 'package:page_animation_transition/animations/scale_animation_transition.dart';
@@ -110,24 +113,51 @@ class _UserLoginState extends State<UserLogin> {
                         isloading = true;
                         setState(() {});
                         try {
-                          await LoginUser();
-                          Navigator.of(context).push(PageAnimationTransition(
+                          await LoginUser(context);
+                          Navigator.of(context).push(
+                            PageAnimationTransition(
                               page: const Frieght(),
-                              pageAnimationType: ScaleAnimationTransition()));
+                              pageAnimationType: ScaleAnimationTransition(),
+                            ),
+                          );
                           // Handle successful user creation (optional)
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'user-not-found') {
-                            showSnackBar(context, "email not registerd");
+                            Fluttertoast.showToast(
+                                msg: "email not found",
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor:
+                                    Color.fromARGB(255, 55, 102, 172),
+                                textColor: Colors.white,
+                                fontSize: 16.0);
                           } else if (e.code == 'wrong-password') {
-                            showSnackBar(context, "wrong password");
+                            Fluttertoast.showToast(
+                                msg: "wrong-password",
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor:
+                                    Color.fromARGB(255, 55, 102, 172),
+                                textColor: Colors.white,
+                                fontSize: 16.0);
                           }
                         } catch (e) {
-                          showSnackBar(
-                              context, "You must enter email and password");
+                          // ignore: use_build_context_synchronously
+                          Fluttertoast.showToast(
+                              msg: "erorr occourd",
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor:
+                                  Color.fromARGB(255, 55, 102, 172),
+                              textColor: Colors.white,
+                              fontSize: 16.0);
                         }
                         isloading = false;
                         setState(() {});
-                      } else {}
+                      }
                     },
                   ),
                 ],
@@ -139,7 +169,7 @@ class _UserLoginState extends State<UserLogin> {
     );
   }
 
-  Future<void> LoginUser() async {
+  Future<void> LoginUser(BuildContext context) async {
     UserCredential user = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email!, password: password!);
   }

@@ -1,5 +1,5 @@
 import 'package:Mowasil/helper/show_snack_bar.dart';
-import 'package:Mowasil/screens/OrdersList/main.dart';
+import 'package:Mowasil/screens/OrdersList/Order.dart';
 import 'package:Mowasil/screens/frieght/frieght_page.dart';
 import 'package:Mowasil/screens/login/components/new_account.dart';
 import 'package:Mowasil/screens/login/components/text_fields.dart';
@@ -7,6 +7,7 @@ import 'package:Mowasil/screens/login/components/login_button.dart';
 import 'package:Mowasil/screens/oder_info/orderinfo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:page_animation_transition/animations/right_to_left_transition.dart';
 import 'package:page_animation_transition/animations/scale_animation_transition.dart';
@@ -116,14 +117,39 @@ class _DriverLoginState extends State<DriverLogin> {
                               pageAnimationType: ScaleAnimationTransition()));
                           // Handle successful user creation (optional)
                         } on FirebaseAuthException catch (e) {
-                          if (e.code == 'user-not-found') {
-                            showSnackBar(context, "email not registerd");
-                          } else if (e.code == 'wrong-password') {
-                            showSnackBar(context, "wrong password");
+                          if (e == 'user-not-found') {
+                            print(e.code);
+                            Fluttertoast.showToast(
+                                msg: "email not found",
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor:
+                                    Color.fromARGB(255, 55, 102, 172),
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          } else if (e == 'wrong-password') {
+                            print(e.code);
+                            Fluttertoast.showToast(
+                                msg: "wrong-password",
+                                toastLength: Toast.LENGTH_LONG,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor:
+                                    Color.fromARGB(255, 55, 102, 172),
+                                textColor: Colors.white,
+                                fontSize: 16.0);
                           }
                         } catch (e) {
-                          showSnackBar(
-                              context, "You must enter email and password");
+                          Fluttertoast.showToast(
+                              msg: "erorr occourd",
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor:
+                                  Color.fromARGB(255, 55, 102, 172),
+                              textColor: Colors.white,
+                              fontSize: 16.0);
                         }
                         isloading = false;
                         setState(() {});

@@ -90,4 +90,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'naqla-d42d2.appspot.com',
     measurementId: 'G-FC7DYBC7KE',
   );
+
 }

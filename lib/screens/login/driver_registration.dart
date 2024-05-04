@@ -5,8 +5,9 @@ import 'dart:io';
 import 'package:Mowasil/helper/controllers/signup_ctrl.dart';
 import 'package:Mowasil/helper/models/users.dart';
 import 'package:Mowasil/helper/show_snack_bar.dart';
-import 'package:Mowasil/screens/OrdersList/main.dart';
+import 'package:Mowasil/screens/OrdersList/Order.dart';
 import 'package:Mowasil/screens/login/components/custom_scaffold.dart';
+import 'package:Mowasil/screens/phoneVerif/phone_verif_driver.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -255,11 +256,23 @@ class _DriverRegState extends State<DriverReg> {
                             ),
                             TextFormField(
                               onChanged: (data) {
-                                phone = data;
+                                formkey.currentState?.validate();
+                                // Check if the entered phone number doesn't start with the country code
+                                if (!data.startsWith("+2") &&
+                                    !data.startsWith("01")) {
+                                  // If not, add the Egypt country code
+                                  controller.phone.text = "+2$data";
+                                }
+                                phone = controller.phone
+                                    .text; // Update phone variable if needed
                               },
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return "Please enter phone";
+                                } else if (!RegExp(
+                                        r'^(\+201|01|00201)[0-2,5]{1}[0-9]{8}$')
+                                    .hasMatch(value)) {
+                                  return "Please enter valid phone number";
                                 }
                                 return null;
                               },
@@ -442,6 +455,9 @@ class _DriverRegState extends State<DriverReg> {
                                     setState(() {});
                                     try {
                                       await registerUser();
+                                      await phoneauth(
+                                        controller.phone.text.trim(),
+                                      );
 
                                       final user = UserModel(
                                           nationalcard: imageUrl2,
@@ -457,7 +473,7 @@ class _DriverRegState extends State<DriverReg> {
 
                                       Navigator.of(context).push(
                                           PageAnimationTransition(
-                                              page: Orders(),
+                                              page: PhoneVerfD(),
                                               pageAnimationType:
                                                   RightToLeftTransition()));
                                       showSnackBar(
@@ -513,5 +529,9 @@ class _DriverRegState extends State<DriverReg> {
   Future<void> registerUser() async {
     UserCredential user = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email!, password: password!);
+  }
+
+  Future<void> phoneauth(String phone) async {
+    await SignupCtrl.instance.phoneAuth(phone);
   }
 }

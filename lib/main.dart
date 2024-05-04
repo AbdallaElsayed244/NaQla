@@ -2,6 +2,8 @@ import 'package:Mowasil/firebase_options.dart';
 import 'package:Mowasil/screens/HomeScreen/home_screen.dart';
 import 'package:Mowasil/screens/oder_info/orderinfo.dart';
 import 'package:Mowasil/screens/splash_screen.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:double_tap_to_exit/double_tap_to_exit.dart';
@@ -13,6 +15,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(
     DevicePreview(
       enabled: true,
