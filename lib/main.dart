@@ -1,5 +1,7 @@
 import 'package:Mowasil/firebase_options.dart';
+import 'package:Mowasil/helper/service/auth_methods.dart';
 import 'package:Mowasil/screens/HomeScreen/home_screen.dart';
+import 'package:Mowasil/screens/frieght/frieght_page.dart';
 import 'package:Mowasil/screens/oder_info/orderinfo.dart';
 import 'package:Mowasil/screens/splash_screen.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -9,13 +11,17 @@ import 'package:flutter/material.dart';
 import 'package:double_tap_to_exit/double_tap_to_exit.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+  ).then((value) => Get.put(AuthMethods()));
+  await FirebaseAppCheck.instance.activate(
+    // ignore: deprecated_member_use
+    androidProvider: AndroidProvider.safetyNet
   );
-
   runApp(
     DevicePreview(
       enabled: true,
@@ -49,6 +55,11 @@ class MyApp extends StatelessWidget {
                 ),
                 // Use onPopInvoked for consistency
                 child: SplashScreen()),
+            routes: {
+              HomeScreen.id: (context) => HomeScreen(),
+              Frieght.id: (context) => Frieght(),
+            },
+            initialRoute: "loginpage",
           );
         });
   }

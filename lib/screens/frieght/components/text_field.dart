@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 
 class TextFrieght extends StatelessWidget {
   final String name;
-  final Function()? navigate;
+  final Function()? ontap;
   final TextInputType type;
   final TextEditingController? controller;
+  final Icon icon;
   const TextFrieght(
       {super.key,
       required this.name,
-      this.navigate,
+      this.ontap,
       required this.type,
-      this.controller});
+      this.controller, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +32,9 @@ class TextFrieght extends StatelessWidget {
             hintStyle: TextStyle(fontSize: 18),
             labelStyle: TextStyle(fontSize: 33),
             suffixIcon: IconButton(
-              icon: Icon(Icons.keyboard_arrow_right_outlined),
+              icon: icon,
               iconSize: 40,
-              onPressed: navigate,
+              onPressed: ontap,
             ),
           )),
     );

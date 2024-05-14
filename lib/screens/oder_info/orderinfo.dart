@@ -1,59 +1,268 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, sort_child_properties_last, prefer_const_literals_to_create_immutables, unused_local_variable, deprecated_member_use, unused_import, avoid_web_libraries_in_flutter, unnecessary_import, use_super_parameters, must_be_immutable
 
 import 'package:Mowasil/helper/app_colors.dart';
+import 'package:Mowasil/helper/service/auth_methods.dart';
+import 'package:Mowasil/helper/service/orders_methods.dart';
+import 'package:Mowasil/screens/oder_info/components/drawer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:insta_image_viewer/insta_image_viewer.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 
-class Orderinfo extends StatelessWidget {
-  const Orderinfo({Key? key}) : super(key: key);
+
+class Orderinfo extends StatefulWidget {
+  final String? email;
+  const Orderinfo({Key? key, this.email}) : super(key: key);
   static String id = "Orderinfo";
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(useMaterial3: true),
-      home: Myproject(),
-    );
-  }
+  State<Orderinfo> createState() => _OrderinfoState();
 }
 
-class Myproject extends StatelessWidget {
-  const Myproject({super.key});
+class _OrderinfoState extends State<Orderinfo> {
+  Stream<QuerySnapshot>? orderStream; // Stream to hold negotiationPrice data
+
+  Stream<bool> checkOrdersExistence() async* {
+    final snapshot = await FirebaseFirestore.instance
+        .collection("orders")
+        .doc(widget.email)
+        .collection('negotiationPrice')
+        .limit(1)
+        .get();
+
+    yield snapshot.docs.isNotEmpty;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    orderStream = FirebaseFirestore.instance
+        .collection("orders")
+        .doc(widget.email)
+        .collection('negotiationPrice')
+        .snapshots();
+    print(orderStream);
+  }
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
+      drawer: CustomDrawer(
+        email: widget.email,
+      ),
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              size: 30,
+            ),
+          )
+        ],
         backgroundColor: BackgroundColor,
         elevation: 10,
         title: Text("Your Orders"),
         centerTitle: true,
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu, size: 33)),
       ),
-      body: Column(
-        children: [
-          SizedBox(height: kDefaultFontSize / 2),
-          Expanded(
-            child: Stack(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: 20.0),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(40),
-                        topRight: Radius.circular(40),
-                      )),
+      body: StreamBuilder<bool>(
+        stream: checkOrdersExistence(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+
+          if (snapshot.hasData && snapshot.data!) {
+            return StreamBuilder<QuerySnapshot>(
+              stream: orderStream,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                }
+
+                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                  return Center(
+                    child: Text(
+                      'No Drivers Right Now',
+                      style: TextStyle(
+                        fontSize: 24,
+                        color: Color.fromARGB(255, 145, 136, 136),
+                      ),
+                    ),
+                  );
+                }
+
+                final negotiationPrices =
+                    snapshot.data!.docs; // Get list of documents
+                return ListView.builder(
+                  itemCount: negotiationPrices.length,
+                  itemBuilder: (context, index) {
+                    final negotiationPriceData = negotiationPrices[index].data()
+                        as Map<String, dynamic>?;
+                    final price = negotiationPriceData?['negotiationPrice'];
+
+                    return Container(
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color.fromARGB(255, 207, 203, 203),
+                        ),
+                        borderRadius: BorderRadius.circular(50),
+                        color: const Color.fromARGB(255, 199, 198, 198),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(left: 25),
+                                child: Text(
+                                  'Driver price : ${price} EGP',
+                                  style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {},
+                                child: Text(
+                                  "Start",
+                                  style: TextStyle(
+                                      fontSize: 19,
+                                      color:
+                                          Color.fromARGB(255, 221, 204, 204)),
+                                ),
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    Color(0xff060644),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 30),
+                          Divider(
+                            color: Colors.black,
+                            thickness: 1.0,
+                            height: 5,
+                          ),
+                          SizedBox(height: 20),
+                          Row(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color:
+                                        const Color.fromARGB(255, 20, 14, 14),
+                                    width: 2,
+                                  ),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: negotiationPriceData?['profilephoto'] !=
+                                        null
+                                    ? ClipOval(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                          ),
+                                          height: 60,
+                                          width: 60,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            child: InstaImageViewer(
+                                              child: Image.network(
+                                                negotiationPriceData?[
+                                                    'profilephoto'],
+                                                scale: 5,
+                                                fit: BoxFit.contain,
+                                                loadingBuilder:
+                                                    (BuildContext context,
+                                                        Widget child,
+                                                        ImageChunkEvent?
+                                                            loadingProgress) {
+                                                  if (loadingProgress == null) {
+                                                    return child;
+                                                  } else {
+                                                    return Center(
+                                                      child:
+                                                          CircularProgressIndicator(),
+                                                    );
+                                                  }
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Icon(
+                                          Icons.person,
+                                          size: 40,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                              ),
+                              SizedBox(width: 15),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    '${negotiationPriceData?['username']}',
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      color: const Color.fromARGB(255, 0, 0, 0),
+                                    ),
+                                  ),
+                                  Text(
+                                    '${negotiationPriceData?['phone']}',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: const Color.fromARGB(255, 0, 0, 0),
+                                    ),
+                                  ),
+                                  Text(
+                                    '${negotiationPriceData?['vehicletype']} - ${negotiationPriceData?['vehiclenum']}',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: const Color.fromARGB(255, 0, 0, 0),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          } else {
+            return Center(
+              child: Text(
+                'Add an Order Now',
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Color.fromARGB(255, 145, 136, 136),
                 ),
-              ],
-            ),
-          ),
-        ],
+              ),
+            );
+          }
+        },
       ),
     );
   }

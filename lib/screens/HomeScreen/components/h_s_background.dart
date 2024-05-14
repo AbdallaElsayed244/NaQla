@@ -16,8 +16,7 @@ class BackGround extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWeight = MediaQuery.of(context).size.width;
     return SizedBox(
-      width: 1600.h,
-      height: screenHeight / 2,
+      height: screenHeight / 1.65,
       child: AnimateGradient(
         duration: const Duration(seconds: 10),
         reverse: true,
@@ -25,13 +24,13 @@ class BackGround extends StatelessWidget {
           BackgroundColor,
           BackgroundColor,
         ],
-        secondaryColors: const [Color(0xff5994C0), Color(0xff5994C0)],
+        secondaryColors: [BackgroundColor, BackgroundColor],
         child: Padding(
-          padding: EdgeInsets.only(top: screenHeight / 70),
+          padding: EdgeInsets.only(top: 10.h),
           child: Row(
             children: [
               Container(
-                decoration: const BoxDecoration(),
+                decoration: BoxDecoration(color: BackgroundColor),
                 width: screenWeight / 1.01,
                 height: screenHeight / .9,
                 child: const Brand(),

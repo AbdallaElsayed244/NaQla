@@ -19,7 +19,7 @@ class LoginButton extends StatelessWidget {
             foregroundColor: Colors.white,
             backgroundColor: Color(0xff060644), //) Set text color to white
             elevation: 5,
-          ), // Set button elevation (shadow),
+          ), 
           onPressed: function,
           child: Text(
             type,

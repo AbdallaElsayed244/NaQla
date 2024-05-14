@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class DatabaseMethods {
+class OrderseMethods {
   //creat
-  Future addEmployeeDetails(
-      Map<String, dynamic> OrderInfomap, String id) async {
+  Future addOrderDetails(Map<String, dynamic> OrderInfomap, String? id) async {
     return await FirebaseFirestore.instance
         .collection("orders")
         .doc(id)
@@ -12,7 +11,12 @@ class DatabaseMethods {
 
 //read
   Future<Stream<QuerySnapshot>> getOederDetails() async {
-    return await FirebaseFirestore.instance.collection("orders").snapshots();
+     
+    return await FirebaseFirestore.instance.collection("orders",).snapshots();
+  }
+  Future<DocumentReference<Map<String, dynamic>>> getnegotiatedPrice() async {
+     
+    return await FirebaseFirestore.instance.collection("orders",).doc('negotiationPrice');
   }
 
   //update

@@ -37,9 +37,7 @@ dependencies:
   flutter_shapes: ^0.3.0
   animate_gradient: ^0.0.2+1
   page_animation_transition: ^1.0.0
-  animated_hint_textfield: ^1.0.0
-  double_tap_to_exit: ^1.0.1
-  cupertino_icons: ^1.0.8 
+  double_tap_to_exit: ^1.0.1 
   device_preview: ^1.1.0
   flutter_screenutil: ^5.9.0
   image_picker: ^1.1.1
@@ -58,9 +56,15 @@ dependencies:
   firebase_storage: ^11.7.4
   provider: ^6.1.1 
   pinput: ^4.0.0
-  firebase_app_check: ^0.2.2+4
+  firebase_app_check: ^0.2.2+5
   random_string: ^2.3.1
   fluttertoast: ^8.2.5
+  loading_indicator: ^3.1.1
+  flash: ^3.1.0
+  insta_image_viewer: ^1.0.4
+  cached_network_image: ^3.3.1
+  flutter_stripe: ^10.1.1
+  dio: ^5.4.3+1
 
 
 
@@ -73,7 +77,8 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.2
+  flutter_lints: ^4.0.0
+  lint: ^2.3.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -5,6 +5,7 @@ import 'dart:async'; // Import for Future.delayed
 import 'package:Mowasil/screens/login/user_login.dart';
 import 'package:Mowasil/screens/login/components/new_account.dart';
 import 'package:Mowasil/screens/login/components/sign_in_buttons.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:page_animation_transition/animations/right_to_left_transition.dart';
 import 'package:page_animation_transition/page_animation_transition.dart';
 
@@ -56,6 +57,7 @@ class _ToLoginState extends State<ToLogin> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    ScreenUtil.init(context);
     return Stack(
       children: [
         Positioned(
@@ -73,6 +75,8 @@ class _ToLoginState extends State<ToLogin> {
                 color: Colors.white,
                 borderRadius: BorderRadius.only(topRight: Radius.circular(100)),
               ),
+              padding: EdgeInsets.only(top: 30.h),
+              margin: EdgeInsets.only(top: 20.h),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -98,13 +102,15 @@ class _ToLoginState extends State<ToLogin> {
         if (!isVisible)
           showUserLogin
               ? UserLogin(
-                  onBack: toggleVisibility, // Pass the toggle function
+                  onBack: toggleVisibility,
+                  context: context, // Pass the toggle function
                 )
               : const SizedBox.shrink(),
         if (!isVisible2)
           showDriverLogin
               ? DriverLogin(
-                  onBack: toggleVisibility2, // Pass the toggle function
+                  onBack: toggleVisibility2,
+                  context: context, // Pass the toggle function
                 )
               : const SizedBox.shrink(), // Placeholder while waiting
       ],

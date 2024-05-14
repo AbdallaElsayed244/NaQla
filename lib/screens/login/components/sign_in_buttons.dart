@@ -22,10 +22,12 @@ class _LoginButtonsState extends State<LoginButtons> {
   Widget build(BuildContext context) {
     // Using MediaQuery to get device dimensions
     double deviceWidth = MediaQuery.of(context).size.width;
+    double devicehieght = MediaQuery.of(context).size.height;
 
     // Responsive width and margins
     double buttonWidth = deviceWidth * 0.6; // 80% of screen width
     double horizontalMargin = deviceWidth * 0.1; // 10% margin on each side
+    double buttonhieght = devicehieght * 0.6;
 
     return GestureDetector(
       onTapDown: (TapDownDetails details) => setState(() => _isPressed = true),
@@ -34,9 +36,11 @@ class _LoginButtonsState extends State<LoginButtons> {
       onTap: widget.onTap,
       child: AnimatedContainer(
         width: buttonWidth,
-        height: 80, // Consider making this responsive if needed
+        height: buttonhieght / 8, // Consider making this responsive if needed
         margin: EdgeInsets.only(
-            top: 47, right: horizontalMargin, left: horizontalMargin),
+            top: buttonhieght / 20,
+            right: horizontalMargin,
+            left: horizontalMargin),
         decoration: BoxDecoration(
           color: _isPressed ? Colors.lightBlueAccent : const Color(0xffD8D8D8),
           borderRadius: BorderRadius.circular(28),
@@ -49,9 +53,7 @@ class _LoginButtonsState extends State<LoginButtons> {
             style: TextStyle(
                 fontFamily: "noyh-bold",
                 color: const Color.fromARGB(255, 0, 0, 0),
-                fontSize: 38 *
-                    MediaQuery.of(context)
-                        .textScaleFactor // Responsive text size
+                fontSize: 0.1 * buttonWidth // Responsive text size
                 ),
           ),
         ),

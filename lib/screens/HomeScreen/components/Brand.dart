@@ -24,7 +24,7 @@ class Brand extends StatelessWidget {
         return Column(
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 50),
+              padding: EdgeInsets.only(top: maxHeight * 0.06),
               child: Image.asset(
                 imagePath,
                 width: imageWidth,
@@ -39,7 +39,7 @@ class Brand extends StatelessWidget {
               style: TextStyle(
                 fontFamily: "organetto-light",
                 color: Colors.white,
-                fontSize: adaptFontSize(maxHeight * 1.5),
+                fontSize: adaptFontSize(maxWidth),
                 height: 2,
               ),
             ),
@@ -49,7 +49,7 @@ class Brand extends StatelessWidget {
     );
   }
 
-  double adaptFontSize(double maxHeight) {
-    return baseFontSize + (maxHeight * scalingFactor);
+  double adaptFontSize(double maxWidth) {
+    return baseFontSize + (maxWidth * scalingFactor);
   }
 }

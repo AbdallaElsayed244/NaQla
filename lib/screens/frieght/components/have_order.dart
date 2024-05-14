@@ -1,4 +1,5 @@
 import 'package:Mowasil/screens/login/driver_registration.dart';
+import 'package:Mowasil/screens/oder_info/orderinfo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -7,18 +8,18 @@ import 'package:page_animation_transition/animations/right_to_left_transition.da
 import 'package:page_animation_transition/animations/scale_animation_transition.dart';
 import 'package:page_animation_transition/page_animation_transition.dart';
 
-import '../user_registration.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 
-class NewAccount extends StatefulWidget {
-  const NewAccount({super.key});
+class HaveOrder extends StatefulWidget {
+  final void Function()? function;
+  const HaveOrder({super.key, required this.function});
 
   @override
-  State<NewAccount> createState() => _NewAccountState();
+  State<HaveOrder> createState() => _HaveOrderState();
 }
 
-class _NewAccountState extends State<NewAccount> {
+class _HaveOrderState extends State<HaveOrder> {
   bool _isPressed = false;
 
   @override
@@ -33,14 +34,14 @@ class _NewAccountState extends State<NewAccount> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Don't have an account? ",
+          "already have an Order? ",
           style: TextStyle(
             fontSize: fontSize,
           ),
         ),
         GestureDetector(
           child: Text(
-            'Create an account',
+            'YourOrder',
             style: TextStyle(
               fontSize: fontSize,
               color: _isPressed
@@ -53,35 +54,7 @@ class _NewAccountState extends State<NewAccount> {
               setState(() => _isPressed = true),
           onTapUp: (TapUpDetails details) => setState(() => _isPressed = false),
           onTapCancel: () => setState(() => _isPressed = false),
-          onTap: () {
-            AwesomeDialog(
-              context: context,
-              keyboardAware: true,
-              dismissOnBackKeyPress: false,
-              dialogType: DialogType.noHeader,
-              animType: AnimType.topSlide,
-              dialogBackgroundColor: Color.fromARGB(255, 232, 232, 233),
-              btnCancelText: "Become a User",
-              btnOkText: "Become a Driver",
-              title: 'Create new account?',
-              // padding: const EdgeInsets.all(5.0),
-              desc: 'choose to be a Driver or User.',
-              descTextStyle: TextStyle(fontSize: 20),
-              btnOkColor: Color(0xff060644),
-              btnCancelColor: Color(0xff393e46),
-
-              btnCancelOnPress: () {
-                Navigator.of(context).push(PageAnimationTransition(
-                    page: const UserReg(),
-                    pageAnimationType: ScaleAnimationTransition()));
-              },
-              btnOkOnPress: () {
-                Navigator.of(context).push(PageAnimationTransition(
-                    page: const DriverReg(),
-                    pageAnimationType: ScaleAnimationTransition()));
-              },
-            ).show();
-          },
+          onTap: widget.function,
         ),
       ],
     );

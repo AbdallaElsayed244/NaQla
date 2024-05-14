@@ -2,9 +2,12 @@
 
 import 'dart:io';
 
+import 'package:Mowasil/helper/app_colors.dart';
 import 'package:Mowasil/helper/controllers/signup_ctrl.dart';
 import 'package:Mowasil/helper/models/users.dart';
+import 'package:Mowasil/helper/service/auth_methods.dart';
 import 'package:Mowasil/helper/show_snack_bar.dart';
+import 'package:Mowasil/screens/frieght/frieght_page.dart';
 
 import 'package:Mowasil/screens/login/components/custom_scaffold.dart';
 import 'package:Mowasil/screens/oder_info/orderinfo.dart';
@@ -31,52 +34,60 @@ class _UserRegState extends State<UserReg> {
   String? phone;
   String? password;
   String? email;
+  String? username;
+  bool _isloading = false;
   bool isloading = false;
   final picker = ImagePicker();
   final controller = Get.put(SignupCtrl());
   String imageUrl = "";
 
-  Future getImageGallery(int containerIndex) async {
-    final XFile? pickedFile = await picker.pickImage(
-      source: ImageSource.gallery,
-      imageQuality: 80,
-    );
-    print("${pickedFile?.path}");
-    if (pickedFile == null) {
-      isloading = false; // Set isloading to false if no image is picked
-      setState(() {});
-      return;
-    }
-
-    Reference refrenceRoot = FirebaseStorage.instance.ref();
-    Reference referenceDirImages = refrenceRoot.child("images");
-
-    String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
-
-    Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
+  Future<void> getImageGallery(int containerIndex) async {
     try {
-      await referenceImageToUpload.putFile(File(pickedFile!.path));
-      imageUrl = await referenceImageToUpload.getDownloadURL();
-    } catch (e) {
-      showSnackBar(context.mounted as BuildContext, "erorr occourd");
-    }
-
-    if (pickedFile != null) {
-      // Check for null
+      final XFile? pickedFile = await picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 80,
+      );
       setState(() {
+        isloading =
+            true; // Set loading indicator to false if no image is picked
+      });
+      if (pickedFile == null) {
+        setState(() {
+          isloading =
+              false; // Set loading indicator to false if no image is picked
+        });
+        return;
+      }
+
+      Reference referenceRoot = FirebaseStorage.instance.ref();
+      Reference referenceDirImages = referenceRoot.child("images");
+
+      String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+      Reference referenceImageToUpload =
+          referenceDirImages.child(uniqueFileName);
+
+      await referenceImageToUpload.putFile(File(pickedFile.path));
+      imageUrl = await referenceImageToUpload.getDownloadURL();
+
+      setState(() {
+        isloading = false; // Reset loading indicator after successful upload
         if (containerIndex == 1) {
-          _image1 = File(pickedFile.path); // Access path from XFile
+          _image1 = File(pickedFile.path);
         }
       });
-    } else {
-      print("No Image Picked");
+    } catch (e) {
+      showSnackBar(context.mounted as BuildContext, "Error occurred");
+      setState(() {
+        isloading = false; // Reset loading indicator on error
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SignupCtrl());
     return ModalProgressHUD(
-      inAsyncCall: isloading,
+      inAsyncCall: _isloading,
       child: Scaffold(
         body: CustomScaffold(
           body: null,
@@ -110,32 +121,58 @@ class _UserRegState extends State<UserReg> {
                             ),
                             Center(
                               child: InkWell(
-                                onTap: () {
-                                  getImageGallery(1);
+                                onTap: () async {
+                                  await getImageGallery(1);
+                                  setState(() {
+                                    isloading =
+                                        false; // Set loading indicator to false if no image is picked
+                                  });
                                 },
-                                child: Container(
-                                  height: 120,
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black12),
-                                      borderRadius: BorderRadius.circular(0)),
-                                  child: _image1 != null
-                                      ? Image.file(
-                                          _image1!.absolute,
-                                          fit: BoxFit.cover,
-                                        )
-                                      : const Center(
-                                          child: Icon(
-                                            Icons.add_photo_alternate_outlined,
-                                            size: 35,
-                                          ),
-                                        ),
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    Container(
+                                      height: 120,
+                                      width: 150,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.white),
+                                        borderRadius: BorderRadius.circular(0),
+                                      ),
+                                      child: _image1 != null
+                                          ? Image.file(
+                                              _image1!.absolute,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Center(
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              255, 20, 14, 14),
+                                                      width: 4,
+                                                    ),
+                                                    shape: BoxShape.circle),
+                                                child: Icon(
+                                                  Icons.person,
+                                                  size: 90,
+                                                ),
+                                              ),
+                                            ),
+                                    ),
+                                    // Loading Indicator inside the InkWell
+                                    if (isloading)
+                                      Positioned.fill(
+                                        child: Center(
+                                            child: CircularProgressIndicator()),
+                                      ),
+                                  ],
                                 ),
                               ),
                             ),
                             Text("Profile Photo",
                                 style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.bold)),
+                                    fontSize: 17, fontWeight: FontWeight.bold)),
                             SizedBox(
                               height: 13,
                             ),
@@ -153,6 +190,38 @@ class _UserRegState extends State<UserReg> {
                               decoration: InputDecoration(
                                   label: Text("email"),
                                   hintText: "enter email",
+                                  hintStyle: TextStyle(
+                                      color: Color.fromARGB(247, 90, 94, 98)),
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color.fromARGB(247, 158, 179, 200),
+                                    ),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color.fromARGB(215, 63, 101, 150),
+                                    ),
+                                    borderRadius: BorderRadius.circular(15),
+                                  )),
+                            ),
+                            SizedBox(
+                              height: 13,
+                            ),
+                            TextFormField(
+                              controller: controller.username,
+                              onChanged: (data) {
+                                username = data;
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter username";
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                  label: Text("username"),
+                                  hintText: "enter username",
                                   hintStyle: TextStyle(
                                       color: Color.fromARGB(247, 90, 94, 98)),
                                   border: OutlineInputBorder(
@@ -258,12 +327,18 @@ class _UserRegState extends State<UserReg> {
                               height: 45,
                               child: ElevatedButton(
                                 onPressed: () async {
+                                  if (_image1 == null) {
+                                    showSnackBar(
+                                        context, 'profile image is requierd.');
+
+                                    return;
+                                  }
                                   if (formkey.currentState!.validate()) {
-                                    isloading = true;
+                                    _isloading = true;
                                     setState(() {});
                                     try {
                                       await registerUser();
-                                      await phoneauth(
+                                      phoneauth(
                                         controller.phone.text.trim(),
                                       );
 
@@ -281,11 +356,12 @@ class _UserRegState extends State<UserReg> {
                                           profilePhoto: imageUrl);
                                       SignupCtrl.instance.CreateUser(user);
 
-                                      Navigator.of(context).push(
-                                          PageAnimationTransition(
-                                              page: PhoneVerfU(),
-                                              pageAnimationType:
-                                                  RightToLeftTransition()));
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Frieght(email: email)),
+                                      );
                                       // Handle successful user creation (optional)
                                     } on FirebaseAuthException catch (e) {
                                       if (e.code == 'weak-password') {
@@ -299,7 +375,7 @@ class _UserRegState extends State<UserReg> {
                                       showSnackBar(context,
                                           "You must enter email and password");
                                     }
-                                    isloading = false;
+                                    _isloading = false;
                                     setState(() {});
                                   } else {}
                                 },
@@ -311,8 +387,8 @@ class _UserRegState extends State<UserReg> {
                                           Color.fromARGB(255, 255, 255, 255)),
                                 ),
                                 style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                      Color(0xff3F6596)),
+                                  backgroundColor:
+                                      MaterialStateProperty.all(ButtonsColor),
                                   padding: MaterialStateProperty.all(
                                       EdgeInsets.all(7)),
                                   shape: MaterialStateProperty.all(

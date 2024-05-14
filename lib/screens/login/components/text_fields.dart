@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:animated_hint_textfield/animated_hint_textfield.dart';
 
 class TextFields extends StatelessWidget {
   final String text;
