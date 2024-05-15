@@ -31,6 +31,7 @@ class Frieght extends StatefulWidget {
   final String? email;
   final String? locationString;
   final String? locationString2;
+
   @override
   State<Frieght> createState() => _FrieghtState(email: email);
 }
@@ -43,6 +44,7 @@ class _FrieghtState extends State<Frieght> {
       new TextEditingController();
   TextEditingController VehicleController = new TextEditingController();
   TextEditingController OfferController = new TextEditingController();
+  FocusNode _focusNode = FocusNode();
 
   final GlobalKey<_FrieghtState> dropDownTextFieldKey = GlobalKey();
   bool _isLoading = false;
@@ -149,8 +151,9 @@ class _FrieghtState extends State<Frieght> {
                   margin: EdgeInsets.symmetric(vertical: 20),
                   padding: EdgeInsets.symmetric(horizontal: 21),
                   decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(20)),
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   width: 350,
                   height: 70,
                   child: DropDownTextField(
@@ -160,6 +163,18 @@ class _FrieghtState extends State<Frieght> {
                         DropDownValueModel(name: 'ربع نقل ', value: "value7"),
                         DropDownValueModel(name: 'تروسيكل', value: "value8"),
                       ],
+                      dropdownColor: Colors.white,
+                      dropDownIconProperty: IconProperty(
+                        icon: Icons.keyboard_arrow_down,
+                        color: Colors.black,
+                        size: 40,
+                      ),
+                      
+                      clearIconProperty: IconProperty(
+                        icon: Icons.close,
+                        color: Colors.black,
+                        size: 40,
+                      ),
                       validator: (value) {
                         if (value == null) {
                           return "Required field";
@@ -171,8 +186,8 @@ class _FrieghtState extends State<Frieght> {
                       onChanged: (val) {
                         setState(() {
                           selectedValue = val;
-                          // Close the dropdown manually (assuming a close function exists)
-                          focusNode.unfocus();
+                          // Remove focus to close the dropdown
+                          FocusScope.of(context).unfocus();
                         });
                       },
                       textFieldDecoration: InputDecoration(
@@ -181,7 +196,7 @@ class _FrieghtState extends State<Frieght> {
                         hintStyle: TextStyle(fontSize: 18),
                         labelStyle: TextStyle(fontSize: 33),
                         suffixIcon: IconButton(
-                          icon: Icon(Icons.keyboard_arrow_right_outlined),
+                          icon: Icon(Icons.vertical_shades_sharp),
                           iconSize: 40,
                           onPressed: () {},
                         ),
@@ -298,7 +313,7 @@ class _FrieghtState extends State<Frieght> {
                           "Order Freight",
                           style: TextStyle(
                               fontSize: 25,
-                              color: const Color.fromARGB(255, 0, 0, 0)),
+                              color: Color.fromARGB(255, 255, 255, 255)),
                         ),
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(ButtonsColor),
@@ -328,7 +343,10 @@ class _FrieghtState extends State<Frieght> {
         appBar: AppBar(
           primary: true,
           elevation: 10,
-          title: Text("FREIGHT"),
+          title: Text(
+            "FREIGHT",
+            style: TextStyle(color: Colors.black),
+          ),
           titleTextStyle: TextStyle(fontSize: 33),
           backgroundColor: BackgroundColor,
           centerTitle: true,

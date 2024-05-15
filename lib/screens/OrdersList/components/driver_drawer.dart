@@ -9,15 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 
-class CustomDrawer extends StatefulWidget {
-  const CustomDrawer({super.key, this.email, this.driverEmail});
+class DriverDrawer extends StatefulWidget {
+  const DriverDrawer({super.key, this.email, this.driverEmail});
   final String? email;
   final String? driverEmail;
   @override
-  State<CustomDrawer> createState() => _CustomDrawerState();
+  State<DriverDrawer> createState() => _DriverDrawerState();
 }
 
-class _CustomDrawerState extends State<CustomDrawer> {
+class _DriverDrawerState extends State<DriverDrawer> {
   Stream<DocumentSnapshot<Map<String, dynamic>>>?
       orderStream; // Stream to hold negotiationPrice data
 
@@ -26,7 +26,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
     super.initState();
     orderStream = FirebaseFirestore.instance
         .collection("Users")
-        .doc(widget.email ?? "${widget.driverEmail}Driver")
+        .doc("${widget.email}Driver")
         .snapshots();
 
     print(orderStream);

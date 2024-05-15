@@ -16,7 +16,7 @@ class BackGround extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWeight = MediaQuery.of(context).size.width;
     return SizedBox(
-      height: screenHeight / 1.65,
+      height: (screenHeight / 1.65) + 10,
       child: AnimateGradient(
         duration: const Duration(seconds: 10),
         reverse: true,

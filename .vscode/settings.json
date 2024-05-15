@@ -1,5 +1,5 @@
 {
     "cmake.sourceDirectory": "E:/cmake-3.29.2",
-    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.configuration.updateBuildConfiguration": "automatic",
     "C_Cpp.default.compilerPath": "E:\\MinGW\\bin\\g++.exe"
 }

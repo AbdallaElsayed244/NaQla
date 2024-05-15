@@ -1,5 +1,6 @@
 import 'package:Mowasil/screens/login/driver_login.dart';
 import 'package:Mowasil/screens/login/driver_registration.dart';
+import 'package:Mowasil/stripe_payment/payment_manager.dart';
 import 'package:flutter/material.dart';
 import 'dart:async'; // Import for Future.delayed
 import 'package:Mowasil/screens/login/user_login.dart';
@@ -61,7 +62,7 @@ class _ToLoginState extends State<ToLogin> {
     return Stack(
       children: [
         Positioned(
-          right: 0.0, // Align to the right edge
+          right: .0, // Align to the right edge
           bottom: 90.0, // Position at the bottom
           child: AnimatedOpacity(
             opacity: isVisible ? 1.0 : 0.5, // Control visibility with opacity

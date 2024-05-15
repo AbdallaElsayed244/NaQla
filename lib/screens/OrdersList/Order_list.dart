@@ -1,6 +1,7 @@
 import 'package:Mowasil/helper/app_colors.dart';
 import 'package:Mowasil/helper/models/users.dart';
 import 'package:Mowasil/helper/service/orders_methods.dart';
+import 'package:Mowasil/screens/OrdersList/components/driver_drawer.dart';
 import 'package:Mowasil/screens/oder_info/components/drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,7 +26,6 @@ class _OrdersState extends State<Orders> {
   Stream? OrderStream;
   getonload() async {
     OrderStream = await OrderseMethods().getOederDetails();
-    setState(() {});
   }
 
   void printUser(UserModel user) {
@@ -338,7 +338,7 @@ class _OrdersState extends State<Orders> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: CustomDrawer(
+        drawer: DriverDrawer(
           email: widget.driverEmail,
         ),
         appBar: AppBar(
