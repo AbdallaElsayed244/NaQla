@@ -1,12 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
-// ignore: avoid_web_libraries_in_flutter
-
-import 'dart:math';
-
 import 'package:Mowasil/helper/app_colors.dart';
-import 'package:Mowasil/helper/controllers/signup_ctrl.dart';
-import 'package:Mowasil/helper/service/auth_methods.dart';
 import 'package:Mowasil/screens/frieght/components/have_order.dart';
 import 'package:Mowasil/screens/frieght/components/text_field.dart';
 import 'package:Mowasil/screens/login/maps/googlemap%20copy.dart';
@@ -14,15 +6,11 @@ import 'package:Mowasil/screens/login/maps/googlemap.dart';
 import 'package:Mowasil/helper/service/orders_methods.dart';
 import 'package:Mowasil/screens/oder_info/components/drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:page_animation_transition/animations/scale_animation_transition.dart';
 import 'package:page_animation_transition/page_animation_transition.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
-
 import '../oder_info/orderinfo.dart';
 
 class Frieght extends StatefulWidget {
@@ -44,7 +32,6 @@ class _FrieghtState extends State<Frieght> {
       new TextEditingController();
   TextEditingController VehicleController = new TextEditingController();
   TextEditingController OfferController = new TextEditingController();
-  FocusNode _focusNode = FocusNode();
 
   final GlobalKey<_FrieghtState> dropDownTextFieldKey = GlobalKey();
   bool _isLoading = false;
@@ -85,10 +72,16 @@ class _FrieghtState extends State<Frieght> {
     List<String> options = ['نقل', 'نص نقل', 'ربع نقل ', 'تروسيكل'];
 
     String selectedValue = options[0];
-    final FocusNode focusNode = FocusNode();
+
     return Scaffold(
         body: Container(
           width: double.infinity,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("images/Order.jpg"),
+              fit: BoxFit.fill,
+            ),
+          ),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -142,7 +135,7 @@ class _FrieghtState extends State<Frieght> {
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.CENTER,
                         timeInSecForIosWeb: 1,
-                        backgroundColor: Color.fromARGB(255, 18, 151, 204),
+                        backgroundColor: MessageColor,
                         textColor: Colors.white,
                         fontSize: 16.0,
                       );
@@ -169,7 +162,6 @@ class _FrieghtState extends State<Frieght> {
                         color: Colors.black,
                         size: 40,
                       ),
-                      
                       clearIconProperty: IconProperty(
                         icon: Icons.close,
                         color: Colors.black,
@@ -213,7 +205,7 @@ class _FrieghtState extends State<Frieght> {
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.CENTER,
                         timeInSecForIosWeb: 1,
-                        backgroundColor: Color.fromARGB(255, 18, 151, 204),
+                        backgroundColor: MessageColor,
                         textColor: Colors.white,
                         fontSize: 18.0,
                       );
@@ -243,6 +235,9 @@ class _FrieghtState extends State<Frieght> {
                               textColor: Colors.white,
                               fontSize: 26.0,
                             );
+                            setState(() {
+                              _isLoading = false; // Stop loading
+                            });
                             return; // Exit the function early
                           }
 
@@ -255,12 +250,10 @@ class _FrieghtState extends State<Frieght> {
                             "date": datetimeController.text,
                             "id": email,
                           };
-                          // Assuming DatabaseMethods is a class, create an instance of it
-                          // Check if data already exists in Firestore
-                          bool isDuplicate = await checkDuplicateData(
-                            OrderInfomap,
-                          );
 
+                          // Check if data already exists in Firestore
+                          bool isDuplicate =
+                              await checkDuplicateData(OrderInfomap);
                           if (isDuplicate) {
                             // Show Flutter toast indicating duplicate data
                             Fluttertoast.showToast(
@@ -273,38 +266,55 @@ class _FrieghtState extends State<Frieght> {
                               fontSize: 26.0,
                             );
                           } else {
-                            // Add data to Firestore if not duplicate
-                            try {
-                              OrderseMethods databaseMethods = OrderseMethods();
-                              await databaseMethods.addOrderDetails(
-                                  OrderInfomap, email);
+                            // Check if there's already an order with this email
+                            bool hasExistingOrder =
+                                await checkExistingOrderByEmail(email!);
+                            if (hasExistingOrder) {
                               Fluttertoast.showToast(
-                                msg:
-                                    "Order Details has been uploaded successfully",
+                                msg: " You already added an order",
                                 toastLength: Toast.LENGTH_LONG,
                                 gravity: ToastGravity.TOP,
                                 timeInSecForIosWeb: 1,
                                 backgroundColor:
-                                    Color.fromARGB(255, 55, 102, 172),
+                                    Color.fromARGB(255, 204, 18, 49),
                                 textColor: Colors.white,
-                                fontSize: 16.0,
+                                fontSize: 26.0,
                               );
-                            } catch (error) {
-                              _showErrorDialog("Error saving data: $error");
-                            } finally {
-                              setState(() {
-                                _isLoading = false; // Stop loading
-                              });
+                            } else if (hasExistingOrder == false) {
+                              // Add data to Firestore if not duplicate
+                              try {
+                                OrderseMethods databaseMethods =
+                                    OrderseMethods();
+                                await databaseMethods.addOrderDetails(
+                                    OrderInfomap, email);
+                                Fluttertoast.showToast(
+                                  msg:
+                                      "Order Details have been uploaded successfully",
+                                  toastLength: Toast.LENGTH_LONG,
+                                  gravity: ToastGravity.TOP,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: MessageColor,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0,
+                                );
+                                // Navigate to Orderinfo page
+                                Navigator.of(context).push(
+                                  PageAnimationTransition(
+                                    page: Orderinfo(
+                                      email: widget.email,
+                                    ),
+                                    pageAnimationType:
+                                        ScaleAnimationTransition(),
+                                  ),
+                                );
+                              } catch (error) {
+                                _showErrorDialog("Error saving data: $error");
+                              } finally {
+                                setState(() {
+                                  _isLoading = false; // Stop loading
+                                });
+                              }
                             }
-
-                            Navigator.of(context).push(
-                              PageAnimationTransition(
-                                page: Orderinfo(
-                                  email: widget.email,
-                                ),
-                                pageAnimationType: ScaleAnimationTransition(),
-                              ),
-                            );
                           }
                         },
                   child: _isLoading // Step 3
@@ -316,7 +326,7 @@ class _FrieghtState extends State<Frieght> {
                               color: Color.fromARGB(255, 255, 255, 255)),
                         ),
                   style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(ButtonsColor),
+                      backgroundColor: MaterialStateProperty.all(ButtonsColor2),
                       padding: MaterialStateProperty.all(
                           EdgeInsets.symmetric(vertical: 25, horizontal: 90)),
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -342,21 +352,36 @@ class _FrieghtState extends State<Frieght> {
         ),
         appBar: AppBar(
           primary: true,
-          elevation: 10,
+          elevation: 0,
           title: Text(
             "FREIGHT",
             style: TextStyle(color: Colors.black),
           ),
           titleTextStyle: TextStyle(fontSize: 33),
-          backgroundColor: BackgroundColor,
           centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Orderinfo(
+                              email: widget.email,
+                            )));
+              },
+              icon: Icon(
+                Icons.moped,
+                size: 30,
+              ),
+            )
+          ],
         ));
   }
 
   Future<bool> checkDuplicateData(Map<String, dynamic> orderInfoMap) async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection(
-            'your_collection_name') // Replace 'your_collection_name' with your actual collection name
+            'orders') // Replace 'your_collection_name' with your actual collection name
         .where('pickup', isEqualTo: orderInfoMap['pickup'])
         .where('destination', isEqualTo: orderInfoMap['destination'])
         .where('cargo', isEqualTo: orderInfoMap['cargo'])
@@ -368,7 +393,17 @@ class _FrieghtState extends State<Frieght> {
     return querySnapshot.docs.isNotEmpty;
   }
 
-// Function to display an error dialog
+  Future<bool> checkExistingOrderByEmail(String email) async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection(
+            'orders') // Replace 'your_collection_name' with your actual collection name
+        .where('id', isEqualTo: email)
+        .get();
+
+    return querySnapshot.docs.isNotEmpty;
+  }
+
+  // Function to display an error dialog
   void _showErrorDialog(String errorMessage) {
     Fluttertoast.showToast(
         msg: "complete any missing field:\n",

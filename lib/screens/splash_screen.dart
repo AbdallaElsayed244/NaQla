@@ -6,19 +6,22 @@ import 'package:flutter/material.dart';
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final imagePath = "images/delivery-car.png";
+    final imagePath = "images/Splash.png";
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: LayoutBuilder(builder: (context, constraints) {
+      debugShowCheckedModeBanner: false,
+      home: LayoutBuilder(
+        builder: (context, constraints) {
           final maxWidth = constraints.maxWidth;
           final imageWidth = maxWidth * 0.8;
           final imageHeight = imageWidth * (190 / 210);
 
-          return AnimatedSplashScreen(
-              backgroundColor: BackgroundColor,
+          return Opacity(
+            opacity: 1,
+            child: AnimatedSplashScreen(
+              backgroundColor: Color(0xff005337),
+              duration: 990,
               splashTransition: SplashTransition.slideTransition,
               splashIconSize: 300,
               splash: Container(
@@ -32,7 +35,11 @@ class SplashScreen extends StatelessWidget {
                   },
                 ),
               ),
-              nextScreen: const HomeScreen());
-        }));
+              nextScreen: HomeScreen(),
+            ),
+          );
+        },
+      ),
+    );
   }
 }

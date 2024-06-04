@@ -31,6 +31,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  intl: ^0.18.1
+  flutter_local_notifications: ^9.0.0+1
   giffy_dialog: ^2.1.0
   dropdown_textfield: ^1.0.8
   flutter_randomcolor: ^ 1.0.15
@@ -65,6 +67,15 @@ dependencies:
   cached_network_image: ^3.3.1
   flutter_stripe: ^10.1.1
   dio: ^5.4.3+1
+  flutter_native_splash: ^2.4.0
+  auto_size_text: ^3.0.0
+  google_fonts: ^6.2.1
+  timeline_tile: ^2.0.0
+  shimmer: ^3.0.0
+  flutter_rating_bar: ^4.0.1
+  animated_rating_stars: ^1.0.1
+  badges: ^3.1.2
+  pull_to_refresh: ^2.0.0
 
 
 

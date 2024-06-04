@@ -2,12 +2,18 @@ import 'package:Mowasil/helper/app_colors.dart';
 import 'package:Mowasil/helper/functions/loading_indicator.dart';
 import 'package:Mowasil/helper/service/auth_methods.dart';
 import 'package:Mowasil/screens/HomeScreen/home_screen.dart';
+import 'package:Mowasil/screens/OrdersList/order_status.dart';
 import 'package:Mowasil/screens/frieght/frieght_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
+import 'package:page_animation_transition/animations/left_to_right_transition.dart';
+import 'package:page_animation_transition/animations/right_to_left_transition.dart';
+import 'package:page_animation_transition/animations/scale_animation_transition.dart';
+import 'package:page_animation_transition/page_animation_transition.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class DriverDrawer extends StatefulWidget {
   const DriverDrawer({super.key, this.email, this.driverEmail});
@@ -50,13 +56,18 @@ class _DriverDrawerState extends State<DriverDrawer> {
             return ListView(
               children: [
                 UserAccountsDrawerHeader(
-                  decoration: BoxDecoration(color: BackgroundColor),
+                  decoration:
+                      BoxDecoration(color: Color.fromARGB(255, 75, 133, 115)),
                   accountName: Text(userData?['username'] ?? ""),
                   accountEmail: Text(userData?['email'] ?? "not signed in"),
                   arrowColor: Colors.black,
                   currentAccountPicture: userData?['profilePhoto'] != null
-                      ? Container(
-                          child: InstaImageViewer(
+                      ? CachedNetworkImage(
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          imageUrl: userData?['profilePhoto'],
+                          imageBuilder: (context, imageProvider) =>
+                              InstaImageViewer(
                             child: CircleAvatar(
                               backgroundImage: NetworkImage(
                                 userData?['profilePhoto'],
@@ -67,7 +78,8 @@ class _DriverDrawerState extends State<DriverDrawer> {
                       : Padding(
                           padding: const EdgeInsets.all(.0),
                           child: Icon(Icons.account_circle_rounded,
-                              size: 80, color: Colors.black),
+                              size: 80,
+                              color: Color.fromARGB(255, 90, 115, 138)),
                         ),
                 ),
                 SizedBox(
@@ -92,20 +104,17 @@ class _DriverDrawerState extends State<DriverDrawer> {
                   dense: false,
                   style: ListTileStyle.list,
                   leading: Icon(
-                    Icons.local_shipping_outlined,
+                    Icons.fact_check_outlined,
                     size: 40,
                   ),
                   title: Text(
-                    'Add Order',
+                    ' Accepted offers',
                     style: TextStyle(fontSize: 20),
                   ),
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Frieght(
-                              email: widget.email ?? widget.driverEmail)),
-                    );
+                    Navigator.of(context).push(PageAnimationTransition(
+                        page: OrderStatus(driverEmail: widget.email),
+                        pageAnimationType: RightToLeftTransition()));
                   },
                 ),
                 SizedBox(

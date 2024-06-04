@@ -2,7 +2,9 @@ import 'package:Mowasil/helper/app_colors.dart';
 import 'package:Mowasil/helper/functions/loading_indicator.dart';
 import 'package:Mowasil/helper/service/auth_methods.dart';
 import 'package:Mowasil/screens/HomeScreen/home_screen.dart';
+import 'package:Mowasil/screens/OrderStatus/order_timeline.dart';
 import 'package:Mowasil/screens/frieght/frieght_page.dart';
+import 'package:Mowasil/screens/oder_info/orderinfo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +52,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
             return ListView(
               children: [
                 UserAccountsDrawerHeader(
-                  decoration: BoxDecoration(color: BackgroundColor),
+                  decoration:
+                      BoxDecoration(color: Color.fromARGB(255, 75, 133, 115)),
                   accountName: Text(userData?['username'] ?? ""),
                   accountEmail: Text(userData?['email'] ?? "not signed in"),
                   arrowColor: Colors.black,
@@ -92,7 +95,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   dense: false,
                   style: ListTileStyle.list,
                   leading: Icon(
-                    Icons.local_shipping_outlined,
+                    Icons.trolley,
                     size: 40,
                   ),
                   title: Text(
@@ -105,6 +108,53 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       MaterialPageRoute(
                           builder: (context) => Frieght(
                               email: widget.email ?? widget.driverEmail)),
+                    );
+                  },
+                ),
+                SizedBox(
+                  height: 13,
+                ),
+                ListTile(
+                  dense: false,
+                  style: ListTileStyle.list,
+                  leading: Icon(
+                    Icons.moped,
+                    size: 40,
+                  ),
+                  title: Text(
+                    'Order Requests',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Orderinfo(email: widget.email)),
+                    );
+                  },
+                ),
+                SizedBox(
+                  height: 13,
+                ),
+                ListTile(
+                  dense: false,
+                  style: ListTileStyle.list,
+                  leading: Icon(
+                    Icons.timeline_rounded,
+                    size: 40,
+                  ),
+                  title: Text(
+                    'Order TimeLine',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TimelineComponent(
+                                email: widget.email,
+                                driverEmail: widget.driverEmail,
+                              )),
                     );
                   },
                 ),

@@ -1,16 +1,11 @@
-import 'package:Mowasil/helper/app_colors.dart';
-import 'package:Mowasil/helper/service/auth_methods.dart';
-import 'package:Mowasil/helper/service/orders_methods.dart';
+import 'package:Mowasil/screens/OrderStatus/order_timeline.dart';
 import 'package:Mowasil/screens/oder_info/components/drawer.dart';
-import 'package:Mowasil/stripe_payment/payment_manager.dart';
+import 'package:Mowasil/screens/oder_info/components/order_details.dart';
+import 'package:Mowasil/screens/oder_info/components/order_request.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:insta_image_viewer/insta_image_viewer.dart';
-import 'package:loading_indicator/loading_indicator.dart';
+import 'package:badges/badges.dart' as badges;
 
 class Orderinfo extends StatefulWidget {
   final String? email;
@@ -22,13 +17,26 @@ class Orderinfo extends StatefulWidget {
 }
 
 class _OrderinfoState extends State<Orderinfo> {
-  Stream<QuerySnapshot>? orderStream; // Stream to hold negotiationPrice data
-  getonload() async {
-    orderStream = FirebaseFirestore.instance
-        .collection("orders")
-        .doc(widget.email)
-        .collection('negotiationPrice')
-        .snapshots();
+  Stream<QuerySnapshot>? orderStream;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeStream();
+  }
+
+  Future<void> _initializeStream() async {
+    setState(() {
+      orderStream = FirebaseFirestore.instance
+          .collection("orders")
+          .doc(widget.email)
+          .collection('negotiationPrice')
+          .snapshots();
+    });
+  }
+
+  Future<void> _refreshOrders() async {
+    await _initializeStream();
   }
 
   Stream<bool> checkOrdersExistence() async* {
@@ -43,265 +51,306 @@ class _OrderinfoState extends State<Orderinfo> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    getonload();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: CustomDrawer(
-        email: widget.email,
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("images/Order-info.jpg"),
+          fit: BoxFit.cover,
+        ),
       ),
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back,
-              size: 30,
-            ),
-          )
-        ],
-        backgroundColor: BackgroundColor,
-        elevation: 10,
-        title: Text("Your Orders"),
-        centerTitle: true,
-      ),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          await getonload();
-        },
-        child: StreamBuilder<bool>(
-          stream: checkOrdersExistence(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            }
-
-            if (snapshot.hasData && snapshot.data!) {
-              return StreamBuilder<QuerySnapshot>(
-                stream: orderStream,
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
-                  }
-
-                  if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                    return Center(
-                      child: Text(
-                        'No Drivers Right Now',
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: Color.fromARGB(255, 145, 136, 136),
-                        ),
-                      ),
-                    );
-                  }
-
-                  final negotiationPrices =
-                      snapshot.data!.docs; // Get list of documents
-
-                  return ListView.builder(
-                    itemCount: negotiationPrices.length,
-                    itemBuilder: (context, index) {
-                      final doc = negotiationPrices[index];
-                      final negotiationPriceData =
-                          doc.data() as Map<String, dynamic>?;
-                      final price = negotiationPriceData?['negotiationPrice'];
-
-                      return Dismissible(
-                        key: Key(doc.id),
-                        direction: DismissDirection.endToStart,
-                        onDismissed: (direction) {
-                          setState(() {
-                            FirebaseFirestore.instance
-                                .collection("orders")
-                                .doc(widget.email)
-                                .collection('negotiationPrice')
-                                .doc(doc.id)
-                                .delete();
-                          });
-                        },
-                        background: Container(
-                          color: Colors.red,
-                          padding: EdgeInsets.only(right: 20),
-                          alignment: Alignment.centerRight,
-                          child: Icon(
-                            Icons.delete,
-                            color: Colors.white,
-                          ),
-                        ),
-                        child: Container(
-                          margin: EdgeInsets.all(10),
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Color.fromARGB(255, 207, 203, 203),
-                            ),
-                            borderRadius: BorderRadius.circular(50),
-                            color: const Color.fromARGB(255, 199, 198, 198),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 25),
-                                    child: Text(
-                                      'Driver price : ${price} EGP',
-                                      style: const TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      int amount = int.parse(price);
-                                      PaymentManager.makePayment(amount, "EGP");
-                                    },
-                                    child: Text(
-                                      "Pay Now",
-                                      style: TextStyle(
-                                          fontSize: 19,
-                                          color: Color.fromARGB(
-                                              255, 221, 204, 204)),
-                                    ),
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                        Color(0xff060644),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 30),
-                              Divider(
-                                color: Colors.black,
-                                thickness: 1.0,
-                                height: 5,
-                              ),
-                              SizedBox(height: 20),
-                              Row(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: const Color.fromARGB(
-                                            255, 20, 14, 14),
-                                        width: 2,
-                                      ),
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: negotiationPriceData?[
-                                                'profilephoto'] !=
-                                            null
-                                        ? ClipOval(
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                              ),
-                                              height: 60,
-                                              width: 60,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                                child: InstaImageViewer(
-                                                  child: Image.network(
-                                                    negotiationPriceData?[
-                                                        'profilephoto'],
-                                                    scale: 5,
-                                                    fit: BoxFit.cover,
-                                                    loadingBuilder: (BuildContext
-                                                            context,
-                                                        Widget child,
-                                                        ImageChunkEvent?
-                                                            loadingProgress) {
-                                                      if (loadingProgress ==
-                                                          null) {
-                                                        return child;
-                                                      } else {
-                                                        return Center(
-                                                          child:
-                                                              CircularProgressIndicator(),
-                                                        );
-                                                      }
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        : Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Icon(
-                                              Icons.person,
-                                              size: 40,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                  ),
-                                  SizedBox(width: 15),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        '${negotiationPriceData?['username']}',
-                                        style: TextStyle(
-                                          fontSize: 24,
-                                          color: const Color.fromARGB(
-                                              255, 0, 0, 0),
-                                        ),
-                                      ),
-                                      Text(
-                                        '${negotiationPriceData?['phone']}',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: const Color.fromARGB(
-                                              255, 0, 0, 0),
-                                        ),
-                                      ),
-                                      Text(
-                                        '${negotiationPriceData?['vehicletype']} - ${negotiationPriceData?['vehiclenum']}',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: const Color.fromARGB(
-                                              255, 0, 0, 0),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+      child: Scaffold(
+        drawer: CustomDrawer(email: widget.email),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          actions: [
+            StreamBuilder<bool>(
+              stream: FirebaseFirestore.instance
+                  .collection("TimeLine")
+                  .where('Confirmed', isEqualTo: false)
+                  .snapshots()
+                  .map((snapshot) => snapshot.docs.isNotEmpty),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                final bool hasEmailInTimeline =
+                    snapshot.hasData ? snapshot.data! : false;
+                return badges.Badge(
+                  badgeStyle: badges.BadgeStyle(
+                    shape: badges.BadgeShape.circle,
+                    badgeColor: Colors.blue,
+                    padding: EdgeInsets.all(4),
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: Colors.white, width: 1),
+                    borderGradient: badges.BadgeGradient.linear(colors: [
+                      Color.fromARGB(255, 12, 68, 133),
+                      const Color.fromARGB(255, 136, 38, 38)
+                    ]),
+                    badgeGradient: badges.BadgeGradient.linear(
+                      colors: [
+                        Color.fromARGB(255, 152, 189, 30),
+                        Color.fromARGB(255, 69, 150, 110)
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
+                  position: badges.BadgePosition.topEnd(top: -4, end: 2),
+                  showBadge: hasEmailInTimeline,
+                  badgeContent: Text('1',
+                      style: TextStyle(color: Color.fromARGB(255, 15, 15, 15))),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              TimelineComponent(email: widget.email),
                         ),
                       );
                     },
+                    icon: Icon(Icons.timeline_rounded, size: 30),
+                  ),
+                );
+              },
+            ),
+          ],
+          elevation: 0,
+          title: AutoSizeText(
+            "Your Order Requests",
+            style: TextStyle(
+              fontSize: 24,
+              color: const Color.fromARGB(255, 0, 0, 0),
+            ),
+          ),
+          centerTitle: true,
+        ),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("images/Order-info.jpg"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: RefreshIndicator(
+            onRefresh: _refreshOrders,
+            child: StreamBuilder<bool>(
+              stream: checkOrdersExistence(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+
+                if (snapshot.hasData && snapshot.data!) {
+                  return StreamBuilder<QuerySnapshot>(
+                    stream: orderStream,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Center(child: Text('Error: ${snapshot.error}'));
+                      }
+
+                      if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                        return _buildOtherWidget();
+                      }
+
+                      final negotiationPrices = snapshot.data!.docs;
+
+                      return _buildOrderList(negotiationPrices);
+                    },
                   );
-                },
-              );
-            } else {
-              return Center(
-                child: Text(
-                  'Add an Order Now',
+                } else {
+                  return FutureBuilder<Widget>(
+                    future: navigateBasedOnOrder(context, widget.email),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+
+                      if (snapshot.hasError) {
+                        return Center(child: Text('Error: ${snapshot.error}'));
+                      }
+
+                      return snapshot.data ?? _buildOtherWidget();
+                    },
+                  );
+                }
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<Widget> navigateBasedOnOrder(
+      BuildContext context, String? email) async {
+    final orderCollection = FirebaseFirestore.instance.collection('orders');
+    final querySnapshot =
+        await orderCollection.where('id', isEqualTo: email).get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      return _buildNoDriversYet();
+    } else {
+      return _buildOtherWidget();
+    }
+  }
+
+  Widget _buildOtherWidget() {
+    return Center(
+      child: Text(
+        'No Orders Found add order Now',
+        style: TextStyle(
+          fontSize: 24,
+          color: const Color.fromARGB(255, 0, 0, 0),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNoDriversYet() {
+    return Container(
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Color.fromARGB(255, 0, 0, 0),
+        ),
+        borderRadius: BorderRadius.circular(50),
+        color: Colors.transparent,
+      ),
+      child: Column(
+        children: [
+          OrderDetails(widget: widget),
+          SizedBox(height: 20),
+          Container(
+            alignment: Alignment.center,
+            width: 250,
+            child: Divider(
+              color: Colors.black,
+              thickness: 1.0,
+              height: 5,
+            ),
+          ),
+          Expanded(
+            child: Column(
+              children: [
+                SizedBox(height: 20),
+                Text(
+                  'No Drivers Yet',
                   style: TextStyle(
                     fontSize: 24,
                     color: Color.fromARGB(255, 145, 136, 136),
                   ),
                 ),
-              );
-            }
-          },
+                SizedBox(height: 20),
+                Container(
+                  alignment: Alignment.center,
+                  width: 250,
+                  child: Divider(
+                    color: Colors.black,
+                    thickness: 1.0,
+                    height: 5,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOrderList(List<DocumentSnapshot> negotiationPrices) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Color.fromARGB(255, 0, 0, 0),
         ),
+        borderRadius: BorderRadius.circular(50),
+        color: Colors.transparent,
+      ),
+      child: Column(
+        children: [
+          OrderDetails(widget: widget),
+          SizedBox(height: 20),
+          Container(
+            alignment: Alignment.center,
+            width: 250,
+            child: Divider(
+              color: Colors.black,
+              thickness: 1.0,
+              height: 5,
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: negotiationPrices.length,
+              itemBuilder: (context, index) {
+                final doc = negotiationPrices[index];
+                final negotiationPriceData =
+                    doc.data() as Map<String, dynamic>?;
+                final price = negotiationPriceData?['negotiationPrice'];
+                final Driveremail = negotiationPriceData?['email'];
+
+                return Dismissible(
+                  key: Key(doc.id),
+                  direction: DismissDirection.endToStart,
+                  onDismissed: (direction) {
+                    FirebaseFirestore.instance
+                        .collection("orders")
+                        .doc(widget.email)
+                        .collection('negotiationPrice')
+                        .doc(doc.id)
+                        .delete();
+                  },
+                  background: Container(
+                    color: Colors.red,
+                    padding: EdgeInsets.only(right: 20),
+                    alignment: Alignment.centerRight,
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 20),
+                          Column(
+                            children: [
+                              OrderRequests(
+                                negotiationPriceData: negotiationPriceData,
+                                price: price,
+                                index: doc.id,
+                                email: widget.email,
+                                Driveremail: Driveremail,
+                              ),
+                              SizedBox(height: 20),
+                              Container(
+                                alignment: Alignment.center,
+                                width: 250,
+                                child: Divider(
+                                  color: Colors.black,
+                                  thickness: 1.0,
+                                  height: 5,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

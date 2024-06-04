@@ -34,27 +34,30 @@ class _LoginButtonsState extends State<LoginButtons> {
       onTapUp: (TapUpDetails details) => setState(() => _isPressed = false),
       onTapCancel: () => setState(() => _isPressed = false),
       onTap: widget.onTap,
-      child: AnimatedContainer(
-        width: buttonWidth,
-        height: buttonhieght / 8, // Consider making this responsive if needed
-        margin: EdgeInsets.only(
-            top: buttonhieght / 20,
-            right: horizontalMargin,
-            left: horizontalMargin),
-        decoration: BoxDecoration(
-          color: _isPressed ? Colors.lightBlueAccent : const Color(0xffD8D8D8),
-          borderRadius: BorderRadius.circular(28),
-        ),
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeIn,
-        child: Center(
-          child: Text(
-            widget.text ?? "Button", // Provide a default text if null
-            style: TextStyle(
-                fontFamily: "noyh-bold",
-                color: const Color.fromARGB(255, 0, 0, 0),
-                fontSize: 0.1 * buttonWidth // Responsive text size
-                ),
+      child: Opacity(
+        opacity: 0.7,
+        child: AnimatedContainer(
+          width: buttonWidth / 1.5,
+          height:
+              buttonhieght / 10, // Consider making this responsive if needed
+
+          decoration: BoxDecoration(
+            color: _isPressed
+                ? Colors.lightBlueAccent
+                : Color.fromARGB(255, 155, 154, 154),
+            borderRadius: BorderRadius.circular(28),
+          ),
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeIn,
+          child: Center(
+            child: Text(
+              widget.text ?? "Button", // Provide a default text if null
+              style: TextStyle(
+                  fontFamily: "noyh-bold",
+                  color: const Color.fromARGB(255, 0, 0, 0),
+                  fontSize: 0.09 * buttonWidth // Responsive text size
+                  ),
+            ),
           ),
         ),
       ),

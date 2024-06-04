@@ -1,8 +1,5 @@
-import 'package:Mowasil/screens/frieght/frieght_page.dart';
-import 'package:Mowasil/screens/oder_info/orderinfo.dart';
 import 'package:flutter/material.dart';
-import 'package:page_animation_transition/animations/right_to_left_transition.dart';
-import 'package:page_animation_transition/page_animation_transition.dart';
+
 
 class LoginButton extends StatelessWidget {
   final String type;

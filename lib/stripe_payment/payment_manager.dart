@@ -53,6 +53,7 @@ abstract class PaymentManager {
         print('Error in _getClientSecret: $error');
         throw Exception('Failed to get client secret: $error');
       }
+      
     }
   }
 }

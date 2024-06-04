@@ -8,6 +8,7 @@ import 'package:Mowasil/screens/login/components/text_fields.dart';
 import 'package:Mowasil/screens/login/components/login_button.dart';
 import 'package:Mowasil/screens/oder_info/orderinfo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore package
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -32,6 +33,7 @@ class _UserLoginState extends State<UserLogin> {
   String? email, password;
   final GlobalKey<FormState> formkey = GlobalKey();
   bool isloading = false;
+
   @override
   Widget build(BuildContext context) {
     // Use MediaQuery to get the screen size
@@ -114,8 +116,8 @@ class _UserLoginState extends State<UserLogin> {
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
-                        backgroundColor:
-                            Color(0xff060644), //) Set text color to white
+                        backgroundColor: Color.fromARGB(
+                            255, 13, 49, 29), //) Set text color to white
                         elevation: 5,
                       ),
                       onPressed: () async {
@@ -124,27 +126,11 @@ class _UserLoginState extends State<UserLogin> {
                             isloading = true; // Move inside setState
                           });
                           try {
-                            await LoginUser(widget.context);
-                            
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Frieght(email: email)),
-                            );
+                            await loginUser(widget.context);
+                            await navigateBasedOnOrder(widget.context, email!);
                             // Handle successful user creation (optional)
                           } on FirebaseAuthException catch (e) {
-                            if (e.code == 'user-not-found') {
-                              showSnackBar(
-                                  widget.context, "email not registerd");
-                            } else if (e.code == "wrong-password") {
-                              showSnackBar(widget.context, "wrong password");
-                            }
-                          } catch (e) {
-                            // ignore: use_build_context_synchronously
-                            showSnackBar(
-                              widget.context,
-                              "Error, please try again later",
-                            );
+                            showSnackBar(widget.context, e.message);
                           } finally {
                             setState(() {
                               isloading = false; // Move inside setState
@@ -171,8 +157,28 @@ class _UserLoginState extends State<UserLogin> {
     );
   }
 
-  Future<void> LoginUser(BuildContext context) async {
-    UserCredential user = await FirebaseAuth.instance
+  Future<void> loginUser(BuildContext context) async {
+    await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email!, password: password!);
+  }
+
+  Future<void> navigateBasedOnOrder(BuildContext context, String email) async {
+    final orderCollection = FirebaseFirestore.instance.collection('orders');
+    final querySnapshot =
+        await orderCollection.where('id', isEqualTo: email).get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      // If an order with the email exists, navigate to OrderInfo page
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Orderinfo(email: email)),
+      );
+    } else {
+      // Otherwise, navigate to Frieght page
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Frieght(email: email)),
+      );
+    }
   }
 }

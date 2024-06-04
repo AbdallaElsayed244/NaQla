@@ -1,11 +1,13 @@
 import 'package:Mowasil/screens/login/driver_login.dart';
 import 'package:Mowasil/screens/login/driver_registration.dart';
 import 'package:Mowasil/stripe_payment/payment_manager.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async'; // Import for Future.delayed
 import 'package:Mowasil/screens/login/user_login.dart';
 import 'package:Mowasil/screens/login/components/new_account.dart';
 import 'package:Mowasil/screens/login/components/sign_in_buttons.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:page_animation_transition/animations/right_to_left_transition.dart';
 import 'package:page_animation_transition/page_animation_transition.dart';
@@ -19,10 +21,9 @@ class ToLogin extends StatefulWidget {
 
 class _ToLoginState extends State<ToLogin> {
   bool isVisible = true;
-  bool isVisible2 =
-      true; // Track the container's visibility (initially visible)
+  bool isVisible2 = true;
   double containerOffset = 0.0;
-  double containerOffset2 = 0.0; // Offset for sliding right
+  double containerOffset2 = 0.0;
   bool showUserLogin = false;
   bool showDriverLogin = false;
 
@@ -32,10 +33,9 @@ class _ToLoginState extends State<ToLogin> {
       containerOffset = isVisible ? 0.0 : MediaQuery.of(context).size.width;
     });
 
-    // Set showUserLogin flag after a delay for smooth transition
-    Future.delayed(const Duration(milliseconds: 10), () {
+    Future.delayed(const Duration(milliseconds: 300), () {
       setState(() {
-        showUserLogin = true;
+        showUserLogin = !isVisible; // Corrected to reflect the actual state
       });
     });
   }
@@ -46,10 +46,9 @@ class _ToLoginState extends State<ToLogin> {
       containerOffset2 = isVisible2 ? 0.0 : MediaQuery.of(context).size.width;
     });
 
-    // Set showUserLogin flag after a delay for smooth transition
-    Future.delayed(const Duration(milliseconds: 10), () {
+    Future.delayed(const Duration(milliseconds: 300), () {
       setState(() {
-        showDriverLogin = true;
+        showDriverLogin = !isVisible2; // Corrected to reflect the actual state
       });
     });
   }
@@ -61,37 +60,42 @@ class _ToLoginState extends State<ToLogin> {
     ScreenUtil.init(context);
     return Stack(
       children: [
-        Positioned(
-          right: .0, // Align to the right edge
-          bottom: 90.0, // Position at the bottom
-          child: AnimatedOpacity(
-            opacity: isVisible ? 1.0 : 0.5, // Control visibility with opacity
-            duration:
-                const Duration(milliseconds: 100), // Adjust for desired speed
-            curve: Curves.easeInCubic, // Add easing for natural feel
-            child: Container(
-              width: screenWidth,
-              height: screenHeight / 3,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(topRight: Radius.circular(100)),
-              ),
-              padding: EdgeInsets.only(top: 30.h),
-              margin: EdgeInsets.only(top: 20.h),
-              child: SingleChildScrollView(
+        if (!isVisible && showUserLogin)
+          UserLogin(
+            onBack: toggleVisibility,
+            context: context,
+          ),
+        if (!isVisible2 && showDriverLogin)
+          DriverLogin(
+            onBack: toggleVisibility2,
+            context: context,
+          ),
+        AnimatedOpacity(
+          opacity: (isVisible && isVisible2) ? 1.0 : 0.0,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInCubic,
+          child: Container(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 10.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    LoginButtons(
-                      text: "Login as User",
-                      onTap: toggleVisibility, // Call toggleVisibility on tap
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        LoginButtons(
+                          text: "Login as User",
+                          onTap: toggleVisibility,
+                        ),
+                        LoginButtons(
+                          text: "Login as Driver",
+                          onTap: toggleVisibility2,
+                        ),
+                      ],
                     ),
-                    LoginButtons(
-                      text: "Login as Driver",
-                      onTap: toggleVisibility2,
-                    ),
-                    const SizedBox(height: 60),
+                    SizedBox(height: 30.0),
                     NewAccount(),
                   ],
                 ),
@@ -99,21 +103,6 @@ class _ToLoginState extends State<ToLogin> {
             ),
           ),
         ),
-
-        if (!isVisible)
-          showUserLogin
-              ? UserLogin(
-                  onBack: toggleVisibility,
-                  context: context, // Pass the toggle function
-                )
-              : const SizedBox.shrink(),
-        if (!isVisible2)
-          showDriverLogin
-              ? DriverLogin(
-                  onBack: toggleVisibility2,
-                  context: context, // Pass the toggle function
-                )
-              : const SizedBox.shrink(), // Placeholder while waiting
       ],
     );
   }

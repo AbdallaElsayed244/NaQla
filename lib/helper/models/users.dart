@@ -8,6 +8,7 @@ class UserModel {
   final String? nationalcard;
   final String? license;
   final String? vehiclereg;
+  final String? phone;
 
   const UserModel({
     this.id,
@@ -17,6 +18,7 @@ class UserModel {
     required this.email,
     required this.username,
     required this.profilePhoto,
+    this.phone,
   });
 
   toJson() {
@@ -35,6 +37,7 @@ class UserModel {
     final data = document.data()!;
     return UserModel(
       id: document.id,
+      phone: data["phone"],
       nationalcard: data["nationalcard"],
       license: data["license"],
       vehiclereg: data["vehiclereg"],
@@ -50,5 +53,6 @@ class UserModel {
         email: json["email"],
         username: json["username"],
         profilePhoto: json["profilePhoto"],
+        phone: json["phone"],
       );
 }

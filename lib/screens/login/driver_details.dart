@@ -1,18 +1,11 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
-// ignore: avoid_web_libraries_in_flutter
-
 import 'package:Mowasil/helper/app_colors.dart';
 import 'package:Mowasil/helper/controllers/signup_ctrl.dart';
 import 'package:Mowasil/helper/show_snack_bar.dart';
 import 'package:Mowasil/screens/OrdersList/Order_list.dart';
 import 'package:Mowasil/screens/login/components/custom_scaffold.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class DriverDetails extends StatefulWidget {
@@ -40,6 +33,7 @@ class _DriverDetailsState extends State<DriverDetails> {
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         body: CustomScaffold(
+          text: Text("Driver Details"),
           body: null,
           child: Column(
             children: [
@@ -232,7 +226,7 @@ class _DriverDetailsState extends State<DriverDetails> {
                                 }
                               },
                               child: Text(
-                                "Done",
+                                "Create Account",
                                 style: TextStyle(
                                     fontSize: 25, color: Colors.white),
                               ),

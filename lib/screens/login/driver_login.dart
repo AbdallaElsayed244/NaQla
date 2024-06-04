@@ -1,19 +1,9 @@
-import 'package:Mowasil/helper/controllers/signup_ctrl.dart';
 import 'package:Mowasil/helper/show_snack_bar.dart';
 import 'package:Mowasil/screens/OrdersList/Order_list.dart';
-import 'package:Mowasil/screens/frieght/frieght_page.dart';
-import 'package:Mowasil/screens/login/components/new_account.dart';
 import 'package:Mowasil/screens/login/components/text_fields.dart';
-import 'package:Mowasil/screens/login/components/login_button.dart';
-import 'package:Mowasil/screens/oder_info/orderinfo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:page_animation_transition/animations/right_to_left_transition.dart';
 import 'package:page_animation_transition/animations/scale_animation_transition.dart';
 import 'package:page_animation_transition/page_animation_transition.dart';
 
@@ -34,7 +24,7 @@ class _DriverLoginState extends State<DriverLogin> {
   Widget build(BuildContext context) {
     // Use MediaQuery to get the screen size
     final screenSize = MediaQuery.of(context).size;
-    final controller = Get.put(SignupCtrl());
+
     return Align(
       alignment: Alignment.bottomCenter,
       child: SizedBox(
@@ -112,8 +102,8 @@ class _DriverLoginState extends State<DriverLogin> {
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
-                        backgroundColor:
-                            Color(0xff060644), //) Set text color to white
+                        backgroundColor: Color.fromARGB(
+                            255, 13, 49, 29), //) Set text color to white
                         elevation: 5,
                       ),
                       onPressed: () async {
@@ -139,19 +129,8 @@ class _DriverLoginState extends State<DriverLogin> {
                             }
 
                             // Handle successful user creation (optional)
-                          } on FirebaseAuthException catch (e) {
-                            if (e.code == 'user-not-found') {
-                              showSnackBar(
-                                  widget.context, "email not registerd");
-                            } else if (e.code == "wrong-password") {
-                              showSnackBar(widget.context, "wrong password");
-                            }
-                          } catch (e) {
-                            // ignore: use_build_context_synchronously
-                            showSnackBar(
-                              widget.context,
-                              "Error, please try again later",
-                            );
+                           } on FirebaseAuthException catch (e) {
+                            showSnackBar(widget.context, e.message);
                           } finally {
                             setState(() {
                               isloading = false; // Move inside setState

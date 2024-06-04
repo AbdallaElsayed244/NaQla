@@ -1,30 +1,24 @@
 import 'package:Mowasil/helper/app_colors.dart';
-import 'package:Mowasil/screens/HomeScreen/home_screen.dart';
-import 'package:Mowasil/screens/login/components/2ndPageregistration1.dart';
-import 'package:Mowasil/screens/login/driver_registration.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:page_animation_transition/animations/right_to_left_transition.dart';
-import 'package:page_animation_transition/page_animation_transition.dart';
 
 class CustomScaffold extends StatelessWidget {
-  const CustomScaffold({super.key, this.child, required body});
+  const CustomScaffold({super.key, this.child, required body, this.text});
   final Widget? child;
+  final Text? text;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        title: text,
         toolbarHeight: 50,
-        backgroundColor: BackgroundColor,
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop(PageAnimationTransition(
-                page: const HomeScreen(),
-                pageAnimationType: RightToLeftTransition()));
+            Navigator.pop(context);
           },
           icon: Icon(Icons.arrow_back),
           iconSize: 29,
-          color: Color.fromARGB(255, 255, 255, 255),
+          color: Color.fromARGB(255, 0, 0, 0),
         ),
         elevation: 0,
       ),
@@ -35,8 +29,12 @@ class CustomScaffold extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height / 1.6,
             decoration: BoxDecoration(
-              color: BackgroundColor,
               borderRadius: BorderRadius.circular(70),
+              gradient: LinearGradient(
+                colors: [Color.fromARGB(255, 161, 62, 128), Colors.green],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
             ),
           ),
           SafeArea(child: child!)

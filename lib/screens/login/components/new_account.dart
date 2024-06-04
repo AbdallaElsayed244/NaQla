@@ -1,3 +1,4 @@
+import 'package:Mowasil/helper/app_colors.dart';
 import 'package:Mowasil/screens/login/driver_registration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -27,16 +28,14 @@ class _NewAccountState extends State<NewAccount> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     // Adjust font size based on screen width.
-    double fontSize = screenWidth < 70 ? 32 : 18;
+    double fontSize = screenWidth < 80 ? 52 : 21;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           "Don't have an account? ",
-          style: TextStyle(
-            fontSize: fontSize,
-          ),
+          style: TextStyle(fontSize: fontSize, color: Colors.white),
         ),
         GestureDetector(
           child: Text(
@@ -44,8 +43,8 @@ class _NewAccountState extends State<NewAccount> {
             style: TextStyle(
               fontSize: fontSize,
               color: _isPressed
-                  ? const Color.fromARGB(255, 6, 124, 214)
-                  : Colors.lightBlueAccent,
+                  ? Color.fromARGB(255, 8, 79, 133)
+                  : Color.fromARGB(255, 235, 109, 60),
               fontWeight: FontWeight.bold, // Added for emphasis
             ),
           ),
@@ -67,8 +66,8 @@ class _NewAccountState extends State<NewAccount> {
               // padding: const EdgeInsets.all(5.0),
               desc: 'choose to be a Driver or User.',
               descTextStyle: TextStyle(fontSize: 20),
-              btnOkColor: Color(0xff060644),
-              btnCancelColor: Color(0xff393e46),
+              btnOkColor: ButtonsColor2,
+              btnCancelColor: Color.fromARGB(255, 70, 64, 57),
 
               btnCancelOnPress: () {
                 Navigator.of(context).push(PageAnimationTransition(
