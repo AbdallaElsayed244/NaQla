@@ -282,9 +282,9 @@ class _TimelineComponentState extends State<TimelineComponent> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Text(
+                  AutoSizeText(
                     'Rate the driver',
-                    style: TextStyle(fontSize: 18.0),
+                    style: TextStyle(fontSize: 28.0),
                   ),
                   SizedBox(height: 16.0),
                   RatingBar.builder(
@@ -312,14 +312,19 @@ class _TimelineComponentState extends State<TimelineComponent> {
                   ),
                   SizedBox(height: 16.0),
                   ElevatedButton(
-                    child: Text('Submit'),
+                    child: AutoSizeText(
+                      'Submit',
+                      style: TextStyle(fontSize: 18.0, color: Colors.white),
+                    ),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(ButtonsColor2),
+                    ),
                     onPressed: () async {
-                     
                       await FirebaseFirestore.instance
                           .collection('TimeLine')
                           .doc(userEmail)
-                          .delete(); 
-                          Navigator.pop(context);
+                          .delete();
+                      Navigator.pop(context);
                     },
                   ),
                 ],

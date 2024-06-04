@@ -64,18 +64,16 @@ class _OrderinfoState extends State<Orderinfo> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           actions: [
-            StreamBuilder<bool>(
+            StreamBuilder<DocumentSnapshot>(
               stream: FirebaseFirestore.instance
                   .collection("TimeLine")
-                  .where('Confirmed', isEqualTo: false)
-                  .snapshots()
-                  .map((snapshot) => snapshot.docs.isNotEmpty),
+                  .doc(widget.email)
+                  .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
                 }
-                final bool hasEmailInTimeline =
-                    snapshot.hasData ? snapshot.data! : false;
+                final bool hasEmailInTimeline = snapshot.data?.exists ?? false;
                 return badges.Badge(
                   badgeStyle: badges.BadgeStyle(
                     shape: badges.BadgeShape.circle,
