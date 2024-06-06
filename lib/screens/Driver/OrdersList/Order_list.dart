@@ -51,11 +51,11 @@ class _OrdersState extends State<Orders> {
               padding: EdgeInsets.only(top: 20), // Added padding at the top
               itemCount: snapshot.data?.docs?.length ?? 0,
               itemBuilder: (context, index) {
-                final DocumentSnapshot ds = snapshot.data.docs[index];
+                final DocumentSnapshot Orders = snapshot.data.docs[index];
                 return FutureBuilder(
                   future: FirebaseFirestore.instance
                       .collection('Users')
-                      .doc(ds['id'])
+                      .doc(Orders['id'])
                       .get(),
                   builder:
                       (context, AsyncSnapshot<DocumentSnapshot> userSnapshot) {
@@ -87,7 +87,7 @@ class _OrdersState extends State<Orders> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        ' ${ds['offer']} EGP',
+                                        ' ${Orders['offer']} EGP',
                                         style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
@@ -96,7 +96,7 @@ class _OrdersState extends State<Orders> {
                                       ),
                                       ElevatedButton(
                                         onPressed: () {
-                                          _showDialog(context, index, ds);
+                                          _showDialog(context, index, Orders);
                                         },
                                         child: Text(
                                           "Start",
@@ -126,7 +126,7 @@ class _OrdersState extends State<Orders> {
                                       '                   ', '            '),
                                   buildDetailRow('      ', '            '),
                                   buildDetailRow('          ', '           '),
-                                  SizedBox(height: 20),
+                                  SizedBox(height: 90),
                                   Divider(
                                       color: Colors.black,
                                       thickness: 1.0,
@@ -150,7 +150,7 @@ class _OrdersState extends State<Orders> {
                         userSnapshot.data!.data() as Map<String, dynamic>;
                     return Dismissible(
                       key: UniqueKey(),
-                      onDismissed: (direction) => (ds),
+                      onDismissed: (direction) => (Orders),
                       child: Card(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -171,7 +171,7 @@ class _OrdersState extends State<Orders> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    ' ${ds['offer']} EGP',
+                                    ' ${Orders['offer']} EGP',
                                     style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
@@ -180,7 +180,7 @@ class _OrdersState extends State<Orders> {
                                   ),
                                   ElevatedButton(
                                     onPressed: () {
-                                      _showDialog(context, index, ds);
+                                      _showDialog(context, index, Orders);
                                     },
                                     child: Text(
                                       "Start",
@@ -203,10 +203,10 @@ class _OrdersState extends State<Orders> {
                                 ],
                               ),
                               SizedBox(height: 10),
-                              buildDetailRow("PickUp:", ds['pickup']),
-                              buildDetailRow("Location:", ds['destination']),
-                              buildDetailRow("Time:", ds['date']),
-                              buildDetailRow("Additional Notes:", ds['cargo']),
+                              buildDetailRow("PickUp:", Orders['pickup']),
+                              buildDetailRow("Location:", Orders['destination']),
+                              buildDetailRow("Time:", Orders['date']),
+                              buildDetailRow("Additional Notes:", Orders['cargo']),
                               SizedBox(height: 20),
                               Divider(
                                   color: Colors.black,
@@ -339,7 +339,7 @@ class _OrdersState extends State<Orders> {
   }
 
   void _showDialog(
-      BuildContext context, int index, DocumentSnapshot<Object?> ds) {
+      BuildContext context, int index, DocumentSnapshot<Object?> Orders) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -374,7 +374,7 @@ class _OrdersState extends State<Orders> {
                 }
                 await FirebaseFirestore.instance
                     .collection('orders')
-                    .doc(ds['id'])
+                    .doc(Orders['id'])
                     .collection("negotiationPrice")
                     .doc(widget.driverEmail)
                     .set({

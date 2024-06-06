@@ -344,7 +344,7 @@ class _FrieghtState extends State<Frieght> {
                     child: _isLoading // Step 3
                         ? CircularProgressIndicator() // Render loading indicator
                         : Text(
-                            "Order Freight",
+                            "Confirm Order",
                             style: TextStyle(
                                 fontSize: 25,
                                 color: Color.fromARGB(255, 255, 255, 255)),
@@ -380,7 +380,7 @@ class _FrieghtState extends State<Frieght> {
           primary: true,
           elevation: 0,
           title: Text(
-            "FREIGHT",
+            "Add Order",
             style: TextStyle(color: Colors.black),
           ),
           titleTextStyle: TextStyle(fontSize: 33),
