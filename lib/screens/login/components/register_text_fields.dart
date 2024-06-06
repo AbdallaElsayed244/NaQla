@@ -1,5 +1,3 @@
-import 'package:Mowasil/screens/login/driver_details.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RegisterTextFields extends StatelessWidget {

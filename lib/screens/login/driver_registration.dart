@@ -1,9 +1,7 @@
 import 'dart:io';
-import 'package:Mowasil/helper/app_colors.dart';
 import 'package:Mowasil/helper/controllers/signup_ctrl.dart';
 import 'package:Mowasil/helper/models/users.dart';
 import 'package:Mowasil/helper/show_snack_bar.dart';
-import 'package:Mowasil/screens/login/components/custom_scaffold.dart';
 import 'package:Mowasil/screens/login/components/register_text_fields.dart';
 import 'package:Mowasil/screens/login/driver_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -98,22 +96,18 @@ class _DriverRegState extends State<DriverReg> {
       showSnackBar(context, "error occurred");
     }
 
-    if (pickedFile != null) {
-      setState(() {
-        if (containerIndex == 1) {
-          _image1 = File(pickedFile.path);
-        } else if (containerIndex == 2) {
-          _image2 = File(pickedFile.path);
-        } else if (containerIndex == 3) {
-          _image3 = File(pickedFile.path);
-        } else if (containerIndex == 4) {
-          _image4 = File(pickedFile.path);
-        }
-      });
-    } else {
-      print("No Image Picked");
+    setState(() {
+      if (containerIndex == 1) {
+        _image1 = File(pickedFile.path);
+      } else if (containerIndex == 2) {
+        _image2 = File(pickedFile.path);
+      } else if (containerIndex == 3) {
+        _image3 = File(pickedFile.path);
+      } else if (containerIndex == 4) {
+        _image4 = File(pickedFile.path);
+      }
+    });
     }
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,4 @@
 import 'package:Mowasil/screens/login/driver_login.dart';
-import 'package:Mowasil/screens/login/driver_registration.dart';
-import 'package:Mowasil/stripe_payment/payment_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async'; // Import for Future.delayed
@@ -9,8 +7,7 @@ import 'package:Mowasil/screens/login/components/new_account.dart';
 import 'package:Mowasil/screens/login/components/sign_in_buttons.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:page_animation_transition/animations/right_to_left_transition.dart';
-import 'package:page_animation_transition/page_animation_transition.dart';
+
 
 class ToLogin extends StatefulWidget {
   const ToLogin({Key? key}) : super(key: key);
@@ -55,8 +52,6 @@ class _ToLoginState extends State<ToLogin> {
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
     ScreenUtil.init(context);
     return Stack(
       children: [

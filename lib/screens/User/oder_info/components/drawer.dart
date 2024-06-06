@@ -1,14 +1,10 @@
-import 'package:Mowasil/helper/app_colors.dart';
-import 'package:Mowasil/helper/functions/loading_indicator.dart';
 import 'package:Mowasil/helper/service/auth_methods.dart';
 import 'package:Mowasil/screens/HomeScreen/home_screen.dart';
 import 'package:Mowasil/screens/User/OrderStatus/order_timeline.dart';
 import 'package:Mowasil/screens/User/frieght/frieght_page.dart';
 import 'package:Mowasil/screens/User/oder_info/orderinfo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 
 class CustomDrawer extends StatefulWidget {

@@ -1,7 +1,6 @@
 import 'package:Mowasil/helper/service/auth_methods.dart';
 import 'package:Mowasil/helper/service/users_methods.dart';
 import 'package:Mowasil/helper/models/users.dart';
-import 'package:Mowasil/helper/show_snack_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,7 +22,6 @@ class SignupCtrl extends GetxController {
   
 
   final userData = Get.put(UsersMethods());
-  bool _isloading = false;
 
   var verificationId = ''.obs;
   Future<void> CreateUser(UserModel user) async {
@@ -73,7 +71,6 @@ class SignupCtrl extends GetxController {
     } catch (e) {
       Get.snackbar("Error", "You must enter email and password");
     }
-    _isloading = false;
   }
 
    loginuser(String email, password) async {
@@ -89,6 +86,5 @@ class SignupCtrl extends GetxController {
       // ignore: use_build_context_synchronously
       Get.snackbar("Error", "error");
     }
-    _isloading = false;
   }
 }

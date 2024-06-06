@@ -26,7 +26,6 @@ class _LoginButtonsState extends State<LoginButtons> {
 
     // Responsive width and margins
     double buttonWidth = deviceWidth * 0.6; // 80% of screen width
-    double horizontalMargin = deviceWidth * 0.1; // 10% margin on each side
     double buttonhieght = devicehieght * 0.6;
 
     return GestureDetector(

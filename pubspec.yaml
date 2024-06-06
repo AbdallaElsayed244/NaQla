@@ -54,8 +54,6 @@ dependencies:
   get: ^4.6.6
   firebase_storage: ^11.7.4
   provider: ^6.1.1 
-  pinput: ^4.0.0
-  firebase_app_check: ^0.2.2+5
   fluttertoast: ^8.2.5
   loading_indicator: ^3.1.1
   insta_image_viewer: ^1.0.4

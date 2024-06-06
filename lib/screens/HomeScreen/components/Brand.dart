@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:geolocator/geolocator.dart';
 
 class Brand extends StatelessWidget {
   final String imagePath;
@@ -21,8 +19,8 @@ class Brand extends StatelessWidget {
       builder: (context, constraints) {
         final maxHeight = constraints.maxHeight;
         final maxWidth = constraints.maxWidth;
-        final imageWidth = maxWidth * 0.6;
-        final imageHeight = imageWidth * (190 / 210);
+
+
 
         return Stack(
           children: [

@@ -1,6 +1,5 @@
 import 'package:Mowasil/helper/app_colors.dart';
 import 'package:Mowasil/helper/show_message.dart';
-import 'package:Mowasil/stripe_payment/payment_manager.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

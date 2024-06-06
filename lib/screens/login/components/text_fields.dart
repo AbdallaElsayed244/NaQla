@@ -24,7 +24,7 @@ class TextFields extends StatelessWidget {
   Widget build(BuildContext context) {
     // Using MediaQuery to obtain device dimensions
     double deviceWidth = MediaQuery.of(context).size.width;
-    double devicehieght = MediaQuery.of(context).size.height;
+
 
     // Responsive width calculation
     double containerWidth = deviceWidth * 0.8; // 80% of screen width

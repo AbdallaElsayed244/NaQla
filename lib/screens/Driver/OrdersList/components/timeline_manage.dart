@@ -57,7 +57,7 @@ class _ListScreenState extends State<ListScreen>
     });
 
     if (widget.startAnimation) {
-      WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         _controller.forward();
       });
     }
@@ -71,8 +71,7 @@ class _ListScreenState extends State<ListScreen>
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
+
 
     return Column(
       children: [

@@ -1,7 +1,6 @@
 import 'package:Mowasil/helper/controllers/signup_ctrl.dart';
 import 'package:Mowasil/helper/firebase/message.dart';
 import 'package:Mowasil/screens/User/frieght/frieght_page.dart';
-import 'package:Mowasil/screens/User/oder_info/orderinfo.dart';
 import 'package:Mowasil/screens/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -43,14 +42,14 @@ class AuthMethods extends GetxController {
       print('exeption  ${ex.message}');
       throw e;
     }
+    return null;
   }
 
   Future<String?> LoginUser(
     String email,
     password,
   ) async {
-    UserCredential user = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: password!);
+    return null;
   }
 
   Future<void> phoneauth(String phone) async {

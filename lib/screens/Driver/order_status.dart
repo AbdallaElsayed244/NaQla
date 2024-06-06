@@ -1,4 +1,3 @@
-import 'package:Mowasil/helper/app_colors.dart';
 import 'package:Mowasil/helper/show_message.dart';
 import 'package:Mowasil/screens/Driver/OrdersList/components/driver_drawer.dart';
 import 'package:Mowasil/screens/Driver/OrdersList/components/order_confirm.dart';
@@ -6,10 +5,7 @@ import 'package:Mowasil/screens/Driver/OrdersList/components/timeline_manage.dar
 import 'package:Mowasil/stripe_payment/payment_manager.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 class OrderStatus extends StatefulWidget {
