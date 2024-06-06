@@ -82,7 +82,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       onPressed: () {
                         showMessage(
                           context,
-                          'To deliver the package you should pay the fees',
+                          'Delete your order and all the requests with it',
                           () async {
                             // Show loading indicator
                             setState(() {});
