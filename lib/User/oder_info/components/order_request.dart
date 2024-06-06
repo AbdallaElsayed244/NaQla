@@ -1,18 +1,11 @@
-import 'dart:ffi';
-
 import 'package:Mowasil/helper/app_colors.dart';
 import 'package:Mowasil/helper/show_message.dart';
 import 'package:Mowasil/User/OrderStatus/order_timeline.dart';
-import 'package:Mowasil/screens/login/driver_details.dart';
-import 'package:Mowasil/stripe_payment/payment_manager.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:loading_indicator/loading_indicator.dart';

@@ -1,24 +1,12 @@
 import 'package:Mowasil/helper/controllers/signup_ctrl.dart';
-import 'package:Mowasil/helper/service/auth_methods.dart';
 import 'package:Mowasil/helper/show_snack_bar.dart';
-import 'package:Mowasil/screens/HomeScreen/home_screen.dart';
 import 'package:Mowasil/User/frieght/frieght_page.dart';
-import 'package:Mowasil/screens/login/components/new_account.dart';
 import 'package:Mowasil/screens/login/components/text_fields.dart';
-import 'package:Mowasil/screens/login/components/login_button.dart';
 import 'package:Mowasil/User/oder_info/orderinfo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore package
-import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:page_animation_transition/animations/right_to_left_transition.dart';
-import 'package:page_animation_transition/animations/scale_animation_transition.dart';
-import 'package:page_animation_transition/page_animation_transition.dart';
 
 class UserLogin extends StatefulWidget {
   final VoidCallback? onBack; // Callback function
