@@ -1,11 +1,14 @@
-import 'package:Mowasil/screens/oder_info/orderinfo.dart';
+import 'package:Mowasil/User/oder_info/orderinfo.dart';
+import 'package:Mowasil/helper/app_colors.dart';
+import 'package:Mowasil/helper/show_message.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class OrderDetails extends StatelessWidget {
+class OrderDetails extends StatefulWidget {
   const OrderDetails({
     super.key,
     required this.widget,
@@ -14,11 +17,16 @@ class OrderDetails extends StatelessWidget {
   final Orderinfo widget;
 
   @override
+  State<OrderDetails> createState() => _OrderDetailsState();
+}
+
+class _OrderDetailsState extends State<OrderDetails> {
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder<DocumentSnapshot>(
       stream: FirebaseFirestore.instance
           .collection('orders')
-          .doc(widget.email)
+          .doc(widget.widget.email)
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -41,23 +49,88 @@ class OrderDetails extends StatelessWidget {
         final orderData = snapshot.data!.data() as Map<String, dynamic>;
         return Container(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Text(
+                          "Order Details",
+                          style: TextStyle(
+                              fontSize: 23,
+                              color: Color.fromARGB(255, 1, 48, 1)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: AutoSizeText(
+                          '${orderData['offer'] ?? 'Unknown'} EGP',
+                          style: const TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Order Details",
-                      style: TextStyle(
-                          fontSize: 23, color: Color.fromARGB(255, 1, 48, 1)),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        showMessage(
+                          context,
+                          'To deliver the package you should pay the fees',
+                          () async {
+                            // Show loading indicator
+                            setState(() {});
+
+                            try {
+                              // Delete the document from the orders collection
+                              await FirebaseFirestore.instance
+                                  .collection('orders')
+                                  .doc(widget.widget.email)
+                                  .delete();
+
+                              // Delete the negotiationPrice sub-collection
+                              await FirebaseFirestore.instance
+                                  .collection('orders')
+                                  .doc(widget.widget.email)
+                                  .collection('negotiationPrice')
+                                  .doc()
+                                  .delete();
+
+                              // Update the state and start the animation
+                            } catch (e) {
+                              // Handle errors here if necessary
+                              print(e);
+                            } finally {
+                              // Hide loading indicator
+                              setState(() {});
+                            }
+                          },
+                          () {},
+                          'Delete Order', // Title of the confirmation dialog
+                          "delete", // Text for the positive action button
+                          "Cancel", // Text for the negative action button
+                          DialogType.error, // Type of the dialog
+                        );
+                      },
+                      child: Text(
+                        "Delete",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateColor.resolveWith(
+                              (states) => ButtonsColor2),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  side: BorderSide(
+                                      color: Colors.black, width: 1)))),
                     ),
-                  ),
-                  AutoSizeText(
-                    '${orderData['offer'] ?? 'Unknown'} EGP',
-                    style: const TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),

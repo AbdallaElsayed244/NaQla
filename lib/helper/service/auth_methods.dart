@@ -1,7 +1,7 @@
 import 'package:Mowasil/helper/controllers/signup_ctrl.dart';
 import 'package:Mowasil/helper/firebase/message.dart';
-import 'package:Mowasil/screens/frieght/frieght_page.dart';
-import 'package:Mowasil/screens/oder_info/orderinfo.dart';
+import 'package:Mowasil/User/frieght/frieght_page.dart';
+import 'package:Mowasil/User/oder_info/orderinfo.dart';
 import 'package:Mowasil/screens/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';

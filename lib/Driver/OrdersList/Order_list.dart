@@ -1,9 +1,9 @@
 import 'package:Mowasil/helper/app_colors.dart';
 import 'package:Mowasil/helper/models/users.dart';
 import 'package:Mowasil/helper/service/orders_methods.dart';
-import 'package:Mowasil/screens/OrdersList/components/driver_drawer.dart';
-import 'package:Mowasil/screens/OrdersList/order_status.dart';
-import 'package:Mowasil/screens/oder_info/components/drawer.dart';
+import 'package:Mowasil/Driver/OrdersList/components/driver_drawer.dart';
+import 'package:Mowasil/Driver/order_status.dart';
+import 'package:Mowasil/User/oder_info/components/drawer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';

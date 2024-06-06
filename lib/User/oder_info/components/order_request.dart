@@ -2,7 +2,7 @@ import 'dart:ffi';
 
 import 'package:Mowasil/helper/app_colors.dart';
 import 'package:Mowasil/helper/show_message.dart';
-import 'package:Mowasil/screens/OrderStatus/order_timeline.dart';
+import 'package:Mowasil/User/OrderStatus/order_timeline.dart';
 import 'package:Mowasil/screens/login/driver_details.dart';
 import 'package:Mowasil/stripe_payment/payment_manager.dart';
 import 'package:auto_size_text/auto_size_text.dart';

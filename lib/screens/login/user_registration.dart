@@ -7,11 +7,11 @@ import 'package:Mowasil/helper/controllers/signup_ctrl.dart';
 import 'package:Mowasil/helper/models/users.dart';
 import 'package:Mowasil/helper/service/auth_methods.dart';
 import 'package:Mowasil/helper/show_snack_bar.dart';
-import 'package:Mowasil/screens/frieght/frieght_page.dart';
+import 'package:Mowasil/User/frieght/frieght_page.dart';
 
 import 'package:Mowasil/screens/login/components/custom_scaffold.dart';
 import 'package:Mowasil/screens/login/components/register_text_fields.dart';
-import 'package:Mowasil/screens/oder_info/orderinfo.dart';
+import 'package:Mowasil/User/oder_info/orderinfo.dart';
 import 'package:Mowasil/screens/phoneVerif/phone_verif_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';

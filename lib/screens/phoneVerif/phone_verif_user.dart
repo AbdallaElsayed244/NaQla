@@ -1,5 +1,5 @@
 
-import 'package:Mowasil/screens/oder_info/orderinfo.dart';
+import 'package:Mowasil/User/oder_info/orderinfo.dart';
 import 'package:Mowasil/screens/phoneVerif/OTP.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

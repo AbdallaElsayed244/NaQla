@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:Mowasil/helper/app_colors.dart';
-import 'package:Mowasil/screens/frieght/frieght_page.dart';
+import 'package:Mowasil/User/frieght/frieght_page.dart';
 import 'package:Mowasil/screens/login/maps/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

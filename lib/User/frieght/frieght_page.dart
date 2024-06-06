@@ -1,10 +1,10 @@
 import 'package:Mowasil/helper/app_colors.dart';
-import 'package:Mowasil/screens/frieght/components/have_order.dart';
-import 'package:Mowasil/screens/frieght/components/text_field.dart';
+import 'package:Mowasil/User/frieght/components/have_order.dart';
+import 'package:Mowasil/User/frieght/components/text_field.dart';
 import 'package:Mowasil/screens/login/maps/googlemap%20copy.dart';
 import 'package:Mowasil/screens/login/maps/googlemap.dart';
 import 'package:Mowasil/helper/service/orders_methods.dart';
-import 'package:Mowasil/screens/oder_info/components/drawer.dart';
+import 'package:Mowasil/User/oder_info/components/drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

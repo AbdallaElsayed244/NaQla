@@ -1,9 +1,9 @@
-import 'package:Mowasil/firebase_options.dart';
+import 'package:Mowasil/helper/firebase/firebase_options.dart';
 import 'package:Mowasil/helper/service/auth_methods.dart';
 import 'package:Mowasil/screens/HomeScreen/home_screen.dart';
-import 'package:Mowasil/screens/OrdersList/components/index_progress.dart';
-import 'package:Mowasil/screens/frieght/frieght_page.dart';
-import 'package:Mowasil/screens/oder_info/orderinfo.dart';
+import 'package:Mowasil/Driver/OrdersList/components/index_progress.dart';
+import 'package:Mowasil/User/frieght/frieght_page.dart';
+import 'package:Mowasil/User/oder_info/orderinfo.dart';
 import 'package:Mowasil/screens/splash_screen.dart';
 import 'package:Mowasil/stripe_payment/components/stripe_keys.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
