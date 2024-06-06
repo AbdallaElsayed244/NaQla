@@ -1,5 +1,5 @@
 import 'package:Mowasil/helper/show_snack_bar.dart';
-import 'package:Mowasil/Driver/OrdersList/Order_list.dart';
+import 'package:Mowasil/screens/Driver/OrdersList/Order_list.dart';
 import 'package:Mowasil/screens/login/components/text_fields.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -103,37 +103,37 @@ class _DriverLoginState extends State<DriverLogin> {
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Color.fromARGB(
-                            255, 13, 49, 29), //) Set text color to white
+                            255, 13, 49, 29), 
                         elevation: 5,
                       ),
                       onPressed: () async {
                         if (formkey.currentState!.validate()) {
                           setState(() {
-                            isloading = true; // Move inside setState
+                            isloading = true; 
                           });
                           try {
-                            final userDoc = await FirebaseFirestore.instance
+                            final driverDoc = await FirebaseFirestore.instance
                                 .collection('Users')
                                 .doc("${email}Driver")
                                 .get();
 
-                            if (userDoc.exists) {
+                            if (driverDoc.exists) {
                               // Login successful, navigate to the appropriate screen
                               print('Login successful!');
-                              await LoginUser();
+                              await LoginUser(); // Driver login function call
                             } else {
-                              // User not found in Firestore, handle error
+                              // Driver not found in Database
                               showSnackBar(widget.context,
                                   "register as driver to continue");
-                              // Show an error message or dialog
+                              // Show an error message 
                             }
 
-                            // Handle successful user creation (optional)
+                            
                            } on FirebaseAuthException catch (e) {
-                            showSnackBar(widget.context, e.message);
+                            showSnackBar(widget.context, e.message); // error message 
                           } finally {
                             setState(() {
-                              isloading = false; // Move inside setState
+                              isloading = false; 
                             });
                           }
                         }

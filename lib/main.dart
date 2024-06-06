@@ -1,8 +1,8 @@
 import 'package:Mowasil/helper/firebase/firebase_options.dart';
 import 'package:Mowasil/helper/service/auth_methods.dart';
 import 'package:Mowasil/screens/HomeScreen/home_screen.dart';
-import 'package:Mowasil/Driver/OrdersList/components/index_progress.dart';
-import 'package:Mowasil/User/frieght/frieght_page.dart';
+import 'package:Mowasil/screens/Driver/OrdersList/components/index_progress.dart';
+import 'package:Mowasil/screens/User/frieght/frieght_page.dart';
 import 'package:Mowasil/screens/splash_screen.dart';
 import 'package:Mowasil/stripe_payment/components/stripe_keys.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -16,11 +16,12 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
- await Firebase.initializeApp(
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ).then((value) => Get.put(AuthMethods()));
-  await FirebaseAppCheck.instance.activate(
-      androidProvider: AndroidProvider.safetyNet);
+  await FirebaseAppCheck.instance
+      .activate(androidProvider: AndroidProvider.safetyNet);
   Stripe.publishableKey = ApiKeys.publishableKey;
   runApp(
     DevicePreview(

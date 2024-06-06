@@ -1,8 +1,8 @@
 import 'package:Mowasil/helper/controllers/signup_ctrl.dart';
 import 'package:Mowasil/helper/show_snack_bar.dart';
-import 'package:Mowasil/User/frieght/frieght_page.dart';
+import 'package:Mowasil/screens/User/frieght/frieght_page.dart';
 import 'package:Mowasil/screens/login/components/text_fields.dart';
-import 'package:Mowasil/User/oder_info/orderinfo.dart';
+import 'package:Mowasil/screens/User/oder_info/orderinfo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore package
 import 'package:flutter/material.dart';
@@ -111,17 +111,18 @@ class _UserLoginState extends State<UserLogin> {
                       onPressed: () async {
                         if (formkey.currentState!.validate()) {
                           setState(() {
-                            isloading = true; // Move inside setState
+                            isloading = true;
                           });
                           try {
-                            await loginUser(widget.context);
-                            await navigateBasedOnOrder(widget.context, email!);
-                            // Handle successful user creation (optional)
+                            await loginUser(
+                                widget.context); // user login function call
+                            await navigateBasedOnOrder(widget.context, email!); // navigate to Order page based on user order existence
                           } on FirebaseAuthException catch (e) {
-                            showSnackBar(widget.context, e.message);
+                            showSnackBar(widget.context,
+                                e.message); // message user login errors
                           } finally {
                             setState(() {
-                              isloading = false; // Move inside setState
+                              isloading = false;
                             });
                           }
                         }

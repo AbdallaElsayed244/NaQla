@@ -470,19 +470,14 @@ class _DriverRegState extends State<DriverReg> {
                                         _image3 == null ||
                                         _image4 == null) {
                                       showSnackBar(
-                                          context, 'all images are required.');
-
+                                          context, 'all images are required.'); // errors message
                                       return;
                                     }
                                     if (formkey.currentState!.validate()) {
                                       _isloading = true;
                                       setState(() {});
                                       try {
-                                        await registerUser();
-                                        // await phoneauth(
-                                        //   controller.phone.text.trim(),
-                                        // );
-
+                                        await registerUser(); // Register Driver function call
                                         final user = UserModel(
                                           nationalcard: imageUrl2,
                                           license: imageUrl3,
@@ -492,8 +487,8 @@ class _DriverRegState extends State<DriverReg> {
                                               controller.username.text.trim(),
                                           profilePhoto: imageUrl1,
                                         );
-                                        SignupCtrl.instance.CreateDriver(user);
-
+                                        SignupCtrl.instance.CreateDriver( user); // register Driver to database
+                                           
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -501,9 +496,8 @@ class _DriverRegState extends State<DriverReg> {
                                                 driverEmail: email),
                                           ),
                                         );
-                                        showSnackBar(
-                                            context, "Registration Successful");
-                                        // Handle successful user creation (optional)
+                                        showSnackBar(context,  "Registration Successful");  // successful Driver creation message
+                                         
                                       } on FirebaseAuthException catch (e) {
                                         showSnackBar(context, e.message);
                                       }
@@ -547,11 +541,10 @@ class _DriverRegState extends State<DriverReg> {
   }
 
   Future<void> registerUser() async {
+    // ignore: unused_local_variable
     UserCredential user = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email!, password: password!);
   }
 
-  Future<void> phoneauth(String phone) async {
-    await SignupCtrl.instance.phoneAuth(phone);
-  }
+
 }

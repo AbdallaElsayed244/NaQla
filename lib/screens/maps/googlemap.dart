@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:Mowasil/helper/app_colors.dart';
-import 'package:Mowasil/User/frieght/frieght_page.dart';
-import 'package:Mowasil/screens/login/maps/const.dart';
+import 'package:Mowasil/screens/User/frieght/frieght_page.dart';
+import 'package:Mowasil/screens/maps/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as map;
@@ -13,16 +13,16 @@ import 'package:page_animation_transition/animations/right_to_left_transition.da
 import 'package:page_animation_transition/page_animation_transition.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class GoogleMapPage2 extends StatefulWidget {
-  const GoogleMapPage2({Key? key, this.email, this.locationString})
+class GoogleMapPage extends StatefulWidget {
+  const GoogleMapPage({Key? key, this.email, this.locationString2})
       : super(key: key);
   final String? email;
-  final String? locationString;
+  final String? locationString2;
   @override
-  _GoogleMapPage2State createState() => _GoogleMapPage2State();
+  _GoogleMapPageState createState() => _GoogleMapPageState();
 }
 
-class _GoogleMapPage2State extends State<GoogleMapPage2> {
+class _GoogleMapPageState extends State<GoogleMapPage> {
   map.GoogleMapController? mapController;
   List<map.Marker> markers = [];
   List<map.Polyline> polylines = [];
@@ -69,7 +69,7 @@ class _GoogleMapPage2State extends State<GoogleMapPage2> {
     }
   }
 
-  String? locationString2;
+  String? locationString;
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +141,7 @@ class _GoogleMapPage2State extends State<GoogleMapPage2> {
                     ],
                   ),
                   child: Text(
-                    locationString2 ?? 'Tap on the map to see location',
+                    locationString ?? 'Tap on the map to see location',
                     style: TextStyle(fontSize: 10.h),
                   ),
                 ),
@@ -162,15 +162,13 @@ class _GoogleMapPage2State extends State<GoogleMapPage2> {
                     ),
                     child: GestureDetector(
                       onTap: () {
-                        if (locationString2 != null) {
+                        if (locationString != null) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => Frieght(
-                                locationString2: locationString2,
-                                email: widget.email,
-                                locationString: widget.locationString,
-                              ),
+                                  locationString: locationString,
+                                  email: widget.email),
                             ),
                           );
                         }
@@ -320,7 +318,7 @@ class _GoogleMapPage2State extends State<GoogleMapPage2> {
     }
   }
 
-  Future<String?> _getlocationString2(LatLng position) async {
+  Future<String?> _getLocationString(LatLng position) async {
     try {
       List<geo.Placemark> placemarks = await geo.placemarkFromCoordinates(
           position.latitude, position.longitude);
@@ -335,9 +333,9 @@ class _GoogleMapPage2State extends State<GoogleMapPage2> {
   }
 
   Future<void> _handleTap(LatLng position) async {
-    String? newlocationString2 = await _getlocationString2(position);
+    String? newLocationString = await _getLocationString(position);
     setState(() {
-      locationString2 = newlocationString2;
+      locationString = newLocationString;
     });
   }
 }

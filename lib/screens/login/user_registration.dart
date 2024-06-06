@@ -7,11 +7,11 @@ import 'package:Mowasil/helper/controllers/signup_ctrl.dart';
 import 'package:Mowasil/helper/models/users.dart';
 import 'package:Mowasil/helper/service/auth_methods.dart';
 import 'package:Mowasil/helper/show_snack_bar.dart';
-import 'package:Mowasil/User/frieght/frieght_page.dart';
+import 'package:Mowasil/screens/User/frieght/frieght_page.dart';
 
 import 'package:Mowasil/screens/login/components/custom_scaffold.dart';
 import 'package:Mowasil/screens/login/components/register_text_fields.dart';
-import 'package:Mowasil/User/oder_info/orderinfo.dart';
+import 'package:Mowasil/screens/User/oder_info/orderinfo.dart';
 import 'package:Mowasil/screens/phoneVerif/phone_verif_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -307,28 +307,16 @@ class _UserRegState extends State<UserReg> {
                                         _isloading = true;
                                         setState(() {});
                                         try {
-                                          await registerUser();
-                                          // phoneauth(
-                                          //   controller.phone.text.trim(),
-                                          // );
-
+                                          await registerUser(); // Register User function call
                                           final user = UserModel(
-                                              nationalcard: controller
-                                                  .nationalcard.text
-                                                  .trim(),
-                                              license: controller.license.text
-                                                  .trim(),
-                                              vehiclereg: controller
-                                                  .vehiclereg.text
-                                                  .trim(),
-                                              email:
-                                                  controller.email.text.trim(),
-                                              username: controller.username.text
-                                                  .trim(),
-                                              phone:
-                                                  controller.phone.text.trim(),
+                                              nationalcard: controller  .nationalcard.text.trim(),
+                                              license: controller.license.text .trim(),  
+                                              vehiclereg: controller .vehiclereg.text .trim(),
+                                              email: controller.email.text.trim(),
+                                              username: controller.username.text.trim(),
+                                              phone: controller.phone.text.trim(),
                                               profilePhoto: imageUrl);
-                                          SignupCtrl.instance.CreateUser(user);
+                                          SignupCtrl.instance.CreateUser(user); // register user to database
 
                                           Navigator.push(
                                             context,
@@ -336,9 +324,9 @@ class _UserRegState extends State<UserReg> {
                                                 builder: (context) =>
                                                     Frieght(email: email)),
                                           );
-                                          // Handle successful user creation (optional)
+                                         
                                         } on FirebaseAuthException catch (e) {
-                                          showSnackBar(context, e.message);
+                                          showSnackBar(context, e.message); // error message
                                         }
                                         _isloading = false;
                                         setState(() {});
@@ -381,9 +369,5 @@ class _UserRegState extends State<UserReg> {
   Future<void> registerUser() async {
     UserCredential user = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email!, password: password!);
-  }
-
-  Future<void> phoneauth(String phone) async {
-    await SignupCtrl.instance.phoneAuth(phone);
   }
 }

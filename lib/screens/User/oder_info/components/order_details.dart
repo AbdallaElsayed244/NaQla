@@ -1,4 +1,4 @@
-import 'package:Mowasil/User/oder_info/orderinfo.dart';
+import 'package:Mowasil/screens/User/oder_info/orderinfo.dart';
 import 'package:Mowasil/helper/app_colors.dart';
 import 'package:Mowasil/helper/show_message.dart';
 import 'package:auto_size_text/auto_size_text.dart';

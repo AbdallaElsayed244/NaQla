@@ -1,7 +1,7 @@
 // utils.dart
 
 import 'package:Mowasil/helper/app_colors.dart';
-import 'package:Mowasil/User/OrderStatus/order_timeline.dart';
+import 'package:Mowasil/screens/User/OrderStatus/order_timeline.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';

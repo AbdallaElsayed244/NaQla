@@ -1,7 +1,7 @@
 import 'package:Mowasil/helper/app_colors.dart';
 import 'package:Mowasil/helper/show_message.dart';
-import 'package:Mowasil/User/OrderStatus/components/timeLine.dart';
-import 'package:Mowasil/User/oder_info/components/drawer.dart';
+import 'package:Mowasil/screens/User/OrderStatus/components/timeLine.dart';
+import 'package:Mowasil/screens/User/oder_info/components/drawer.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';

@@ -6,12 +6,14 @@ class TextFrieght extends StatelessWidget {
   final TextInputType type;
   final TextEditingController? controller;
   final Icon icon;
+   final void Function(String)? onChanged;
+     final String? Function(String?)? validator;
   const TextFrieght(
       {super.key,
       required this.name,
       this.ontap,
       required this.type,
-      this.controller, required this.icon});
+      this.controller, required this.icon, this.onChanged, this.validator});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,8 @@ class TextFrieght extends StatelessWidget {
       width: 350,
       height: 70,
       child: TextFormField(
+         validator: validator,
+           onChanged: onChanged,
           controller: controller,
           textInputAction: TextInputAction.done,
           keyboardType: type,

@@ -6,29 +6,22 @@ class OrderseMethods {
     return await FirebaseFirestore.instance
         .collection("orders")
         .doc(id)
-        .set(OrderInfomap);
+        .set(OrderInfomap); // store order details
   }
 
-//read
   Future<Stream<QuerySnapshot>> getOederDetails() async {
-     
-    return await FirebaseFirestore.instance.collection("orders",).snapshots();
-  }
-  Future<DocumentReference<Map<String, dynamic>>> getnegotiatedPrice() async {
-     
-    return await FirebaseFirestore.instance.collection("orders",).doc('negotiationPrice');
-  }
-
-  //update
-  Future updateUsersDetail(String id, Map<String, dynamic> updateInfo) async {
     return await FirebaseFirestore.instance
-        .collection("Users")
-        .doc(id)
-        .update(updateInfo);
+        .collection(
+          "orders",
+        )
+        .snapshots(); // fetching order details
   }
 
-  //delete
-  Future deleteUsersDetail(String id) async {
-    return await FirebaseFirestore.instance.collection("Users").doc(id);
+  Future<DocumentReference<Map<String, dynamic>>> getnegotiatedPrice() async {
+    return await FirebaseFirestore.instance
+        .collection(
+          "orders",
+        )
+        .doc('negotiationPrice'); // store negotiation details
   }
 }
