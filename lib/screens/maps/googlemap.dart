@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:Mowasil/helper/app_colors.dart';
-import 'package:Mowasil/screens/User/frieght/frieght_page.dart';
-import 'package:Mowasil/screens/maps/const.dart';
+import 'package:Naqla/helper/app_colors.dart';
+import 'package:Naqla/screens/User/frieght/frieght_page.dart';
+import 'package:Naqla/screens/maps/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as map;

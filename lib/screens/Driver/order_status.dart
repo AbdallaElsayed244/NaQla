@@ -1,8 +1,8 @@
-import 'package:Mowasil/helper/show_message.dart';
-import 'package:Mowasil/screens/Driver/OrdersList/components/driver_drawer.dart';
-import 'package:Mowasil/screens/Driver/OrdersList/components/order_confirm.dart';
-import 'package:Mowasil/screens/Driver/OrdersList/components/timeline_manage.dart';
-import 'package:Mowasil/stripe_payment/payment_manager.dart';
+import 'package:Naqla/helper/show_message.dart';
+import 'package:Naqla/screens/Driver/OrdersList/components/driver_drawer.dart';
+import 'package:Naqla/screens/Driver/OrdersList/components/order_confirm.dart';
+import 'package:Naqla/screens/Driver/OrdersList/components/timeline_manage.dart';
+import 'package:Naqla/stripe_payment/payment_manager.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

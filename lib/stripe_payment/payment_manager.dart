@@ -1,4 +1,4 @@
-import 'package:Mowasil/stripe_payment/components/stripe_keys.dart';
+import 'package:Naqla/stripe_payment/components/stripe_keys.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 

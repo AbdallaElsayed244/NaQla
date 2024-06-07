@@ -1,6 +1,6 @@
-import 'package:Mowasil/helper/service/auth_methods.dart';
-import 'package:Mowasil/screens/HomeScreen/home_screen.dart';
-import 'package:Mowasil/screens/Driver/order_status.dart';
+import 'package:Naqla/helper/service/auth_methods.dart';
+import 'package:Naqla/screens/HomeScreen/home_screen.dart';
+import 'package:Naqla/screens/Driver/order_status.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';

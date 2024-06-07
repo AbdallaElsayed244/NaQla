@@ -1,4 +1,4 @@
-import 'package:Mowasil/screens/HomeScreen/home_screen.dart';
+import 'package:Naqla/screens/HomeScreen/home_screen.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 

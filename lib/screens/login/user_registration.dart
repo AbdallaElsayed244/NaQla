@@ -1,10 +1,10 @@
 import 'dart:io';
-import 'package:Mowasil/helper/app_colors.dart';
-import 'package:Mowasil/helper/controllers/signup_ctrl.dart';
-import 'package:Mowasil/helper/models/users.dart';
-import 'package:Mowasil/helper/show_snack_bar.dart';
-import 'package:Mowasil/screens/User/frieght/frieght_page.dart';
-import 'package:Mowasil/screens/login/components/register_text_fields.dart';
+import 'package:Naqla/helper/app_colors.dart';
+import 'package:Naqla/helper/controllers/signup_ctrl.dart';
+import 'package:Naqla/helper/models/users.dart';
+import 'package:Naqla/helper/show_snack_bar.dart';
+import 'package:Naqla/screens/User/frieght/frieght_page.dart';
+import 'package:Naqla/screens/login/components/register_text_fields.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -332,11 +332,11 @@ class _UserRegState extends State<UserReg> {
                                     ),
                                     style: ButtonStyle(
                                       backgroundColor:
-                                          MaterialStateProperty.all(
+                                          WidgetStateProperty.all(
                                               ButtonsColor),
-                                      padding: MaterialStateProperty.all(
+                                      padding: WidgetStateProperty.all(
                                           const EdgeInsets.all(7)),
-                                      shape: MaterialStateProperty.all(
+                                      shape: WidgetStateProperty.all(
                                           RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(15))),

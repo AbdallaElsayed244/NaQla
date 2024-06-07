@@ -1,4 +1,4 @@
-import 'package:Mowasil/screens/login/to_login.dart';
+import 'package:Naqla/screens/login/to_login.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {

@@ -1,8 +1,8 @@
-import 'package:Mowasil/helper/controllers/signup_ctrl.dart';
-import 'package:Mowasil/helper/show_snack_bar.dart';
-import 'package:Mowasil/screens/User/frieght/frieght_page.dart';
-import 'package:Mowasil/screens/login/components/text_fields.dart';
-import 'package:Mowasil/screens/User/oder_info/orderinfo.dart';
+import 'package:Naqla/helper/controllers/signup_ctrl.dart';
+import 'package:Naqla/helper/show_snack_bar.dart';
+import 'package:Naqla/screens/User/frieght/frieght_page.dart';
+import 'package:Naqla/screens/login/components/text_fields.dart';
+import 'package:Naqla/screens/User/oder_info/orderinfo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore package
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
-import 'package:Mowasil/screens/User/OrderStatus/order_timeline.dart';
-import 'package:Mowasil/screens/User/oder_info/components/drawer.dart';
-import 'package:Mowasil/screens/User/oder_info/components/order_details.dart';
-import 'package:Mowasil/screens/User/oder_info/components/order_request.dart';
+import 'package:Naqla/screens/User/OrderStatus/order_timeline.dart';
+import 'package:Naqla/screens/User/oder_info/components/drawer.dart';
+import 'package:Naqla/screens/User/oder_info/components/order_details.dart';
+import 'package:Naqla/screens/User/oder_info/components/order_request.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

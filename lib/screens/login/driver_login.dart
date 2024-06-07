@@ -1,6 +1,6 @@
-import 'package:Mowasil/helper/show_snack_bar.dart';
-import 'package:Mowasil/screens/Driver/OrdersList/Order_list.dart';
-import 'package:Mowasil/screens/login/components/text_fields.dart';
+import 'package:Naqla/helper/show_snack_bar.dart';
+import 'package:Naqla/screens/Driver/OrdersList/Order_list.dart';
+import 'package:Naqla/screens/login/components/text_fields.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -102,14 +102,13 @@ class _DriverLoginState extends State<DriverLogin> {
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
-                        backgroundColor: const Color.fromARGB(
-                            255, 13, 49, 29), 
+                        backgroundColor: const Color.fromARGB(255, 13, 49, 29),
                         elevation: 5,
                       ),
                       onPressed: () async {
                         if (formkey.currentState!.validate()) {
                           setState(() {
-                            isloading = true; 
+                            isloading = true;
                           });
                           try {
                             final driverDoc = await FirebaseFirestore.instance
@@ -125,15 +124,13 @@ class _DriverLoginState extends State<DriverLogin> {
                               // Driver not found in Database
                               showSnackBar(widget.context,
                                   "register as driver to continue");
-                              // Show an error message 
+                              // Show an error message
                             }
-
-                            
-                           } on FirebaseAuthException catch (e) {
-                            showSnackBar(widget.context, e.message); // error message 
+                          } on FirebaseAuthException catch (e) {
+                            showSnackBar(context, e.message); // error message
                           } finally {
                             setState(() {
-                              isloading = false; 
+                              isloading = false;
                             });
                           }
                         }

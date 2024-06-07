@@ -1,7 +1,7 @@
-import 'package:Mowasil/helper/app_colors.dart';
-import 'package:Mowasil/helper/show_message.dart';
-import 'package:Mowasil/screens/User/OrderStatus/components/timeLine.dart';
-import 'package:Mowasil/screens/User/oder_info/components/drawer.dart';
+import 'package:Naqla/helper/app_colors.dart';
+import 'package:Naqla/helper/show_message.dart';
+import 'package:Naqla/screens/User/OrderStatus/components/timeLine.dart';
+import 'package:Naqla/screens/User/oder_info/components/drawer.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -251,12 +251,12 @@ class _TimelineComponentState extends State<TimelineComponent> {
                       ),
                       style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all(ButtonsColor2),
-                          padding: MaterialStateProperty.all(
+                              WidgetStateProperty.all(ButtonsColor2),
+                          padding: WidgetStateProperty.all(
                               const EdgeInsets.symmetric(
                                   vertical: 15, horizontal: 40)),
                           shape:
-                              MaterialStateProperty.all(RoundedRectangleBorder(
+                              WidgetStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ))),
                     ),
@@ -317,7 +317,7 @@ class _TimelineComponentState extends State<TimelineComponent> {
                       style: TextStyle(fontSize: 18.0, color: Colors.white),
                     ),
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(ButtonsColor2),
+                      backgroundColor: WidgetStateProperty.all(ButtonsColor2),
                     ),
                     onPressed: () async {
                       await FirebaseFirestore.instance

@@ -1,4 +1,4 @@
-import 'package:Mowasil/helper/app_colors.dart';
+import 'package:Naqla/helper/app_colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -122,9 +122,9 @@ class _ListScreenState extends State<ListScreen>
                 style: TextStyle(color: Colors.white),
               ),
               style: ButtonStyle(
-                fixedSize: MaterialStateProperty.all(const Size(150, 50)),
-                backgroundColor: MaterialStateProperty.all(ButtonsColor2),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                fixedSize: WidgetStateProperty.all(const Size(150, 50)),
+                backgroundColor: WidgetStateProperty.all(ButtonsColor2),
+                shape: WidgetStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                   side: const BorderSide(color: Colors.black, width: 1),
                 )),
@@ -165,9 +165,9 @@ class _ListScreenState extends State<ListScreen>
                   style: TextStyle(color: Colors.white),
                 ),
                 style: ButtonStyle(
-                  fixedSize: MaterialStateProperty.all(const Size(80, 50)),
-                  backgroundColor: MaterialStateProperty.all(ButtonsColor2),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  fixedSize: WidgetStateProperty.all(const Size(80, 50)),
+                  backgroundColor: WidgetStateProperty.all(ButtonsColor2),
+                  shape: WidgetStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                     side: const BorderSide(color: Colors.black, width: 1),
                   )),

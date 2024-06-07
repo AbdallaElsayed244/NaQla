@@ -1,7 +1,7 @@
-import 'package:Mowasil/helper/controllers/signup_ctrl.dart';
-import 'package:Mowasil/helper/firebase/message.dart';
-import 'package:Mowasil/screens/User/frieght/frieght_page.dart';
-import 'package:Mowasil/screens/splash_screen.dart';
+import 'package:Naqla/helper/controllers/signup_ctrl.dart';
+import 'package:Naqla/helper/firebase/message.dart';
+import 'package:Naqla/screens/User/frieght/frieght_page.dart';
+import 'package:Naqla/screens/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 

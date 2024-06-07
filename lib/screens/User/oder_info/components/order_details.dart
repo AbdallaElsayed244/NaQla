@@ -1,6 +1,6 @@
-import 'package:Mowasil/screens/User/oder_info/orderinfo.dart';
-import 'package:Mowasil/helper/app_colors.dart';
-import 'package:Mowasil/helper/show_message.dart';
+import 'package:Naqla/screens/User/oder_info/orderinfo.dart';
+import 'package:Naqla/helper/app_colors.dart';
+import 'package:Naqla/helper/show_message.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -122,9 +122,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                         style: TextStyle(color: Colors.white),
                       ),
                       style: ButtonStyle(
-                          backgroundColor: MaterialStateColor.resolveWith(
+                          backgroundColor: WidgetStateColor.resolveWith(
                               (states) => ButtonsColor2),
-                          shape: MaterialStateProperty.all(
+                          shape: WidgetStateProperty.all(
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   side: const BorderSide(

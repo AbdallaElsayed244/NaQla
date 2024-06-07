@@ -1,6 +1,7 @@
-import 'package:Mowasil/helper/service/auth_methods.dart';
-import 'package:Mowasil/helper/service/users_methods.dart';
-import 'package:Mowasil/helper/models/users.dart';
+
+import 'package:Naqla/helper/models/users.dart';
+import 'package:Naqla/helper/service/auth_methods.dart';
+import 'package:Naqla/helper/service/users_methods.dart';
 import 'package:get/get.dart';
 
 

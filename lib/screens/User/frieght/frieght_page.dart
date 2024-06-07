@@ -1,10 +1,10 @@
-import 'package:Mowasil/helper/app_colors.dart';
-import 'package:Mowasil/screens/User/frieght/components/have_order.dart';
-import 'package:Mowasil/screens/User/frieght/components/text_field.dart';
-import 'package:Mowasil/screens/maps/googlemap%20copy.dart';
-import 'package:Mowasil/screens/maps/googlemap.dart';
-import 'package:Mowasil/helper/service/orders_methods.dart';
-import 'package:Mowasil/screens/User/oder_info/components/drawer.dart';
+import 'package:Naqla/helper/app_colors.dart';
+import 'package:Naqla/screens/User/frieght/components/have_order.dart';
+import 'package:Naqla/screens/User/frieght/components/text_field.dart';
+import 'package:Naqla/screens/maps/googlemap%20copy.dart';
+import 'package:Naqla/screens/maps/googlemap.dart';
+import 'package:Naqla/helper/service/orders_methods.dart';
+import 'package:Naqla/screens/User/oder_info/components/drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -49,9 +49,9 @@ class _FrieghtState extends State<Frieght> {
           data: ThemeData.light().copyWith(
             primaryColor: Colors.blue,
             checkboxTheme: CheckboxThemeData(
-                overlayColor: MaterialStateProperty.all(BackgroundColor),
-                fillColor: MaterialStateProperty.all(BackgroundColor),
-                checkColor: MaterialStateProperty.all(BackgroundColor)),
+                overlayColor: WidgetStateProperty.all(BackgroundColor),
+                fillColor: WidgetStateProperty.all(BackgroundColor),
+                checkColor: WidgetStateProperty.all(BackgroundColor)),
           ),
           child: child!,
         );
@@ -181,7 +181,6 @@ class _FrieghtState extends State<Frieght> {
                           DropDownValueModel(name: 'ربع نقل ', value: "value7"),
                           DropDownValueModel(name: 'تروسيكل', value: "value8"),
                         ],
-                        dropdownColor: Colors.white,
                         dropDownIconProperty: IconProperty(
                           icon: Icons.keyboard_arrow_down,
                           color: Colors.black,
@@ -350,11 +349,11 @@ class _FrieghtState extends State<Frieght> {
                                 color: Color.fromARGB(255, 255, 255, 255)),
                           ),
                     style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(ButtonsColor2),
-                        padding: MaterialStateProperty.all(
-                            const EdgeInsets.symmetric(vertical: 25, horizontal: 90)),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        backgroundColor: WidgetStateProperty.all(ButtonsColor2),
+                        padding: WidgetStateProperty.all(
+                            const EdgeInsets.symmetric(
+                                vertical: 25, horizontal: 90)),
+                        shape: WidgetStateProperty.all(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50),
                         ))),
                   ),

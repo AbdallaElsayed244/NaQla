@@ -1,7 +1,7 @@
-import 'package:Mowasil/helper/app_colors.dart';
-import 'package:Mowasil/helper/service/orders_methods.dart';
-import 'package:Mowasil/screens/Driver/OrdersList/components/driver_drawer.dart';
-import 'package:Mowasil/screens/Driver/order_status.dart';
+import 'package:Naqla/helper/app_colors.dart';
+import 'package:Naqla/helper/service/orders_methods.dart';
+import 'package:Naqla/screens/Driver/OrdersList/components/driver_drawer.dart';
+import 'package:Naqla/screens/Driver/order_status.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
@@ -104,12 +104,12 @@ class _OrdersState extends State<Orders> {
                                         ),
                                         style: ButtonStyle(
                                             fixedSize:
-                                                MaterialStateProperty.all(
+                                                WidgetStateProperty.all(
                                                     const Size(80, 50)),
                                             backgroundColor:
-                                                MaterialStateColor.resolveWith(
+                                                WidgetStateColor.resolveWith(
                                                     (states) => ButtonsColor2),
-                                            shape: MaterialStateProperty.all(
+                                            shape: WidgetStateProperty.all(
                                                 RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -187,12 +187,12 @@ class _OrdersState extends State<Orders> {
                                       style: TextStyle(color: Colors.white),
                                     ),
                                     style: ButtonStyle(
-                                        fixedSize: MaterialStateProperty.all(
+                                        fixedSize: WidgetStateProperty.all(
                                             const Size(80, 50)),
                                         backgroundColor:
-                                            MaterialStateColor.resolveWith(
+                                            WidgetStateColor.resolveWith(
                                                 (states) => ButtonsColor2),
-                                        shape: MaterialStateProperty.all(
+                                        shape: WidgetStateProperty.all(
                                             RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
