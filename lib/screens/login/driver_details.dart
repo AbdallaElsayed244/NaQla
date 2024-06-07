@@ -33,15 +33,15 @@ class _DriverDetailsState extends State<DriverDetails> {
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         body: CustomScaffold(
-          text: Text("Driver Details"),
+          text: const Text("Driver Details"),
           body: null,
           child: Column(
             children: [
               Expanded(
                   flex: 2,
                   child: Container(
-                    padding: EdgeInsets.fromLTRB(25.0, 150.0, 25.0, 0.0),
-                    decoration: BoxDecoration(
+                    padding: const EdgeInsets.fromLTRB(25.0, 150.0, 25.0, 0.0),
+                    decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 255, 255, 255),
                       borderRadius:
                           BorderRadius.only(topLeft: Radius.circular(40.0)),
@@ -64,24 +64,24 @@ class _DriverDetailsState extends State<DriverDetails> {
                                 return null;
                               },
                               decoration: InputDecoration(
-                                  label: Text("username"),
+                                  label: const Text("username"),
                                   hintText: "enter username",
-                                  hintStyle: TextStyle(
+                                  hintStyle: const TextStyle(
                                       color: Color.fromARGB(247, 90, 94, 98)),
                                   border: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color.fromARGB(247, 158, 179, 200),
                                     ),
                                     borderRadius: BorderRadius.circular(15),
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color.fromARGB(215, 63, 101, 150),
                                     ),
                                     borderRadius: BorderRadius.circular(15),
                                   )),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 13,
                             ),
                             TextFormField(
@@ -109,24 +109,24 @@ class _DriverDetailsState extends State<DriverDetails> {
                               },
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
-                                  label: Text("Phone"),
+                                  label: const Text("Phone"),
                                   hintText: "enter phone",
-                                  hintStyle: TextStyle(
+                                  hintStyle: const TextStyle(
                                       color: Color.fromARGB(247, 90, 94, 98)),
                                   border: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color.fromARGB(247, 158, 179, 200),
                                     ),
                                     borderRadius: BorderRadius.circular(15),
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color.fromARGB(215, 63, 101, 150),
                                     ),
                                     borderRadius: BorderRadius.circular(15),
                                   )),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 13,
                             ),
                             TextFormField(
@@ -141,24 +141,24 @@ class _DriverDetailsState extends State<DriverDetails> {
                                 return null;
                               },
                               decoration: InputDecoration(
-                                  label: Text("type of vehicle"),
+                                  label: const Text("type of vehicle"),
                                   hintText: "type of vehicle",
-                                  hintStyle: TextStyle(
+                                  hintStyle: const TextStyle(
                                       color: Color.fromARGB(247, 90, 94, 98)),
                                   border: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color.fromARGB(247, 158, 179, 200),
                                     ),
                                     borderRadius: BorderRadius.circular(15),
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color.fromARGB(215, 63, 101, 150),
                                     ),
                                     borderRadius: BorderRadius.circular(15),
                                   )),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 13,
                             ),
                             TextFormField(
@@ -174,24 +174,24 @@ class _DriverDetailsState extends State<DriverDetails> {
                                 return null;
                               },
                               decoration: InputDecoration(
-                                  label: Text("type vehicle number"),
+                                  label: const Text("type vehicle number"),
                                   hintText: "type vehicle number",
-                                  hintStyle: TextStyle(
+                                  hintStyle: const TextStyle(
                                       color: Color.fromARGB(247, 90, 94, 98)),
                                   border: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color.fromARGB(247, 158, 179, 200),
                                     ),
                                     borderRadius: BorderRadius.circular(15),
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color.fromARGB(215, 63, 101, 150),
                                     ),
                                     borderRadius: BorderRadius.circular(15),
                                   )),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 103,
                             ),
                             ElevatedButton(
@@ -225,7 +225,7 @@ class _DriverDetailsState extends State<DriverDetails> {
                                   showSnackBar(context, "something went wrong");
                                 }
                               },
-                              child: Text(
+                              child: const Text(
                                 "Create Account",
                                 style: TextStyle(
                                     fontSize: 25, color: Colors.white),
@@ -234,7 +234,7 @@ class _DriverDetailsState extends State<DriverDetails> {
                                   backgroundColor:
                                       MaterialStateProperty.all(ButtonsColor),
                                   padding: MaterialStateProperty.all(
-                                      EdgeInsets.symmetric(
+                                      const EdgeInsets.symmetric(
                                           vertical: 25, horizontal: 90)),
                                   shape: MaterialStateProperty.all(
                                       RoundedRectangleBorder(

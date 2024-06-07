@@ -124,16 +124,16 @@ class _DriverRegState extends State<DriverReg> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             iconSize: 29,
-            color: Color.fromARGB(255, 0, 0, 0),
+            color: const Color.fromARGB(255, 0, 0, 0),
           ),
           elevation: 0,
         ),
         body: Stack(
           children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage("images/photo.jpg"),
                   fit: BoxFit.cover,
@@ -145,8 +145,8 @@ class _DriverRegState extends State<DriverReg> {
                 Expanded(
                   flex: 2,
                   child: Container(
-                    padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
-                    decoration: BoxDecoration(),
+                    padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+                    decoration: const BoxDecoration(),
                     child: SingleChildScrollView(
                       child: Padding(
                         padding: const EdgeInsets.only(top: 70),
@@ -155,10 +155,10 @@ class _DriverRegState extends State<DriverReg> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 height: 13,
                               ),
-                              Text(
+                              const Text(
                                 "Create New Account As Driver",
                                 style: TextStyle(
                                   fontSize: 25.0,
@@ -202,7 +202,7 @@ class _DriverRegState extends State<DriverReg> {
                                                     ),
                                                     shape: BoxShape.circle,
                                                   ),
-                                                  child: Icon(
+                                                  child: const Icon(
                                                     Icons.person,
                                                     size: 90,
                                                   ),
@@ -212,18 +212,18 @@ class _DriverRegState extends State<DriverReg> {
                                     ),
                                   ),
                                   if (isloading)
-                                    Positioned.fill(
+                                    const Positioned.fill(
                                       child: Center(
                                           child: CircularProgressIndicator()),
                                     ),
                                 ],
                               ),
-                              Text(
+                              const Text(
                                 "Profile Photo",
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 13,
                               ),
                               RegisterTextFields(
@@ -237,11 +237,11 @@ class _DriverRegState extends State<DriverReg> {
                                   }
                                   return null;
                                 },
-                                label: Text("email"),
+                                label: const Text("email"),
                                 hintText: "enter email",
                                 obscureText: false,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 13,
                               ),
                               RegisterTextFields(
@@ -256,10 +256,10 @@ class _DriverRegState extends State<DriverReg> {
                                 onChanged: (data) {
                                   password = data;
                                 },
-                                label: Text("Password"),
+                                label: const Text("Password"),
                                 hintText: "enter password",
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 13,
                               ),
                               Column(
@@ -311,7 +311,7 @@ class _DriverRegState extends State<DriverReg> {
                                                   ),
                                                 ),
                                                 if (isloading)
-                                                  Positioned.fill(
+                                                  const Positioned.fill(
                                                     child: Center(
                                                         child:
                                                             CircularProgressIndicator()),
@@ -373,7 +373,7 @@ class _DriverRegState extends State<DriverReg> {
                                                   ),
                                                 ),
                                                 if (isloading)
-                                                  Positioned.fill(
+                                                  const Positioned.fill(
                                                     child: Center(
                                                         child:
                                                             CircularProgressIndicator()),
@@ -394,7 +394,7 @@ class _DriverRegState extends State<DriverReg> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 23,
                                   ),
                                   Stack(
@@ -433,17 +433,17 @@ class _DriverRegState extends State<DriverReg> {
                                         ),
                                       ),
                                       if (isloading)
-                                        Positioned.fill(
+                                        const Positioned.fill(
                                           child: Center(
                                               child:
                                                   CircularProgressIndicator()),
                                         ),
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 15,
                                   ),
-                                  Text(
+                                  const Text(
                                     "Certificate of Vehicle Registration",
                                     style: TextStyle(
                                         fontSize: 23,
@@ -451,7 +451,7 @@ class _DriverRegState extends State<DriverReg> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 25,
                               ),
                               SizedBox(
@@ -499,7 +499,7 @@ class _DriverRegState extends State<DriverReg> {
                                       setState(() {});
                                     } else {}
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     "Continue",
                                     style: TextStyle(
                                         fontSize: 23,
@@ -508,9 +508,9 @@ class _DriverRegState extends State<DriverReg> {
                                   ),
                                   style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(
-                                        Color.fromARGB(255, 13, 49, 29)),
+                                        const Color.fromARGB(255, 13, 49, 29)),
                                     padding: MaterialStateProperty.all(
-                                        EdgeInsets.all(7)),
+                                        const EdgeInsets.all(7)),
                                     shape: MaterialStateProperty.all(
                                       RoundedRectangleBorder(
                                           borderRadius:

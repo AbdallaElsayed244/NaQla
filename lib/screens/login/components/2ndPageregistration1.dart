@@ -1,7 +1,6 @@
 import 'package:Mowasil/helper/app_colors.dart';
 import 'package:Mowasil/screens/login/driver_registration.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:page_animation_transition/animations/right_to_left_transition.dart';
 import 'package:page_animation_transition/page_animation_transition.dart';
 
@@ -20,9 +19,9 @@ class registration1 extends StatelessWidget {
                 page: const DriverReg(),
                 pageAnimationType: RightToLeftTransition()));
           },
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           iconSize: 29,
-          color: Color.fromARGB(255, 255, 255, 255),
+          color: const Color.fromARGB(255, 255, 255, 255),
         ),
         elevation: 0,
       ),
@@ -33,7 +32,7 @@ class registration1 extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height / 1.6,
             decoration: BoxDecoration(
-              color: Color(0xff3F6596),
+              color: const Color(0xff3F6596),
               borderRadius: BorderRadius.circular(70),
             ),
           ),

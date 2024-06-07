@@ -43,7 +43,7 @@ class _LoginButtonsState extends State<LoginButtons> {
           decoration: BoxDecoration(
             color: _isPressed
                 ? Colors.lightBlueAccent
-                : Color.fromARGB(255, 155, 154, 154),
+                : const Color.fromARGB(255, 155, 154, 154),
             borderRadius: BorderRadius.circular(28),
           ),
           duration: const Duration(milliseconds: 200),

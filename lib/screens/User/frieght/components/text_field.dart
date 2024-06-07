@@ -18,8 +18,8 @@ class TextFrieght extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 20),
-      padding: EdgeInsets.symmetric(horizontal: 21),
+      margin: const EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 21),
       decoration: BoxDecoration(
           color: Colors.grey[200], borderRadius: BorderRadius.circular(20)),
       width: 350,
@@ -33,8 +33,8 @@ class TextFrieght extends StatelessWidget {
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: name,
-            hintStyle: TextStyle(fontSize: 18),
-            labelStyle: TextStyle(fontSize: 33),
+            hintStyle: const TextStyle(fontSize: 18),
+            labelStyle: const TextStyle(fontSize: 33),
             suffixIcon: IconButton(
               icon: icon,
               iconSize: 40,

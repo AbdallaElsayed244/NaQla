@@ -20,14 +20,14 @@ void showMessage(
           dismissOnBackKeyPress: false,
           dialogType:dialogType ,
           animType: AnimType.topSlide,
-          dialogBackgroundColor: Color.fromARGB(255, 232, 232, 233),
+          dialogBackgroundColor: const Color.fromARGB(255, 232, 232, 233),
           btnCancelText: btnCancelText,
           btnOkText: btnOkText,
           title: title,
           desc: description,
-          descTextStyle: TextStyle(fontSize: 20),
+          descTextStyle: const TextStyle(fontSize: 20),
           btnOkColor: ButtonsColor2,
-          btnCancelColor: Color.fromARGB(255, 70, 64, 57),
+          btnCancelColor: const Color.fromARGB(255, 70, 64, 57),
           btnCancelOnPress: CancelFunction,
           btnOkOnPress: OkFunction)
       .show();

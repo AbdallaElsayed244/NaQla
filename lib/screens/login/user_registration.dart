@@ -89,16 +89,16 @@ class _UserRegState extends State<UserReg> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             iconSize: 29,
-            color: Color.fromARGB(255, 0, 0, 0),
+            color: const Color.fromARGB(255, 0, 0, 0),
           ),
           elevation: 0,
         ),
         body: Stack(
           children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage("images/photo.jpg"),
                   fit: BoxFit.cover,
@@ -110,8 +110,8 @@ class _UserRegState extends State<UserReg> {
                 Expanded(
                     flex: 7,
                     child: Container(
-                      padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
-                      decoration: BoxDecoration(
+                      padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+                      decoration: const BoxDecoration(
                         borderRadius:
                             BorderRadius.only(topLeft: Radius.circular(40.0)),
                       ),
@@ -123,10 +123,10 @@ class _UserRegState extends State<UserReg> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                SizedBox(
+                                const SizedBox(
                                   height: 13,
                                 ),
-                                Text(
+                                const Text(
                                   "Create New Account As User",
                                   style: TextStyle(
                                     fontSize: 25.0,
@@ -170,7 +170,7 @@ class _UserRegState extends State<UserReg> {
                                                           width: 4,
                                                         ),
                                                         shape: BoxShape.circle),
-                                                    child: Icon(
+                                                    child: const Icon(
                                                       Icons.person,
                                                       size: 90,
                                                     ),
@@ -179,7 +179,7 @@ class _UserRegState extends State<UserReg> {
                                         ),
                                         // Loading Indicator inside the InkWell
                                         if (isloading)
-                                          Positioned.fill(
+                                          const Positioned.fill(
                                             child: Center(
                                                 child:
                                                     CircularProgressIndicator()),
@@ -188,11 +188,11 @@ class _UserRegState extends State<UserReg> {
                                     ),
                                   ),
                                 ),
-                                Text("Profile Photo",
+                                const Text("Profile Photo",
                                     style: TextStyle(
                                         fontSize: 17,
                                         fontWeight: FontWeight.bold)),
-                                SizedBox(
+                                const SizedBox(
                                   height: 13,
                                 ),
                                 RegisterTextFields(
@@ -206,11 +206,11 @@ class _UserRegState extends State<UserReg> {
                                     }
                                     return null;
                                   },
-                                  label: Text("email"),
+                                  label: const Text("email"),
                                   hintText: "enter email",
                                   obscureText: false,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 13,
                                 ),
                                 RegisterTextFields(
@@ -224,11 +224,11 @@ class _UserRegState extends State<UserReg> {
                                     }
                                     return null;
                                   },
-                                  label: Text("username"),
+                                  label: const Text("username"),
                                   hintText: "enter username",
                                   obscureText: false,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 13,
                                 ),
                                 RegisterTextFields(
@@ -243,10 +243,10 @@ class _UserRegState extends State<UserReg> {
                                   onChanged: (data) {
                                     password = data;
                                   },
-                                  label: Text("Password"),
+                                  label: const Text("Password"),
                                   hintText: "enter password",
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 13,
                                 ),
                                 RegisterTextFields(
@@ -274,13 +274,13 @@ class _UserRegState extends State<UserReg> {
                                     return null;
                                   },
                                   keyboardType: TextInputType.number,
-                                  label: Text("Phone"),
+                                  label: const Text("Phone"),
                                   hintText: "enter phone",
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 13,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                                 SizedBox(
@@ -323,7 +323,7 @@ class _UserRegState extends State<UserReg> {
                                         setState(() {});
                                       } else {}
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       "Create Account",
                                       style: TextStyle(
                                           fontSize: 23,
@@ -335,7 +335,7 @@ class _UserRegState extends State<UserReg> {
                                           MaterialStateProperty.all(
                                               ButtonsColor),
                                       padding: MaterialStateProperty.all(
-                                          EdgeInsets.all(7)),
+                                          const EdgeInsets.all(7)),
                                       shape: MaterialStateProperty.all(
                                           RoundedRectangleBorder(
                                               borderRadius:

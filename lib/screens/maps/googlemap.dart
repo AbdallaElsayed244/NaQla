@@ -128,7 +128,7 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
@@ -148,7 +148,7 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Container(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: ButtonsColor,
                       borderRadius: BorderRadius.circular(10),

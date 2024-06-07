@@ -99,24 +99,24 @@ class _OrderinfoState extends State<OrderStatus>
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               size: 30,
             ),
           )
         ],
         elevation: 0,
-        title: Text(
+        title: const Text(
           "Your Order Requests",
           style: TextStyle(
-              fontSize: 24, color: const Color.fromARGB(255, 0, 0, 0)),
+              fontSize: 24, color: Color.fromARGB(255, 0, 0, 0)),
         ),
         centerTitle: true,
       ),
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('images/Order-info2.jpg'),
                 fit: BoxFit.cover,
@@ -127,7 +127,7 @@ class _OrderinfoState extends State<OrderStatus>
             future: checkOrdersExistence(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
+                return const Center(
                   child: LoadingIndicator(
                     indicatorType: Indicator.ballPulse,
                     colors: [Color.fromARGB(255, 62, 99, 64)],
@@ -147,7 +147,7 @@ class _OrderinfoState extends State<OrderStatus>
                     }
 
                     if (!snapshot.hasData || !snapshot.data!.exists) {
-                      return Center(
+                      return const Center(
                         child: Text(
                           'No Drivers Right Now',
                           style: TextStyle(
@@ -240,7 +240,7 @@ class _OrderinfoState extends State<OrderStatus>
                           height: screenHeight / 2,
                           width: screenWidth,
                           curve: Curves.easeInOut,
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           transform: Matrix4.translationValues(
                               startanimation ? 0 : screenWidth, 0, 0),
                           margin: const EdgeInsets.only(
@@ -264,7 +264,7 @@ class _OrderinfoState extends State<OrderStatus>
                   },
                 );
               } else {
-                return Center(
+                return const Center(
                   child: Text(
                     'No Offers Accepted For Now',
                     style: TextStyle(
@@ -279,7 +279,7 @@ class _OrderinfoState extends State<OrderStatus>
           if (isLoading)
             Container(
               color: Colors.black54,
-              child: Center(
+              child: const Center(
                 child: CircularProgressIndicator(),
               ),
             ),

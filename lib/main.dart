@@ -47,8 +47,8 @@ class MyApp extends StatelessWidget {
             create: (context) => ProgressProvider(),
             child: GetMaterialApp(
               debugShowCheckedModeBanner: false,
-              home: DoubleTapToExit(
-                  snackBar: const SnackBar(
+              home: const DoubleTapToExit(
+                  snackBar: SnackBar(
                     content: Text(
                       'Tap again to exit !',
                       style: TextStyle(fontSize: 25),
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
                   // Use onPopInvoked for consistency
                   child: SplashScreen()),
               routes: {
-                HomeScreen.id: (context) => HomeScreen(),
+                HomeScreen.id: (context) => const HomeScreen(),
                 Frieght.id: (context) => Frieght(),
               },
               initialRoute: "loginpage",

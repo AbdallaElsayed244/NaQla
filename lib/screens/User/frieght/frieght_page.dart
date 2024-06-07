@@ -75,7 +75,7 @@ class _FrieghtState extends State<Frieght> {
     return Scaffold(
         body: Container(
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("images/Order.jpg"),
               fit: BoxFit.fill,
@@ -89,7 +89,7 @@ class _FrieghtState extends State<Frieght> {
                 children: [
                   TextFrieght(
                     type: TextInputType.streetAddress,
-                    icon: Icon(Icons.location_pin),
+                    icon: const Icon(Icons.location_pin),
                     controller:
                         TextEditingController(text: widget.locationString),
                     name: "Pickup Location",
@@ -110,7 +110,7 @@ class _FrieghtState extends State<Frieght> {
                     },
                   ),
                   TextFrieght(
-                    icon: Icon(Icons.location_pin),
+                    icon: const Icon(Icons.location_pin),
                     type: TextInputType.streetAddress,
                     controller:
                         TextEditingController(text: widget.locationString2),
@@ -132,7 +132,7 @@ class _FrieghtState extends State<Frieght> {
                     },
                   ),
                   TextFrieght(
-                      icon: Icon(Icons.calendar_month_outlined),
+                      icon: const Icon(Icons.calendar_month_outlined),
                       type: TextInputType.datetime,
                       controller: datetimeController,
                       name: "Pickup Date ",
@@ -144,7 +144,7 @@ class _FrieghtState extends State<Frieght> {
                       },
                       ontap: () => _selectDate(context)),
                   TextFrieght(
-                      icon: Icon(Icons.description),
+                      icon: const Icon(Icons.description),
                       type: TextInputType.text,
                       controller: DescribtionOfTheCargoController,
                       name: "Description Of The Cargo",
@@ -166,8 +166,8 @@ class _FrieghtState extends State<Frieght> {
                         );
                       }),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 20),
-                    padding: EdgeInsets.symmetric(horizontal: 21),
+                    margin: const EdgeInsets.symmetric(vertical: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 21),
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(20),
@@ -175,7 +175,7 @@ class _FrieghtState extends State<Frieght> {
                     width: 350,
                     height: 70,
                     child: DropDownTextField(
-                        dropDownList: [
+                        dropDownList: const [
                           DropDownValueModel(name: 'نقل', value: "value5"),
                           DropDownValueModel(name: 'نص نقل', value: "value6"),
                           DropDownValueModel(name: 'ربع نقل ', value: "value7"),
@@ -210,17 +210,17 @@ class _FrieghtState extends State<Frieght> {
                         textFieldDecoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: "Vehicle Size",
-                          hintStyle: TextStyle(fontSize: 18),
-                          labelStyle: TextStyle(fontSize: 33),
+                          hintStyle: const TextStyle(fontSize: 18),
+                          labelStyle: const TextStyle(fontSize: 33),
                           suffixIcon: IconButton(
-                            icon: Icon(Icons.vertical_shades_sharp),
+                            icon: const Icon(Icons.vertical_shades_sharp),
                             iconSize: 40,
                             onPressed: () {},
                           ),
                         )),
                   ),
                   TextFrieght(
-                      icon: Icon(Icons.price_change),
+                      icon: const Icon(Icons.price_change),
                       type: TextInputType.number,
                       controller: OfferController,
                       name: "Offer Your Price",
@@ -253,7 +253,7 @@ class _FrieghtState extends State<Frieght> {
                                 gravity: ToastGravity.TOP,
                                 timeInSecForIosWeb: 1,
                                 backgroundColor:
-                                    Color.fromARGB(255, 204, 18, 49),
+                                    const Color.fromARGB(255, 204, 18, 49),
                                 textColor: Colors.white,
                                 fontSize: 16.0,
                               );
@@ -285,7 +285,7 @@ class _FrieghtState extends State<Frieght> {
                                 gravity: ToastGravity.TOP,
                                 timeInSecForIosWeb: 1,
                                 backgroundColor:
-                                    Color.fromARGB(255, 204, 18, 49),
+                                    const Color.fromARGB(255, 204, 18, 49),
                                 textColor: Colors.white,
                                 fontSize: 26.0,
                               );
@@ -300,7 +300,7 @@ class _FrieghtState extends State<Frieght> {
                                   gravity: ToastGravity.TOP,
                                   timeInSecForIosWeb: 1,
                                   backgroundColor:
-                                      Color.fromARGB(255, 204, 18, 49),
+                                      const Color.fromARGB(255, 204, 18, 49),
                                   textColor: Colors.white,
                                   fontSize: 26.0,
                                 );
@@ -342,8 +342,8 @@ class _FrieghtState extends State<Frieght> {
                             }
                           },
                     child: _isLoading // Step 3
-                        ? CircularProgressIndicator() // Render loading indicator
-                        : Text(
+                        ? const CircularProgressIndicator() // Render loading indicator
+                        : const Text(
                             "Confirm Order",
                             style: TextStyle(
                                 fontSize: 25,
@@ -353,12 +353,12 @@ class _FrieghtState extends State<Frieght> {
                         backgroundColor:
                             MaterialStateProperty.all(ButtonsColor2),
                         padding: MaterialStateProperty.all(
-                            EdgeInsets.symmetric(vertical: 25, horizontal: 90)),
+                            const EdgeInsets.symmetric(vertical: 25, horizontal: 90)),
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50),
                         ))),
                   ),
-                  SizedBox(height: 19),
+                  const SizedBox(height: 19),
                   HaveOrder(
                     function: () {
                       Navigator.push(
@@ -379,11 +379,11 @@ class _FrieghtState extends State<Frieght> {
         appBar: AppBar(
           primary: true,
           elevation: 0,
-          title: Text(
+          title: const Text(
             "Add Order",
             style: TextStyle(color: Colors.black),
           ),
-          titleTextStyle: TextStyle(fontSize: 33),
+          titleTextStyle: const TextStyle(fontSize: 33),
           centerTitle: true,
           actions: [
             IconButton(
@@ -395,7 +395,7 @@ class _FrieghtState extends State<Frieght> {
                               email: widget.email,
                             )));
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.moped,
                 size: 30,
               ),
@@ -433,7 +433,7 @@ class _FrieghtState extends State<Frieght> {
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.TOP,
         timeInSecForIosWeb: 1,
-        backgroundColor: Color.fromARGB(255, 219, 31, 56),
+        backgroundColor: const Color.fromARGB(255, 219, 31, 56),
         textColor: Colors.white,
         fontSize: 16.0);
   }

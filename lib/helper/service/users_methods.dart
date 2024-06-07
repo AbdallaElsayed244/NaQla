@@ -15,19 +15,19 @@ class UsersMethods extends GetxController {
         .whenComplete(() => Get.snackbar(
               "Success",
               "your account has been created",
-              backgroundColor: Color.fromARGB(255, 53, 107, 121),
+              backgroundColor: const Color.fromARGB(255, 53, 107, 121),
               snackPosition: SnackPosition.BOTTOM,
-              duration: Duration(seconds: 2),
-              margin: EdgeInsets.all(50),
+              duration: const Duration(seconds: 2),
+              margin: const EdgeInsets.all(50),
             ))
         .catchError((error, stackTrace) {
       Get.snackbar(
         "Error",
         "Something went wrong, try again",
-        backgroundColor: Color.fromARGB(255, 175, 5, 28),
+        backgroundColor: const Color.fromARGB(255, 175, 5, 28),
         snackPosition: SnackPosition.BOTTOM,
-        duration: Duration(seconds: 2),
-        margin: EdgeInsets.all(50),
+        duration: const Duration(seconds: 2),
+        margin: const EdgeInsets.all(50),
       );
       print(error.toString());
     });
@@ -41,19 +41,19 @@ class UsersMethods extends GetxController {
         .whenComplete(() => Get.snackbar(
               "Success",
               "your account has been created",
-              backgroundColor: Color.fromARGB(255, 53, 107, 121),
+              backgroundColor: const Color.fromARGB(255, 53, 107, 121),
               snackPosition: SnackPosition.BOTTOM,
-              duration: Duration(seconds: 2),
-              margin: EdgeInsets.all(50),
+              duration: const Duration(seconds: 2),
+              margin: const EdgeInsets.all(50),
             ))
         .catchError((error, stackTrace) {
       Get.snackbar(
         "Error",
         "Something went wrong, try again",
-        backgroundColor: Color.fromARGB(255, 175, 5, 28),
+        backgroundColor: const Color.fromARGB(255, 175, 5, 28),
         snackPosition: SnackPosition.BOTTOM,
-        duration: Duration(seconds: 2),
-        margin: EdgeInsets.all(50),
+        duration: const Duration(seconds: 2),
+        margin: const EdgeInsets.all(50),
       );
       print(error.toString());
     });

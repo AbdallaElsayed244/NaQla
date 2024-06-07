@@ -31,7 +31,7 @@ class Brand extends StatelessWidget {
                 height: maxHeight,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
-                  return Icon(Icons.error); // Simple error icon
+                  return const Icon(Icons.error); // Simple error icon
                 },
               ),
             ),

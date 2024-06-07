@@ -27,8 +27,8 @@ class OrderConfirmation extends StatelessWidget {
     final double screenHeight = MediaQuery.of(context).size.height;
 
     return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.black,
@@ -52,7 +52,7 @@ class OrderConfirmation extends StatelessWidget {
                 child: Acceptance?['profilephoto'] != null
                     ? ClipOval(
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                           ),
                           height: screenHeight * 0.08,
@@ -60,7 +60,7 @@ class OrderConfirmation extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: CachedNetworkImage(
-                              placeholder: (context, url) => LoadingIndicator(
+                              placeholder: (context, url) => const LoadingIndicator(
                                 indicatorType: Indicator.ballPulse,
                                 colors: [Color.fromARGB(255, 62, 99, 64)],
                                 strokeWidth: 0.6,
@@ -82,7 +82,7 @@ class OrderConfirmation extends StatelessWidget {
                                     if (loadingProgress == null) {
                                       return child;
                                     } else {
-                                      return Center(
+                                      return const Center(
                                         child: CircularProgressIndicator(),
                                       );
                                     }
@@ -93,8 +93,8 @@ class OrderConfirmation extends StatelessWidget {
                           ),
                         ),
                       )
-                    : Padding(
-                        padding: const EdgeInsets.all(8.0),
+                    : const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Icon(
                           Icons.person,
                           size: 40,
@@ -102,7 +102,7 @@ class OrderConfirmation extends StatelessWidget {
                         ),
                       ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,17 +112,17 @@ class OrderConfirmation extends StatelessWidget {
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       '${Acceptance?['username']}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 24,
                         color: Color.fromARGB(255, 82, 177, 82),
                       ),
                     ),
                     Text(
                       '${Acceptance?['phone']}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.black,
                       ),
@@ -132,7 +132,7 @@ class OrderConfirmation extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -148,22 +148,22 @@ class OrderConfirmation extends StatelessWidget {
                           .delete();
                     }, () {}, "", "Yes", "cancle", DialogType.error);
                   },
-                  child: Text(
+                  child: const Text(
                     "Delete",
                     style: TextStyle(fontSize: 19, color: Colors.white),
                   ),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                      Color.fromARGB(255, 70, 64, 57),
+                      const Color.fromARGB(255, 70, 64, 57),
                     ),
                   ),
                 ),
               ),
-              SizedBox(width: 5), // Add spacing between buttons if needed
+              const SizedBox(width: 5), // Add spacing between buttons if needed
               Expanded(
                 child: ElevatedButton(
                   onPressed: onPressed,
-                  child: Text(
+                  child: const Text(
                     "Proceed",
                     style: TextStyle(fontSize: 19, color: Colors.white),
                   ),

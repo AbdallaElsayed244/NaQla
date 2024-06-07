@@ -53,7 +53,7 @@ class _OrderinfoState extends State<Orderinfo> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage("images/Order-info.jpg"),
           fit: BoxFit.cover,
@@ -71,21 +71,21 @@ class _OrderinfoState extends State<Orderinfo> {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
                 final bool hasEmailInTimeline = snapshot.data?.exists ?? false;
                 return badges.Badge(
                   badgeStyle: badges.BadgeStyle(
                     shape: badges.BadgeShape.circle,
                     badgeColor: Colors.blue,
-                    padding: EdgeInsets.all(4),
+                    padding: const EdgeInsets.all(4),
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.white, width: 1),
-                    borderGradient: badges.BadgeGradient.linear(colors: [
+                    borderSide: const BorderSide(color: Colors.white, width: 1),
+                    borderGradient: const badges.BadgeGradient.linear(colors: [
                       Color.fromARGB(255, 12, 68, 133),
-                      const Color.fromARGB(255, 136, 38, 38)
+                      Color.fromARGB(255, 136, 38, 38)
                     ]),
-                    badgeGradient: badges.BadgeGradient.linear(
+                    badgeGradient: const badges.BadgeGradient.linear(
                       colors: [
                         Color.fromARGB(255, 152, 189, 30),
                         Color.fromARGB(255, 69, 150, 110)
@@ -96,7 +96,7 @@ class _OrderinfoState extends State<Orderinfo> {
                   ),
                   position: badges.BadgePosition.topEnd(top: -4, end: 2),
                   showBadge: hasEmailInTimeline,
-                  badgeContent: Text('1',
+                  badgeContent: const Text('1',
                       style: TextStyle(color: Color.fromARGB(255, 15, 15, 15))),
                   child: IconButton(
                     onPressed: () {
@@ -108,24 +108,24 @@ class _OrderinfoState extends State<Orderinfo> {
                         ),
                       );
                     },
-                    icon: Icon(Icons.timeline_rounded, size: 30),
+                    icon: const Icon(Icons.timeline_rounded, size: 30),
                   ),
                 );
               },
             ),
           ],
           elevation: 0,
-          title: AutoSizeText(
+          title: const AutoSizeText(
             "Your Order Requests",
             style: TextStyle(
               fontSize: 24,
-              color: const Color.fromARGB(255, 0, 0, 0),
+              color: Color.fromARGB(255, 0, 0, 0),
             ),
           ),
           centerTitle: true,
         ),
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("images/Order-info.jpg"),
               fit: BoxFit.cover,
@@ -137,7 +137,7 @@ class _OrderinfoState extends State<Orderinfo> {
               stream: checkOrdersExistence(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
 
                 if (snapshot.hasData && snapshot.data!) {
@@ -162,7 +162,7 @@ class _OrderinfoState extends State<Orderinfo> {
                     future: navigateBasedOnOrder(context, widget.email),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       }
 
                       if (snapshot.hasError) {
@@ -195,12 +195,12 @@ class _OrderinfoState extends State<Orderinfo> {
   }
 
   Widget _buildOtherWidget() {
-    return Center(
+    return const Center(
       child: Text(
         'No Orders Found add order Now',
         style: TextStyle(
           fontSize: 24,
-          color: const Color.fromARGB(255, 0, 0, 0),
+          color: Color.fromARGB(255, 0, 0, 0),
         ),
       ),
     );
@@ -208,11 +208,11 @@ class _OrderinfoState extends State<Orderinfo> {
 
   Widget _buildNoDriversYet() {
     return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         border: Border.all(
-          color: Color.fromARGB(255, 0, 0, 0),
+          color: const Color.fromARGB(255, 0, 0, 0),
         ),
         borderRadius: BorderRadius.circular(50),
         color: Colors.transparent,
@@ -220,11 +220,11 @@ class _OrderinfoState extends State<Orderinfo> {
       child: Column(
         children: [
           OrderDetails(widget: widget),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Container(
             alignment: Alignment.center,
             width: 250,
-            child: Divider(
+            child: const Divider(
               color: Colors.black,
               thickness: 1.0,
               height: 5,
@@ -233,19 +233,19 @@ class _OrderinfoState extends State<Orderinfo> {
           Expanded(
             child: Column(
               children: [
-                SizedBox(height: 20),
-                Text(
+                const SizedBox(height: 20),
+                const Text(
                   'No Drivers Yet',
                   style: TextStyle(
                     fontSize: 24,
                     color: Color.fromARGB(255, 145, 136, 136),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
                   alignment: Alignment.center,
                   width: 250,
-                  child: Divider(
+                  child: const Divider(
                     color: Colors.black,
                     thickness: 1.0,
                     height: 5,
@@ -261,11 +261,11 @@ class _OrderinfoState extends State<Orderinfo> {
 
   Widget _buildOrderList(List<DocumentSnapshot> negotiationPrices) {
     return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         border: Border.all(
-          color: Color.fromARGB(255, 0, 0, 0),
+          color: const Color.fromARGB(255, 0, 0, 0),
         ),
         borderRadius: BorderRadius.circular(50),
         color: Colors.transparent,
@@ -273,11 +273,11 @@ class _OrderinfoState extends State<Orderinfo> {
       child: Column(
         children: [
           OrderDetails(widget: widget),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Container(
             alignment: Alignment.center,
             width: 250,
-            child: Divider(
+            child: const Divider(
               color: Colors.black,
               thickness: 1.0,
               height: 5,
@@ -306,9 +306,9 @@ class _OrderinfoState extends State<Orderinfo> {
                   },
                   background: Container(
                     color: Colors.red,
-                    padding: EdgeInsets.only(right: 20),
+                    padding: const EdgeInsets.only(right: 20),
                     alignment: Alignment.centerRight,
-                    child: Icon(
+                    child: const Icon(
                       Icons.delete,
                       color: Colors.white,
                     ),
@@ -318,7 +318,7 @@ class _OrderinfoState extends State<Orderinfo> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Column(
                             children: [
                               OrderRequests(
@@ -328,11 +328,11 @@ class _OrderinfoState extends State<Orderinfo> {
                                 email: widget.email,
                                 Driveremail: Driveremail,
                               ),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               Container(
                                 alignment: Alignment.center,
                                 width: 250,
-                                child: Divider(
+                                child: const Divider(
                                   color: Colors.black,
                                   thickness: 1.0,
                                   height: 5,

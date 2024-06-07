@@ -50,14 +50,14 @@ class _DriverDrawerState extends State<DriverDrawer> {
               children: [
                 UserAccountsDrawerHeader(
                   decoration:
-                      BoxDecoration(color: Color.fromARGB(255, 75, 133, 115)),
+                      const BoxDecoration(color: Color.fromARGB(255, 75, 133, 115)),
                   accountName: Text(userData?['username'] ?? ""),
                   accountEmail: Text(userData?['email'] ?? "not signed in"),
                   arrowColor: Colors.black,
                   currentAccountPicture: userData?['profilePhoto'] != null
                       ? CachedNetworkImage(
                           placeholder: (context, url) =>
-                              CircularProgressIndicator(),
+                              const CircularProgressIndicator(),
                           imageUrl: userData?['profilePhoto'],
                           imageBuilder: (context, imageProvider) =>
                               InstaImageViewer(
@@ -68,17 +68,17 @@ class _DriverDrawerState extends State<DriverDrawer> {
                             ),
                           ),
                         )
-                      : Padding(
-                          padding: const EdgeInsets.all(.0),
+                      : const Padding(
+                          padding: EdgeInsets.all(.0),
                           child: Icon(Icons.account_circle_rounded,
                               size: 80,
                               color: Color.fromARGB(255, 90, 115, 138)),
                         ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 13,
                 ),
-                ListTile(
+                const ListTile(
                   dense: false,
                   style: ListTileStyle.list,
                   leading: Icon(
@@ -90,17 +90,17 @@ class _DriverDrawerState extends State<DriverDrawer> {
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 13,
                 ),
                 ListTile(
                   dense: false,
                   style: ListTileStyle.list,
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.fact_check_outlined,
                     size: 40,
                   ),
-                  title: Text(
+                  title: const Text(
                     ' Accepted offers',
                     style: TextStyle(fontSize: 20),
                   ),
@@ -110,17 +110,17 @@ class _DriverDrawerState extends State<DriverDrawer> {
                         pageAnimationType: RightToLeftTransition()));
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 13,
                 ),
                 ListTile(
                   dense: false,
                   style: ListTileStyle.list,
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.logout,
                     size: 40,
                   ),
-                  title: Text(
+                  title: const Text(
                     'Log Out',
                     style: TextStyle(fontSize: 20),
                   ),
@@ -129,7 +129,7 @@ class _DriverDrawerState extends State<DriverDrawer> {
 
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                      MaterialPageRoute(builder: (context) => const HomeScreen()),
                     );
                   },
                 ),
@@ -137,7 +137,7 @@ class _DriverDrawerState extends State<DriverDrawer> {
             );
           }
 
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );

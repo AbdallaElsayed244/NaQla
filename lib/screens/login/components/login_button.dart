@@ -14,13 +14,13 @@ class LoginButton extends StatelessWidget {
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             foregroundColor: Colors.white,
-            backgroundColor: Color(0xff060644), //) Set text color to white
+            backgroundColor: const Color(0xff060644), //) Set text color to white
             elevation: 5,
           ), 
           onPressed: function,
           child: Text(
             type,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 25,
               fontWeight: FontWeight.bold,

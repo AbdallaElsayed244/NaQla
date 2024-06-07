@@ -29,7 +29,7 @@ class _OrderDetailsState extends State<OrderDetails> {
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         }
         if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
@@ -39,7 +39,7 @@ class _OrderDetailsState extends State<OrderDetails> {
             snapshot.data!.data() == null) {
           return Container(
               width: double.infinity,
-              child: Center(
+              child: const Center(
                   child: AutoSizeText(
                 'No Orders Found add order Now',
                 style: TextStyle(fontSize: 30),
@@ -56,8 +56,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 20),
                         child: Text(
                           "Order Details",
                           style: TextStyle(
@@ -117,7 +117,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                           DialogType.error, // Type of the dialog
                         );
                       },
-                      child: Text(
+                      child: const Text(
                         "Delete",
                         style: TextStyle(color: Colors.white),
                       ),
@@ -127,50 +127,50 @@ class _OrderDetailsState extends State<OrderDetails> {
                           shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
-                                  side: BorderSide(
+                                  side: const BorderSide(
                                       color: Colors.black, width: 1)))),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      AutoSizeText(
+                      const AutoSizeText(
                         "PickUp:",
                         style: TextStyle(
                             fontSize: 19,
                             fontWeight: FontWeight.bold,
-                            color: const Color.fromARGB(255, 0, 0, 0)),
+                            color: Color.fromARGB(255, 0, 0, 0)),
                       ),
                       AutoSizeText(
                         ' ${orderData['pickup'] ?? 'Unknown'}',
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 19,
-                            color: const Color.fromARGB(255, 0, 0, 0)),
+                            color: Color.fromARGB(255, 0, 0, 0)),
                       ),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      AutoSizeText(
+                      const AutoSizeText(
                         "Location:",
                         style: TextStyle(
                             fontSize: 19,
                             fontWeight: FontWeight.bold,
-                            color: const Color.fromARGB(255, 0, 0, 0)),
+                            color: Color.fromARGB(255, 0, 0, 0)),
                       ),
                       Flexible(
                         child: AutoSizeText(
                           ' ${orderData['destination'] ?? 'Unknown'}',
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 19,
-                              color: const Color.fromARGB(255, 0, 0, 0)),
+                              color: Color.fromARGB(255, 0, 0, 0)),
                         ),
                       ),
                     ],
@@ -178,36 +178,36 @@ class _OrderDetailsState extends State<OrderDetails> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      AutoSizeText(
+                      const AutoSizeText(
                         "Time: ",
                         style: TextStyle(
                             fontSize: 19,
                             fontWeight: FontWeight.bold,
-                            color: const Color.fromARGB(255, 0, 0, 0)),
+                            color: Color.fromARGB(255, 0, 0, 0)),
                       ),
                       AutoSizeText(
                         '${orderData['date'] ?? 'Unknown'}',
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 19,
-                            color: const Color.fromARGB(255, 0, 0, 0)),
+                            color: Color.fromARGB(255, 0, 0, 0)),
                       ),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      AutoSizeText(
+                      const AutoSizeText(
                         "Additional Notes:",
                         style: TextStyle(
                             fontSize: 19,
                             fontWeight: FontWeight.bold,
-                            color: const Color.fromARGB(255, 0, 0, 0)),
+                            color: Color.fromARGB(255, 0, 0, 0)),
                       ),
                       AutoSizeText(
                         ' ${orderData['cargo'] ?? 'Unknown'}',
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 19,
-                            color: const Color.fromARGB(255, 0, 0, 0)),
+                            color: Color.fromARGB(255, 0, 0, 0)),
                       ),
                     ],
                   ),

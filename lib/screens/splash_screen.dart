@@ -19,7 +19,7 @@ class SplashScreen extends StatelessWidget {
           return Opacity(
             opacity: 1,
             child: AnimatedSplashScreen(
-              backgroundColor: Color(0xff005337),
+              backgroundColor: const Color(0xff005337),
               duration: 990,
               splashTransition: SplashTransition.slideTransition,
               splashIconSize: 300,
@@ -30,11 +30,11 @@ class SplashScreen extends StatelessWidget {
                   width: imageWidth,
                   height: imageHeight,
                   errorBuilder: (context, error, stackTrace) {
-                    return Icon(Icons.error); // Simple error icon
+                    return const Icon(Icons.error); // Simple error icon
                   },
                 ),
               ),
-              nextScreen: HomeScreen(),
+              nextScreen: const HomeScreen(),
             ),
           );
         },

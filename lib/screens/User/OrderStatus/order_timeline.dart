@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-TextStyle style = TextStyle(color: Colors.white);
+TextStyle style = const TextStyle(color: Colors.white);
 
 class TimelineComponent extends StatefulWidget {
   TimelineComponent({Key? key, this.email, this.driverEmail}) : super(key: key);
@@ -31,7 +31,7 @@ class _TimelineComponentState extends State<TimelineComponent> {
     Size size = MediaQuery.of(context).size;
 
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage("images/Order-info.jpg"),
           fit: BoxFit.cover,
@@ -47,13 +47,13 @@ class _TimelineComponentState extends State<TimelineComponent> {
         appBar: AppBar(
             centerTitle: true,
             backgroundColor: Colors.transparent,
-            title: Text('Order Timeline'),
+            title: const Text('Order Timeline'),
             actions: [
               IconButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back,
                   size: 30,
                 ),
@@ -66,20 +66,20 @@ class _TimelineComponentState extends State<TimelineComponent> {
               .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
             if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             }
             if (!snapshot.hasData || !snapshot.data!.exists) {
               return Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage("images/Order-info2.jpg"),
                     fit: BoxFit.cover,
                   ),
                 ),
-                child: Center(
+                child: const Center(
                     child: AutoSizeText(
                   'Wait for the driver to confirm',
                   style: TextStyle(fontSize: 22),
@@ -99,7 +99,7 @@ class _TimelineComponentState extends State<TimelineComponent> {
               children: [
                 Container(
                   margin: EdgeInsets.zero,
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                       top: kToolbarHeight +
                           50), // Add padding equal to the height of the AppBar
                   child: Stack(
@@ -144,9 +144,9 @@ class _TimelineComponentState extends State<TimelineComponent> {
                         indicatorStyle: IndicatorStyle(
                           width: 20,
                           color: boolean1 == true
-                              ? Color.fromARGB(255, 203, 216, 209)
-                              : Color.fromARGB(255, 31, 95, 63),
-                          padding: EdgeInsets.all(6),
+                              ? const Color.fromARGB(255, 203, 216, 209)
+                              : const Color.fromARGB(255, 31, 95, 63),
+                          padding: const EdgeInsets.all(6),
                         ),
                         endChild: RightChild(
                           asset: Image.asset("images/order_placed.png",
@@ -157,8 +157,8 @@ class _TimelineComponentState extends State<TimelineComponent> {
                         ),
                         beforeLineStyle: LineStyle(
                           color: boolean1 == true
-                              ? Color.fromARGB(255, 203, 216, 209)
-                              : Color.fromARGB(255, 31, 95, 63),
+                              ? const Color.fromARGB(255, 203, 216, 209)
+                              : const Color.fromARGB(255, 31, 95, 63),
                         ),
                       ),
                       TimelineTile(
@@ -167,9 +167,9 @@ class _TimelineComponentState extends State<TimelineComponent> {
                         indicatorStyle: IndicatorStyle(
                           width: 20,
                           color: boolean2 == true
-                              ? Color.fromARGB(255, 203, 216, 209)
-                              : Color.fromARGB(255, 31, 95, 63),
-                          padding: EdgeInsets.all(6),
+                              ? const Color.fromARGB(255, 203, 216, 209)
+                              : const Color.fromARGB(255, 31, 95, 63),
+                          padding: const EdgeInsets.all(6),
                         ),
                         endChild: RightChild(
                           asset: Image.asset('images/order_confirmed.png',
@@ -180,8 +180,8 @@ class _TimelineComponentState extends State<TimelineComponent> {
                         ),
                         beforeLineStyle: LineStyle(
                           color: boolean2 == true
-                              ? Color.fromARGB(255, 203, 216, 209)
-                              : Color.fromARGB(255, 31, 95, 63),
+                              ? const Color.fromARGB(255, 203, 216, 209)
+                              : const Color.fromARGB(255, 31, 95, 63),
                         ),
                       ),
                       TimelineTile(
@@ -190,9 +190,9 @@ class _TimelineComponentState extends State<TimelineComponent> {
                         indicatorStyle: IndicatorStyle(
                           width: 20,
                           color: boolean3 == true
-                              ? Color.fromARGB(255, 203, 216, 209)
-                              : Color.fromARGB(255, 31, 95, 63),
-                          padding: EdgeInsets.all(6),
+                              ? const Color.fromARGB(255, 203, 216, 209)
+                              : const Color.fromARGB(255, 31, 95, 63),
+                          padding: const EdgeInsets.all(6),
                         ),
                         endChild: RightChild(
                           asset: Image.asset('images/output-onlinepngtools.png',
@@ -203,8 +203,8 @@ class _TimelineComponentState extends State<TimelineComponent> {
                         ),
                         beforeLineStyle: LineStyle(
                             color: boolean3 == true
-                                ? Color.fromARGB(255, 203, 216, 209)
-                                : Color.fromARGB(255, 31, 95, 63)),
+                                ? const Color.fromARGB(255, 203, 216, 209)
+                                : const Color.fromARGB(255, 31, 95, 63)),
                       ),
                       TimelineTile(
                         alignment: TimelineAlign.manual,
@@ -213,9 +213,9 @@ class _TimelineComponentState extends State<TimelineComponent> {
                         indicatorStyle: IndicatorStyle(
                           width: 20,
                           color: boolean4 == true
-                              ? Color.fromARGB(255, 203, 216, 209)
-                              : Color.fromARGB(255, 31, 95, 63),
-                          padding: EdgeInsets.all(6),
+                              ? const Color.fromARGB(255, 203, 216, 209)
+                              : const Color.fromARGB(255, 31, 95, 63),
+                          padding: const EdgeInsets.all(6),
                         ),
                         endChild: RightChild(
                           disabled: boolean4 ?? true,
@@ -226,8 +226,8 @@ class _TimelineComponentState extends State<TimelineComponent> {
                         ),
                         beforeLineStyle: LineStyle(
                           color: boolean4 == true
-                              ? Color.fromARGB(255, 203, 216, 209)
-                              : Color.fromARGB(255, 31, 95, 63),
+                              ? const Color.fromARGB(255, 203, 216, 209)
+                              : const Color.fromARGB(255, 31, 95, 63),
                         ),
                       ),
                     ],
@@ -243,7 +243,7 @@ class _TimelineComponentState extends State<TimelineComponent> {
                           _showRatingBar(context, driveremail, widget.email);
                         }, () {}, '', "yes", "No", DialogType.noHeader);
                       },
-                      child: Text(
+                      child: const Text(
                         "Confirm Delivery",
                         style: TextStyle(
                             fontSize: 25,
@@ -253,7 +253,7 @@ class _TimelineComponentState extends State<TimelineComponent> {
                           backgroundColor:
                               MaterialStateProperty.all(ButtonsColor2),
                           padding: MaterialStateProperty.all(
-                              EdgeInsets.symmetric(
+                              const EdgeInsets.symmetric(
                                   vertical: 15, horizontal: 40)),
                           shape:
                               MaterialStateProperty.all(RoundedRectangleBorder(
@@ -282,11 +282,11 @@ class _TimelineComponentState extends State<TimelineComponent> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  AutoSizeText(
+                  const AutoSizeText(
                     'Rate the driver',
                     style: TextStyle(fontSize: 28.0),
                   ),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   RatingBar.builder(
                     initialRating: 3,
                     minRating: 1,
@@ -294,8 +294,8 @@ class _TimelineComponentState extends State<TimelineComponent> {
                     direction: Axis.horizontal,
                     allowHalfRating: true,
                     itemCount: 5,
-                    itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                    itemBuilder: (context, _) => Icon(
+                    itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    itemBuilder: (context, _) => const Icon(
                       Icons.star,
                       color: Colors.amber,
                     ),
@@ -310,9 +310,9 @@ class _TimelineComponentState extends State<TimelineComponent> {
                       print(rating);
                     },
                   ),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   ElevatedButton(
-                    child: AutoSizeText(
+                    child: const AutoSizeText(
                       'Submit',
                       style: TextStyle(fontSize: 18.0, color: Colors.white),
                     ),

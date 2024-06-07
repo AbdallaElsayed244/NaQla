@@ -48,7 +48,7 @@ class _OrdersState extends State<Orders> {
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
-              padding: EdgeInsets.only(top: 20), // Added padding at the top
+              padding: const EdgeInsets.only(top: 20), // Added padding at the top
               itemCount: snapshot.data?.docs?.length ?? 0,
               itemBuilder: (context, index) {
                 final DocumentSnapshot Orders = snapshot.data.docs[index];
@@ -65,20 +65,20 @@ class _OrdersState extends State<Orders> {
                         width: 200.0,
                         height: 100.0,
                         child: Shimmer.fromColors(
-                          baseColor: Color.fromARGB(255, 231, 224, 224),
-                          highlightColor: Color.fromARGB(255, 223, 222, 216),
+                          baseColor: const Color.fromARGB(255, 231, 224, 224),
+                          highlightColor: const Color.fromARGB(255, 223, 222, 216),
                           child: Card(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
-                                side: BorderSide(
+                                side: const BorderSide(
                                   color: Colors.black,
                                   width: 2,
                                 )),
-                            margin: EdgeInsets.symmetric(
+                            margin: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 15),
                             elevation: 3,
                             child: Padding(
-                              padding: EdgeInsets.all(15),
+                              padding: const EdgeInsets.all(15),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -98,14 +98,14 @@ class _OrdersState extends State<Orders> {
                                         onPressed: () {
                                           _showDialog(context, index, Orders);
                                         },
-                                        child: Text(
+                                        child: const Text(
                                           "Start",
                                           style: TextStyle(color: Colors.white),
                                         ),
                                         style: ButtonStyle(
                                             fixedSize:
                                                 MaterialStateProperty.all(
-                                                    Size(80, 50)),
+                                                    const Size(80, 50)),
                                             backgroundColor:
                                                 MaterialStateColor.resolveWith(
                                                     (states) => ButtonsColor2),
@@ -114,24 +114,24 @@ class _OrdersState extends State<Orders> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
-                                                    side: BorderSide(
+                                                    side: const BorderSide(
                                                         color: Colors.black,
                                                         width: 1)))),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   buildDetailRow('       ', '             '),
                                   buildDetailRow(
                                       '                   ', '            '),
                                   buildDetailRow('      ', '            '),
                                   buildDetailRow('          ', '           '),
-                                  SizedBox(height: 90),
-                                  Divider(
+                                  const SizedBox(height: 90),
+                                  const Divider(
                                       color: Colors.black,
                                       thickness: 1.0,
                                       height: 5),
-                                  SizedBox(height: 20),
+                                  const SizedBox(height: 20),
                                 ],
                               ),
                             ),
@@ -143,7 +143,7 @@ class _OrdersState extends State<Orders> {
                       return Text('Error: ${userSnapshot.error}');
                     }
                     if (!userSnapshot.hasData || !userSnapshot.data!.exists) {
-                      return SizedBox();
+                      return const SizedBox();
                     }
 
                     final userData =
@@ -154,15 +154,15 @@ class _OrdersState extends State<Orders> {
                       child: Card(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
-                            side: BorderSide(
+                            side: const BorderSide(
                               color: Colors.black,
                               width: 2,
                             )),
                         margin:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                            const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                         elevation: 3,
                         child: Padding(
-                          padding: EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(15),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -182,13 +182,13 @@ class _OrdersState extends State<Orders> {
                                     onPressed: () {
                                       _showDialog(context, index, Orders);
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       "Start",
                                       style: TextStyle(color: Colors.white),
                                     ),
                                     style: ButtonStyle(
                                         fixedSize: MaterialStateProperty.all(
-                                            Size(80, 50)),
+                                            const Size(80, 50)),
                                         backgroundColor:
                                             MaterialStateColor.resolveWith(
                                                 (states) => ButtonsColor2),
@@ -196,23 +196,23 @@ class _OrdersState extends State<Orders> {
                                             RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
-                                                side: BorderSide(
+                                                side: const BorderSide(
                                                     color: Colors.black,
                                                     width: 1)))),
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               buildDetailRow("PickUp:", Orders['pickup']),
                               buildDetailRow("Location:", Orders['destination']),
                               buildDetailRow("Time:", Orders['date']),
                               buildDetailRow("Additional Notes:", Orders['cargo']),
-                              SizedBox(height: 20),
-                              Divider(
+                              const SizedBox(height: 20),
+                              const Divider(
                                   color: Colors.black,
                                   thickness: 1.0,
                                   height: 5),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               buildUserInfo(userData),
                             ],
                           ),
@@ -224,7 +224,7 @@ class _OrdersState extends State<Orders> {
               },
             );
           } else {
-            return Center(
+            return const Center(
               child: Text(
                 'No Orders Right Now',
                 style: TextStyle(
@@ -244,18 +244,18 @@ class _OrdersState extends State<Orders> {
       children: [
         Text(
           "$label ",
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 19,
             fontWeight: FontWeight.bold,
-            color: const Color.fromARGB(255, 0, 0, 0),
+            color: Color.fromARGB(255, 0, 0, 0),
           ),
         ),
         Expanded(
           child: Text(
             value,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 19,
-              color: const Color.fromARGB(255, 0, 0, 0),
+              color: Color.fromARGB(255, 0, 0, 0),
             ),
           ),
         ),
@@ -280,7 +280,7 @@ class _OrdersState extends State<Orders> {
                     height: 60,
                     width: 60,
                     child: CachedNetworkImage(
-                      placeholder: (context, url) => LoadingIndicator(
+                      placeholder: (context, url) => const LoadingIndicator(
                         indicatorType: Indicator.ballPulse,
                         colors: [Color.fromARGB(255, 62, 99, 64)],
                         strokeWidth: 0.6,
@@ -299,7 +299,7 @@ class _OrdersState extends State<Orders> {
                             if (loadingProgress == null) {
                               return child;
                             } else {
-                              return Center(
+                              return const Center(
                                 child: LoadingIndicator(
                                   indicatorType: Indicator.ballPulse,
                                   colors: [Color.fromARGB(255, 62, 99, 64)],
@@ -317,8 +317,8 @@ class _OrdersState extends State<Orders> {
                     ),
                   ),
                 )
-              : Padding(
-                  padding: const EdgeInsets.all(8.0),
+              : const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Icon(
                     Icons.person,
                     size: 40,
@@ -326,12 +326,12 @@ class _OrdersState extends State<Orders> {
                   ),
                 ),
         ),
-        SizedBox(width: 15),
+        const SizedBox(width: 15),
         Text(
           userData['username'] ?? 'Unknown',
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 19,
-            color: const Color.fromARGB(255, 0, 0, 0),
+            color: Color.fromARGB(255, 0, 0, 0),
           ),
         ),
       ],
@@ -346,17 +346,17 @@ class _OrdersState extends State<Orders> {
         String _text = '';
 
         return AlertDialog(
-          title: Text('Negotiate'),
+          title: const Text('Negotiate'),
           content: TextFormField(
             onChanged: (value) {
               _text = value;
             },
-            decoration: InputDecoration(hintText: 'Enter negotiation price'),
+            decoration: const InputDecoration(hintText: 'Enter negotiation price'),
           ),
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () async {
@@ -395,7 +395,7 @@ class _OrdersState extends State<Orders> {
 
                 Navigator.of(context).pop();
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );
@@ -413,7 +413,7 @@ class _OrdersState extends State<Orders> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text("ORDERS"),
+        title: const Text("ORDERS"),
         centerTitle: true,
         actions: [
           StreamBuilder<DocumentSnapshot>(
@@ -423,21 +423,21 @@ class _OrdersState extends State<Orders> {
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
               final bool hasEmailInTimeline = snapshot.data?.exists ?? false;
               return badges.Badge(
                   badgeStyle: badges.BadgeStyle(
                     shape: badges.BadgeShape.circle,
                     badgeColor: Colors.blue,
-                    padding: EdgeInsets.all(4),
+                    padding: const EdgeInsets.all(4),
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.white, width: 1),
-                    borderGradient: badges.BadgeGradient.linear(colors: [
+                    borderSide: const BorderSide(color: Colors.white, width: 1),
+                    borderGradient: const badges.BadgeGradient.linear(colors: [
                       Color.fromARGB(255, 12, 68, 133),
-                      const Color.fromARGB(255, 136, 38, 38)
+                      Color.fromARGB(255, 136, 38, 38)
                     ]),
-                    badgeGradient: badges.BadgeGradient.linear(
+                    badgeGradient: const badges.BadgeGradient.linear(
                       colors: [
                         Color.fromARGB(255, 152, 189, 30),
                         Color.fromARGB(255, 69, 150, 110)
@@ -448,7 +448,7 @@ class _OrdersState extends State<Orders> {
                   ),
                   position: badges.BadgePosition.topEnd(top: -4, end: 2),
                   showBadge: hasEmailInTimeline,
-                  badgeContent: Text('1',
+                  badgeContent: const Text('1',
                       style: TextStyle(color: Color.fromARGB(255, 15, 15, 15))),
                   child: IconButton(
                     onPressed: () {
@@ -456,7 +456,7 @@ class _OrdersState extends State<Orders> {
                           page: OrderStatus(driverEmail: widget.driverEmail),
                           pageAnimationType: RightToLeftTransition()));
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.fact_check_outlined,
                       size: 30,
                     ),
@@ -478,7 +478,7 @@ class _OrdersState extends State<Orders> {
           // Your existing content
           SafeArea(
             child: Container(
-              margin: EdgeInsets.all(11),
+              margin: const EdgeInsets.all(11),
               child: Column(
                 children: [
                   Expanded(

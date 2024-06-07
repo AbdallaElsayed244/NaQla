@@ -15,9 +15,9 @@ class CustomScaffold extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           iconSize: 29,
-          color: Color.fromARGB(255, 0, 0, 0),
+          color: const Color.fromARGB(255, 0, 0, 0),
         ),
         elevation: 0,
       ),
@@ -29,7 +29,7 @@ class CustomScaffold extends StatelessWidget {
             height: MediaQuery.of(context).size.height / 1.6,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(70),
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 colors: [Color.fromARGB(255, 161, 62, 128), Colors.green],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,

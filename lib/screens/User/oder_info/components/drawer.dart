@@ -49,7 +49,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               children: [
                 UserAccountsDrawerHeader(
                   decoration:
-                      BoxDecoration(color: Color.fromARGB(255, 75, 133, 115)),
+                      const BoxDecoration(color: Color.fromARGB(255, 75, 133, 115)),
                   accountName: Text(userData?['username'] ?? ""),
                   accountEmail: Text(userData?['email'] ?? "not signed in"),
                   arrowColor: Colors.black,
@@ -63,16 +63,16 @@ class _CustomDrawerState extends State<CustomDrawer> {
                             ),
                           ),
                         )
-                      : Padding(
-                          padding: const EdgeInsets.all(.0),
+                      : const Padding(
+                          padding: EdgeInsets.all(.0),
                           child: Icon(Icons.account_circle_rounded,
                               size: 80, color: Colors.black),
                         ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 13,
                 ),
-                ListTile(
+                const ListTile(
                   dense: false,
                   style: ListTileStyle.list,
                   leading: Icon(
@@ -84,17 +84,17 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 13,
                 ),
                 ListTile(
                   dense: false,
                   style: ListTileStyle.list,
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.trolley,
                     size: 40,
                   ),
-                  title: Text(
+                  title: const Text(
                     'Add Order',
                     style: TextStyle(fontSize: 20),
                   ),
@@ -107,17 +107,17 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     );
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 13,
                 ),
                 ListTile(
                   dense: false,
                   style: ListTileStyle.list,
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.moped,
                     size: 40,
                   ),
-                  title: Text(
+                  title: const Text(
                     'Order Requests',
                     style: TextStyle(fontSize: 20),
                   ),
@@ -129,17 +129,17 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     );
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 13,
                 ),
                 ListTile(
                   dense: false,
                   style: ListTileStyle.list,
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.timeline_rounded,
                     size: 40,
                   ),
-                  title: Text(
+                  title: const Text(
                     'Order TimeLine',
                     style: TextStyle(fontSize: 20),
                   ),
@@ -154,17 +154,17 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     );
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 13,
                 ),
                 ListTile(
                   dense: false,
                   style: ListTileStyle.list,
-                  leading: Icon(
+                  leading: const Icon(
                     Icons.logout,
                     size: 40,
                   ),
-                  title: Text(
+                  title: const Text(
                     'Log Out',
                     style: TextStyle(fontSize: 20),
                   ),
@@ -173,7 +173,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
 
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                      MaterialPageRoute(builder: (context) => const HomeScreen()),
                     );
                   },
                 ),
@@ -181,7 +181,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
             );
           }
 
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );

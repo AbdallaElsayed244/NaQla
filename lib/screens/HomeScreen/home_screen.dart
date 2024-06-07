@@ -1,5 +1,4 @@
 import 'package:Mowasil/screens/login/to_login.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -28,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _preloadImage() async {
-    await precacheImage(AssetImage('images/Truck.jpg'), context);
+    await precacheImage(const AssetImage('images/Truck.jpg'), context);
     setState(() {
       _isImageLoaded = true;
     });
@@ -96,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          ToLogin(),
+          const ToLogin(),
         ],
       ),
     );

@@ -46,8 +46,8 @@ class _ListScreenState extends State<ListScreen>
       final start = index * 0.1;
       final end = start + 0.3;
       return Tween<Offset>(
-        begin: Offset(0.0, 1.0), // Start from below
-        end: Offset(0.0, 0.0), // End at the original position
+        begin: const Offset(0.0, 1.0), // Start from below
+        end: const Offset(0.0, 0.0), // End at the original position
       ).animate(
         CurvedAnimation(
           parent: _controller,
@@ -75,13 +75,13 @@ class _ListScreenState extends State<ListScreen>
 
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
           child: Card(
             elevation: 5,
             color: Colors.white,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8.0),
               child: Column(
                 children: [
                   AutoSizeText(
@@ -117,16 +117,16 @@ class _ListScreenState extends State<ListScreen>
                     .doc(widget.driveremail)
                     .delete();
               },
-              child: Text(
+              child: const Text(
                 "GO Back",
                 style: TextStyle(color: Colors.white),
               ),
               style: ButtonStyle(
-                fixedSize: MaterialStateProperty.all(Size(150, 50)),
+                fixedSize: MaterialStateProperty.all(const Size(150, 50)),
                 backgroundColor: MaterialStateProperty.all(ButtonsColor2),
                 shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
-                  side: BorderSide(color: Colors.black, width: 1),
+                  side: const BorderSide(color: Colors.black, width: 1),
                 )),
               ),
             ),
@@ -160,16 +160,16 @@ class _ListScreenState extends State<ListScreen>
                   });
                   widget.onPressed[index]();
                 },
-                child: Text(
+                child: const Text(
                   "yes",
                   style: TextStyle(color: Colors.white),
                 ),
                 style: ButtonStyle(
-                  fixedSize: MaterialStateProperty.all(Size(80, 50)),
+                  fixedSize: MaterialStateProperty.all(const Size(80, 50)),
                   backgroundColor: MaterialStateProperty.all(ButtonsColor2),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
-                    side: BorderSide(color: Colors.black, width: 1),
+                    side: const BorderSide(color: Colors.black, width: 1),
                   )),
                 ),
               ),

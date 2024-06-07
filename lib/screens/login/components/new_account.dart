@@ -37,8 +37,8 @@ class _NewAccountState extends State<NewAccount> {
             style: TextStyle(
               fontSize: fontSize,
               color: _isPressed
-                  ? Color.fromARGB(255, 8, 79, 133)
-                  : Color.fromARGB(255, 235, 109, 60),
+                  ? const Color.fromARGB(255, 8, 79, 133)
+                  : const Color.fromARGB(255, 235, 109, 60),
               fontWeight: FontWeight.bold, // Added for emphasis
             ),
           ),
@@ -53,15 +53,15 @@ class _NewAccountState extends State<NewAccount> {
               dismissOnBackKeyPress: false,
               dialogType: DialogType.noHeader,
               animType: AnimType.topSlide,
-              dialogBackgroundColor: Color.fromARGB(255, 232, 232, 233),
+              dialogBackgroundColor: const Color.fromARGB(255, 232, 232, 233),
               btnCancelText: "Become a User",
               btnOkText: "Become a Driver",
               title: 'Create new account?',
               // padding: const EdgeInsets.all(5.0),
               desc: 'choose to be a Driver or User.',
-              descTextStyle: TextStyle(fontSize: 20),
+              descTextStyle: const TextStyle(fontSize: 20),
               btnOkColor: ButtonsColor2,
-              btnCancelColor: Color.fromARGB(255, 70, 64, 57),
+              btnCancelColor: const Color.fromARGB(255, 70, 64, 57),
 
               btnCancelOnPress: () {
                 Navigator.of(context).push(PageAnimationTransition(

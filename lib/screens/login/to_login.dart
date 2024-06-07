@@ -73,7 +73,7 @@ class _ToLoginState extends State<ToLogin> {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: EdgeInsets.only(bottom: 10.0),
+                padding: const EdgeInsets.only(bottom: 10.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -90,8 +90,8 @@ class _ToLoginState extends State<ToLogin> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 30.0),
-                    NewAccount(),
+                    const SizedBox(height: 30.0),
+                    const NewAccount(),
                   ],
                 ),
               ),

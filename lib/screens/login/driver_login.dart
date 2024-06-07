@@ -74,19 +74,19 @@ class _DriverLoginState extends State<DriverLogin> {
                           onChanged: (data) {
                             email = data;
                           },
-                          icon: Icon(Icons.person),
+                          icon: const Icon(Icons.person),
                           hide: false,
                           type: TextInputType.emailAddress,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Material(
                         child: TextFields(
                           text: "Password",
                           onChanged: (data) {
                             password = data;
                           },
-                          icon: Icon(Icons.key),
+                          icon: const Icon(Icons.key),
                           hide: true,
                           type: TextInputType.text,
                         ),
@@ -94,7 +94,7 @@ class _DriverLoginState extends State<DriverLogin> {
                     ],
                   ),
                 ),
-                SizedBox(height: 70), // Adjust spacing
+                const SizedBox(height: 70), // Adjust spacing
 
                 SizedBox(
                   width: 330,
@@ -102,7 +102,7 @@ class _DriverLoginState extends State<DriverLogin> {
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
-                        backgroundColor: Color.fromARGB(
+                        backgroundColor: const Color.fromARGB(
                             255, 13, 49, 29), 
                         elevation: 5,
                       ),
@@ -139,8 +139,8 @@ class _DriverLoginState extends State<DriverLogin> {
                         }
                       },
                       child: isloading
-                          ? CircularProgressIndicator()
-                          : Text(
+                          ? const CircularProgressIndicator()
+                          : const Text(
                               'Sign in',
                               style: TextStyle(
                                 color: Colors.white,

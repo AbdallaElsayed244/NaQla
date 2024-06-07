@@ -30,15 +30,15 @@ class RegisterTextFields extends StatelessWidget {
       decoration: InputDecoration(
           label: label,
           hintText: hintText,
-          hintStyle: TextStyle(color: Color.fromARGB(247, 90, 94, 98)),
+          hintStyle: const TextStyle(color: Color.fromARGB(247, 90, 94, 98)),
           border: OutlineInputBorder(
-            borderSide: BorderSide(
+            borderSide: const BorderSide(
               color: Color.fromARGB(247, 158, 179, 200),
             ),
             borderRadius: BorderRadius.circular(15),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
+            borderSide: const BorderSide(
               color: Color.fromARGB(215, 63, 101, 150),
             ),
             borderRadius: BorderRadius.circular(15),

@@ -8,16 +8,16 @@ Future<bool> _onWillPop(context) async {
     final shouldExit = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Are you sure you want to exit?'),
-        content: Text('Press back button again to confirm.'),
+        title: const Text('Are you sure you want to exit?'),
+        content: const Text('Press back button again to confirm.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false), // Cancel
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true), // Exit
-            child: Text('Exit'),
+            child: const Text('Exit'),
           ),
         ],
       ),
