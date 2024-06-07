@@ -10,19 +10,6 @@ class AuthMethods extends GetxController {
   final _auth = FirebaseAuth.instance;
   late final Rx<User?> firebaseUser;
 
-  void onReady() {
-    Future.delayed(Duration(seconds: 6));
-    firebaseUser = Rx<User?>(_auth.currentUser);
-    firebaseUser.bindStream(_auth.userChanges());
-    ever(firebaseUser, _setInitialScreen);
-  }
-
-  void _setInitialScreen(User? user) {
-    user == null
-        ? Get.offAll((context) => const SplashScreen())
-        : Get.offAll((context) => Frieght());
-  }
-
   Future<String?> registerUser(
     String email,
     password,

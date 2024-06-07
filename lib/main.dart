@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         builder: (_, child) {
           return ChangeNotifierProvider(
             create: (context) => ProgressProvider(),
-            child: MaterialApp(
+            child: GetMaterialApp(
               debugShowCheckedModeBanner: false,
               home: DoubleTapToExit(
                   snackBar: const SnackBar(

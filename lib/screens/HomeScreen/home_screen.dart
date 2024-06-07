@@ -14,17 +14,24 @@ class HomeScreen extends StatefulWidget {
   final double scalingFactor;
 
   @override
-  State<HomeScreen> createState() => _AnimatedContainerReplacementState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _AnimatedContainerReplacementState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   bool _showOriginalContainer = true;
+  bool _isImageLoaded = false;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Preload the image after dependencies have been established
-    precacheImage(AssetImage('images/Truck.jpg'), context);
+    _preloadImage();
+  }
+
+  Future<void> _preloadImage() async {
+    await precacheImage(AssetImage('images/Truck.jpg'), context);
+    setState(() {
+      _isImageLoaded = true;
+    });
   }
 
   void _toggleContainers() {
@@ -41,10 +48,14 @@ class _AnimatedContainerReplacementState extends State<HomeScreen> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: Image.asset(
-              fit: BoxFit.cover,
-              'images/Truck.jpg',
-            ),
+            child: _isImageLoaded
+                ? Image.asset(
+                    'images/Truck.jpg',
+                    fit: BoxFit.cover,
+                  )
+                : Container(
+                    color: Colors.black, // A solid color placeholder
+                  ),
           ),
           Align(
             alignment: Alignment.centerLeft,
