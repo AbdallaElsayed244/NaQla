@@ -108,8 +108,7 @@ class _OrderinfoState extends State<OrderStatus>
         elevation: 0,
         title: const Text(
           "Your Order Requests",
-          style: TextStyle(
-              fontSize: 24, color: Color.fromARGB(255, 0, 0, 0)),
+          style: TextStyle(fontSize: 24, color: Color.fromARGB(255, 0, 0, 0)),
         ),
         centerTitle: true,
       ),
@@ -169,7 +168,7 @@ class _OrderinfoState extends State<OrderStatus>
                             onPressed: () {
                               showMessage(
                                 context,
-                                'To deliver the package you should pay the fees',
+                                'To deliver the package you should pay the 10% fees',
                                 () async {
                                   // Show loading indicator
                                   setState(() {
@@ -181,7 +180,7 @@ class _OrderinfoState extends State<OrderStatus>
                                     useremail = Acceptance?['email'];
 
                                     // Parse the price and handle any potential null values
-                                    int amount = int.parse(price ?? '0');
+                                    int amount = int.parse(price * 0.1 ?? '0');
 
                                     // Process the payment
                                     await PaymentManager.makePayment(

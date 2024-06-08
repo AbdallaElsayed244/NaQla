@@ -5,7 +5,6 @@
 import FlutterMacOS
 import Foundation
 
-import animated_rating_stars
 import cloud_firestore
 import file_selector_macos
 import firebase_auth
@@ -17,7 +16,6 @@ import rive_common
 import sqflite
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
-  AnimatedRatingStarsPlugin.register(with: registry.registrar(forPlugin: "AnimatedRatingStarsPlugin"))
   FLTFirebaseFirestorePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseFirestorePlugin"))
   FileSelectorPlugin.register(with: registry.registrar(forPlugin: "FileSelectorPlugin"))
   FLTFirebaseAuthPlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseAuthPlugin"))
