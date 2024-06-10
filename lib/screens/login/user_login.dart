@@ -72,6 +72,7 @@ class _UserLoginState extends State<UserLogin> {
                   child: Column(
                     children: [
                       Material(
+                        color: Colors.white,
                         child: TextFields(
                           text: "email",
                           onChanged: (data) {
@@ -84,6 +85,7 @@ class _UserLoginState extends State<UserLogin> {
                       ),
                       const SizedBox(height: 10),
                       Material(
+                        color: Colors.white,
                         child: TextFields(
                           text: "Password",
                           onChanged: (data) {
@@ -116,7 +118,8 @@ class _UserLoginState extends State<UserLogin> {
                           try {
                             await loginUser(
                                 widget.context); // user login function call
-                            await navigateBasedOnOrder(widget.context, email!); // navigate to Order page based on user order existence
+                            await navigateBasedOnOrder(widget.context,
+                                email!); // navigate to Order page based on user order existence
                           } on FirebaseAuthException catch (e) {
                             showSnackBar(widget.context,
                                 e.message); // message user login errors

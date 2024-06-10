@@ -1,7 +1,8 @@
 import 'package:Naqla/helper/app_colors.dart';
 import 'package:Naqla/helper/show_message.dart';
 import 'package:Naqla/screens/User/OrderStatus/components/timeLine.dart';
-import 'package:Naqla/screens/User/oder_info/components/drawer.dart';
+import 'package:Naqla/screens/User/drawer.dart';
+import 'package:Naqla/screens/User/frieght/components/text_field.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -195,7 +196,7 @@ class _TimelineComponentState extends State<TimelineComponent> {
                           padding: const EdgeInsets.all(6),
                         ),
                         endChild: RightChild(
-                          asset: Image.asset('images/output-onlinepngtools.png',
+                          asset: Image.asset('images/order_processed2.png',
                               height: 65),
                           title: 'Order Coming',
                           message: 'Your order is on the way.',
@@ -255,8 +256,7 @@ class _TimelineComponentState extends State<TimelineComponent> {
                           padding: WidgetStateProperty.all(
                               const EdgeInsets.symmetric(
                                   vertical: 15, horizontal: 40)),
-                          shape:
-                              WidgetStateProperty.all(RoundedRectangleBorder(
+                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ))),
                     ),
@@ -274,19 +274,20 @@ class _TimelineComponentState extends State<TimelineComponent> {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
+          String comment = "";
           return Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.all(50.0),
             child: Container(
               width: double.infinity,
-              height: MediaQuery.of(context).size.height / 5,
+              height: MediaQuery.of(context).size.height / 4,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   const AutoSizeText(
                     'Rate the driver',
-                    style: TextStyle(fontSize: 28.0),
+                    style: TextStyle(fontSize: 20.0),
                   ),
-                  const SizedBox(height: 16.0),
+                  const SizedBox(height: 10.0),
                   RatingBar.builder(
                     initialRating: 3,
                     minRating: 1,
@@ -310,7 +311,15 @@ class _TimelineComponentState extends State<TimelineComponent> {
                       print(rating);
                     },
                   ),
-                  const SizedBox(height: 16.0),
+                  const SizedBox(height: 1.0),
+                  TextFrieght(
+                    name: 'Comment about the driver',
+                    type: TextInputType.text,
+                    icon: const Icon(Icons.add_reaction_sharp),
+                    onChanged: (data) {
+                      comment = data;
+                    },
+                  ),
                   ElevatedButton(
                     child: const AutoSizeText(
                       'Submit',
@@ -324,6 +333,12 @@ class _TimelineComponentState extends State<TimelineComponent> {
                           .collection('TimeLine')
                           .doc(userEmail)
                           .delete();
+                      await FirebaseFirestore.instance
+                          .collection('Users')
+                          .doc("${driveremail}Driver")
+                          .update({
+                        'rating': comment,
+                      });
                       Navigator.pop(context);
                     },
                   ),

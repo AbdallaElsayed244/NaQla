@@ -25,14 +25,13 @@ class TextFields extends StatelessWidget {
     // Using MediaQuery to obtain device dimensions
     double deviceWidth = MediaQuery.of(context).size.width;
 
-
     // Responsive width calculation
     double containerWidth = deviceWidth * 0.8; // 80% of screen width
     double marginHorizontal = deviceWidth * 0.1; // 10% margin on each side
 
     return Container(
       width: containerWidth,
-      height: 65, // You may want to make this also responsive if needed
+      height: 65,
       margin: EdgeInsets.only(
           top: 27, right: marginHorizontal, left: marginHorizontal),
       decoration: BoxDecoration(

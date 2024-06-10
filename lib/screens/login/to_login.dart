@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async'; // Import for Future.delayed
 import 'package:Naqla/screens/login/user_login.dart';
-import 'package:Naqla/screens/login/components/new_account.dart';
+import 'package:Naqla/screens/HomeScreen/components/new_account.dart';
 import 'package:Naqla/screens/login/components/sign_in_buttons.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

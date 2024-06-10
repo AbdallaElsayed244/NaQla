@@ -208,7 +208,7 @@ class _UserRegState extends State<UserReg> {
                                   },
                                   label: const Text("email"),
                                   hintText: "enter email",
-                                  obscureText: false,
+                                  obscureText: false, keyboardType: TextInputType.emailAddress,
                                 ),
                                 const SizedBox(
                                   height: 13,
@@ -226,7 +226,7 @@ class _UserRegState extends State<UserReg> {
                                   },
                                   label: const Text("username"),
                                   hintText: "enter username",
-                                  obscureText: false,
+                                  obscureText: false, keyboardType: TextInputType.name,
                                 ),
                                 const SizedBox(
                                   height: 13,
@@ -244,7 +244,7 @@ class _UserRegState extends State<UserReg> {
                                     password = data;
                                   },
                                   label: const Text("Password"),
-                                  hintText: "enter password",
+                                  hintText: "enter password", keyboardType: TextInputType.text,
                                 ),
                                 const SizedBox(
                                   height: 13,

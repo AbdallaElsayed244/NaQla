@@ -6,27 +6,28 @@ class RegisterTextFields extends StatelessWidget {
     this.controller,
     this.onChanged,
     this.validator,
-    this.keyboardType,
+    required this.keyboardType,
     this.label,
-    this.hintText, required this.obscureText, 
+    this.hintText,
+    required this.obscureText,
   });
   final TextEditingController? controller;
   final void Function(String)? onChanged;
   final String? Function(String?)? validator;
-  final TextInputType? keyboardType;
+  final TextInputType keyboardType;
   final Widget? label;
   final String? hintText;
-  final bool obscureText ;
+  final bool obscureText;
  
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       onChanged: onChanged,
       validator: validator,
-      keyboardType: TextInputType.number,
+      keyboardType:keyboardType,
       obscureText: obscureText,
-     
       decoration: InputDecoration(
           label: label,
           hintText: hintText,

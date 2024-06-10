@@ -6,6 +6,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:loading_indicator/loading_indicator.dart';
@@ -63,7 +64,8 @@ class OrderRequests extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: CachedNetworkImage(
-                              placeholder: (context, url) => const LoadingIndicator(
+                              placeholder: (context, url) =>
+                                  const LoadingIndicator(
                                 indicatorType: Indicator.ballPulse,
                                 colors: [Color.fromARGB(255, 62, 99, 64)],
                                 strokeWidth: 0.6,
@@ -137,12 +139,16 @@ class OrderRequests extends StatelessWidget {
                           const SizedBox(
                             width: 50,
                           ),
-                          AutoSizeText(
-                            '${negotiationPriceData?['username']}',
-                            style: const TextStyle(
-                              fontSize: 24,
-                              color: Color.fromARGB(255, 82, 177, 82),
-                            ),
+                          Row(
+                            children: [
+                              AutoSizeText(
+                                '${negotiationPriceData?['username']}',
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  color: Color.fromARGB(255, 82, 177, 82),
+                                ),
+                              ),
+                            ],
                           ),
                           const SizedBox(
                             width: 15,
@@ -163,6 +169,63 @@ class OrderRequests extends StatelessWidget {
                           color: Color.fromARGB(255, 0, 0, 0),
                         ),
                       ),
+                      negotiationPriceData?['rating'] != null
+                          ? Row(
+                              children: [
+                                AutoSizeText(
+                                  '${negotiationPriceData?['rating']} -',
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    color: Color.fromARGB(255, 0, 0, 0),
+                                  ),
+                                ),
+                                RatingBarIndicator(
+                                  direction: Axis.horizontal,
+                                  itemSize: 15,
+                                  rating: (negotiationPriceData?['rating'] !=
+                                          null)
+                                      ? double.tryParse(
+                                              negotiationPriceData!['rating']
+                                                  .toString()) ??
+                                          0.0
+                                      : 0.0,
+                                  itemPadding: const EdgeInsets.symmetric(
+                                      horizontal: 4.0),
+                                  itemBuilder: (context, _) => const Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Row(
+                              children: [
+                                const AutoSizeText(
+                                  '0.0 -',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Color.fromARGB(255, 0, 0, 0),
+                                  ),
+                                ),
+                                RatingBarIndicator(
+                                  direction: Axis.horizontal,
+                                  itemSize: 15,
+                                  rating: (negotiationPriceData?['rating'] !=
+                                          null)
+                                      ? double.tryParse(
+                                              negotiationPriceData!['rating']
+                                                  .toString()) ??
+                                          0.0
+                                      : 0.0,
+                                  itemPadding: const EdgeInsets.symmetric(
+                                      horizontal: 4.0),
+                                  itemBuilder: (context, _) => const Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                ),
+                              ],
+                            ),
                     ],
                   ),
                 ],

@@ -29,6 +29,7 @@ class UserModel {
       "email": email,
       "username": username,
       "profilePhoto": profilePhoto,
+      "phone": phone
     };
   }
 

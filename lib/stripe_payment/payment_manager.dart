@@ -6,7 +6,7 @@ abstract class PaymentManager {
   static Future<void> makePayment(int amount, String currency) async {
     try {
       String clientSecret =
-          await _getClientSecret((amount * 100).toString(), currency);
+          await _getClientSecret((amount * 10).toString(), currency);
       await _initializePaymentSheet(clientSecret);
       await Stripe.instance.presentPaymentSheet();
     } catch (error) {
@@ -53,7 +53,6 @@ abstract class PaymentManager {
         print('Error in _getClientSecret: $error');
         throw Exception('Failed to get client secret: $error');
       }
-      
     }
   }
 }

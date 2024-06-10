@@ -227,6 +227,7 @@ class _DriverRegState extends State<DriverReg> {
                                 height: 13,
                               ),
                               RegisterTextFields(
+                                keyboardType: TextInputType.emailAddress,
                                 controller: controller.email,
                                 onChanged: (data) {
                                   email = data;
@@ -257,7 +258,7 @@ class _DriverRegState extends State<DriverReg> {
                                   password = data;
                                 },
                                 label: const Text("Password"),
-                                hintText: "enter password",
+                                hintText: "enter password", keyboardType: TextInputType.text,
                               ),
                               const SizedBox(
                                 height: 13,
@@ -490,7 +491,7 @@ class _DriverRegState extends State<DriverReg> {
                                                 driverEmail: email),
                                           ),
                                         );
-                                        showSnackBar(context,  "Registration Successful");  // successful Driver creation message
+                                    
                                          
                                       } on FirebaseAuthException catch (e) {
                                         showSnackBar(context, e.message);

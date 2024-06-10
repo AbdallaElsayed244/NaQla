@@ -1,5 +1,5 @@
 import 'package:Naqla/helper/show_message.dart';
-import 'package:Naqla/screens/Driver/OrdersList/components/driver_drawer.dart';
+import 'package:Naqla/screens/Driver/driver_drawer.dart';
 import 'package:Naqla/screens/Driver/OrdersList/components/order_confirm.dart';
 import 'package:Naqla/screens/Driver/OrdersList/components/timeline_manage.dart';
 import 'package:Naqla/stripe_payment/payment_manager.dart';
@@ -94,6 +94,7 @@ class _OrderinfoState extends State<OrderStatus>
         email: widget.driverEmail,
       ),
       appBar: AppBar(
+        backgroundColor: Colors.white,
         actions: [
           IconButton(
             onPressed: () {
@@ -180,11 +181,11 @@ class _OrderinfoState extends State<OrderStatus>
                                     useremail = Acceptance?['email'];
 
                                     // Parse the price and handle any potential null values
-                                    int amount = int.parse(price * 0.1 ?? '0');
+                                    int amount = int.parse(price ?? '0');
 
                                     // Process the payment
                                     await PaymentManager.makePayment(
-                                        amount, "EGP");
+                                        amount, "USD");
 
                                     // Update the TimeLine collection in Firestore
                                     await FirebaseFirestore.instance
@@ -205,13 +206,20 @@ class _OrderinfoState extends State<OrderStatus>
                                         .delete();
 
                                     // Delete the negotiationPrice sub-collection
-                                    await FirebaseFirestore.instance
-                                        .collection('orders')
-                                        .doc(useremail)
-                                        .collection('negotiationPrice')
-                                        .doc()
-                                        .delete();
+                                    CollectionReference subcollection =
+                                        FirebaseFirestore.instance
+                                            .collection('orders')
+                                            .doc(useremail)
+                                            .collection('negotiationPrice');
 
+                                    QuerySnapshot subcollectionSnapshot =
+                                        await subcollection.get();
+
+                                    // Loop through and delete each document
+                                    for (DocumentSnapshot document
+                                        in subcollectionSnapshot.docs) {
+                                      await document.reference.delete();
+                                    }
                                     // Update the state and start the animation
                                     setState(() {
                                       startanimation = true;

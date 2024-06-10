@@ -78,6 +78,7 @@ class _GoogleMapPageState extends State<GoogleMapPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Google Map'),
+        backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {

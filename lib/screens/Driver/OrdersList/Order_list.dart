@@ -1,6 +1,6 @@
 import 'package:Naqla/helper/app_colors.dart';
 import 'package:Naqla/helper/service/orders_methods.dart';
-import 'package:Naqla/screens/Driver/OrdersList/components/driver_drawer.dart';
+import 'package:Naqla/screens/Driver/driver_drawer.dart';
 import 'package:Naqla/screens/Driver/order_status.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -48,7 +48,8 @@ class _OrdersState extends State<Orders> {
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
-              padding: const EdgeInsets.only(top: 20), // Added padding at the top
+              padding:
+                  const EdgeInsets.only(top: 20), // Added padding at the top
               itemCount: snapshot.data?.docs?.length ?? 0,
               itemBuilder: (context, index) {
                 final DocumentSnapshot Orders = snapshot.data.docs[index];
@@ -66,7 +67,8 @@ class _OrdersState extends State<Orders> {
                         height: 100.0,
                         child: Shimmer.fromColors(
                           baseColor: const Color.fromARGB(255, 231, 224, 224),
-                          highlightColor: const Color.fromARGB(255, 223, 222, 216),
+                          highlightColor:
+                              const Color.fromARGB(255, 223, 222, 216),
                           child: Card(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
@@ -103,9 +105,8 @@ class _OrdersState extends State<Orders> {
                                           style: TextStyle(color: Colors.white),
                                         ),
                                         style: ButtonStyle(
-                                            fixedSize:
-                                                WidgetStateProperty.all(
-                                                    const Size(80, 50)),
+                                            fixedSize: WidgetStateProperty.all(
+                                                const Size(80, 50)),
                                             backgroundColor:
                                                 WidgetStateColor.resolveWith(
                                                     (states) => ButtonsColor2),
@@ -158,8 +159,8 @@ class _OrdersState extends State<Orders> {
                               color: Colors.black,
                               width: 2,
                             )),
-                        margin:
-                            const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 15),
                         elevation: 3,
                         child: Padding(
                           padding: const EdgeInsets.all(15),
@@ -204,9 +205,11 @@ class _OrdersState extends State<Orders> {
                               ),
                               const SizedBox(height: 10),
                               buildDetailRow("PickUp:", Orders['pickup']),
-                              buildDetailRow("Location:", Orders['destination']),
+                              buildDetailRow(
+                                  "Location:", Orders['destination']),
                               buildDetailRow("Time:", Orders['date']),
-                              buildDetailRow("Additional Notes:", Orders['cargo']),
+                              buildDetailRow(
+                                  "Additional Notes:", Orders['cargo']),
                               const SizedBox(height: 20),
                               const Divider(
                                   color: Colors.black,
@@ -293,7 +296,7 @@ class _OrdersState extends State<Orders> {
                         child: Image.network(
                           userData['profilePhoto'],
                           scale: 5,
-                          fit: BoxFit.contain,
+                          fit: BoxFit.cover,
                           loadingBuilder: (BuildContext context, Widget child,
                               ImageChunkEvent? loadingProgress) {
                             if (loadingProgress == null) {
@@ -351,7 +354,8 @@ class _OrdersState extends State<Orders> {
             onChanged: (value) {
               _text = value;
             },
-            decoration: const InputDecoration(hintText: 'Enter negotiation price'),
+            decoration:
+                const InputDecoration(hintText: 'Enter negotiation price'),
           ),
           actions: <Widget>[
             TextButton(
@@ -388,6 +392,7 @@ class _OrdersState extends State<Orders> {
                   'vehicletype': user?['vehicletype'],
                   'phone': user?['phone'],
                   'email': user?['email'],
+                  'rating': user?['rating'],
                 });
 
                 print(

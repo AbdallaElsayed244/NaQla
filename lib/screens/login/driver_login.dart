@@ -69,6 +69,7 @@ class _DriverLoginState extends State<DriverLogin> {
                   child: Column(
                     children: [
                       Material(
+                        color: Colors.white,
                         child: TextFields(
                           text: "email",
                           onChanged: (data) {
@@ -81,6 +82,7 @@ class _DriverLoginState extends State<DriverLogin> {
                       ),
                       const SizedBox(height: 10),
                       Material(
+                        color: Colors.white,
                         child: TextFields(
                           text: "Password",
                           onChanged: (data) {
@@ -110,28 +112,28 @@ class _DriverLoginState extends State<DriverLogin> {
                           setState(() {
                             isloading = true;
                           });
-                          try {
-                            final driverDoc = await FirebaseFirestore.instance
-                                .collection('Users')
-                                .doc("${email}Driver")
-                                .get();
-
-                            if (driverDoc.exists) {
+                          final driverDoc = await FirebaseFirestore.instance
+                              .collection('Users')
+                              .doc("${email}Driver")
+                              .get();
+                          if (driverDoc.exists) {
+                            try {
                               // Login successful, navigate to the appropriate screen
                               print('Login successful!');
                               await LoginUser(); // Driver login function call
-                            } else {
-                              // Driver not found in Database
-                              showSnackBar(widget.context,
-                                  "register as driver to continue");
-                              // Show an error message
+                            } on FirebaseAuthException catch (e) {
+                              showSnackBar(
+                                  widget.context, e.message); // error message
+                            } finally {
+                              setState(() {
+                                isloading = false;
+                              });
                             }
-                          } on FirebaseAuthException catch (e) {
-                            showSnackBar(context, e.message); // error message
-                          } finally {
-                            setState(() {
-                              isloading = false;
-                            });
+                          } else {
+                            // Driver not found in Database
+                            showSnackBar(widget.context,
+                                "register as driver to continue");
+                            // Show an error message
                           }
                         }
                       },

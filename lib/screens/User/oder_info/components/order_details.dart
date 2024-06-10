@@ -6,7 +6,6 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-
 class OrderDetails extends StatefulWidget {
   const OrderDetails({
     super.key,
@@ -111,24 +110,23 @@ class _OrderDetailsState extends State<OrderDetails> {
                             }
                           },
                           () {},
-                          'Delete Order', // Title of the confirmation dialog
-                          "delete", // Text for the positive action button
-                          "Cancel", // Text for the negative action button
+                          'Cancle Order', // Title of the confirmation dialog
+                          "Cancle", // Text for the positive action button
+                          "no", // Text for the negative action button
                           DialogType.error, // Type of the dialog
                         );
                       },
                       child: const Text(
-                        "Delete",
+                        "Cancle Order",
                         style: TextStyle(color: Colors.white),
                       ),
                       style: ButtonStyle(
                           backgroundColor: WidgetStateColor.resolveWith(
                               (states) => ButtonsColor2),
-                          shape: WidgetStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  side: const BorderSide(
-                                      color: Colors.black, width: 1)))),
+                          shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              side: const BorderSide(
+                                  color: Colors.black, width: 1)))),
                     ),
                   ),
                 ],
@@ -147,11 +145,13 @@ class _OrderDetailsState extends State<OrderDetails> {
                             fontWeight: FontWeight.bold,
                             color: Color.fromARGB(255, 0, 0, 0)),
                       ),
-                      AutoSizeText(
-                        ' ${orderData['pickup'] ?? 'Unknown'}',
-                        style: const TextStyle(
-                            fontSize: 19,
-                            color: Color.fromARGB(255, 0, 0, 0)),
+                      Flexible(
+                        child: AutoSizeText(
+                          ' ${orderData['pickup'] ?? 'Unknown'}',
+                          style: const TextStyle(
+                              fontSize: 19,
+                              color: Color.fromARGB(255, 0, 0, 0)),
+                        ),
                       ),
                     ],
                   ),
@@ -188,8 +188,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       AutoSizeText(
                         '${orderData['date'] ?? 'Unknown'}',
                         style: const TextStyle(
-                            fontSize: 19,
-                            color: Color.fromARGB(255, 0, 0, 0)),
+                            fontSize: 19, color: Color.fromARGB(255, 0, 0, 0)),
                       ),
                     ],
                   ),
@@ -206,8 +205,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                       AutoSizeText(
                         ' ${orderData['cargo'] ?? 'Unknown'}',
                         style: const TextStyle(
-                            fontSize: 19,
-                            color: Color.fromARGB(255, 0, 0, 0)),
+                            fontSize: 19, color: Color.fromARGB(255, 0, 0, 0)),
                       ),
                     ],
                   ),
