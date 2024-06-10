@@ -9,6 +9,13 @@ class OrderseMethods {
         .set(OrderInfomap); // store order details
   }
 
+  Future getOederHistory(String? id) async {
+    return await FirebaseFirestore.instance
+        .collection("orders_History")
+        .doc(id)
+        .snapshots(); // store order details
+  }
+
   Future<Stream<QuerySnapshot>> getOederDetails() async {
     return await FirebaseFirestore.instance
         .collection(

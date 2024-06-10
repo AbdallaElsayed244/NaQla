@@ -1,6 +1,7 @@
 import 'package:Naqla/helper/service/auth_methods.dart';
 import 'package:Naqla/screens/HomeScreen/home_screen.dart';
 import 'package:Naqla/screens/User/OrderStatus/order_timeline.dart';
+import 'package:Naqla/screens/User/OrdersHistory/orders_history.dart';
 import 'package:Naqla/screens/User/frieght/frieght_page.dart';
 import 'package:Naqla/screens/User/oder_info/orderinfo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -72,18 +73,26 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 const SizedBox(
                   height: 13,
                 ),
-                // const ListTile(
-                //   dense: false,
-                //   style: ListTileStyle.list,
-                //   leading: Icon(
-                //     Icons.account_circle_outlined,
-                //     size: 40,
-                //   ),
-                //   title: Text(
-                //     'Your Profile',
-                //     style: TextStyle(fontSize: 20),
-                //   ),
-                // ),
+                ListTile(
+                  dense: false,
+                  style: ListTileStyle.list,
+                  leading: const Icon(
+                    Icons.history_rounded,
+                    size: 40,
+                  ),
+                  title: const Text(
+                    'Order history',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              OrdersHistory(email: widget.email)),
+                    );
+                  },
+                ),
                 const SizedBox(
                   height: 13,
                 ),

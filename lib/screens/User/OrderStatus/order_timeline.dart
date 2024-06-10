@@ -337,7 +337,7 @@ class _TimelineComponentState extends State<TimelineComponent> {
                           .collection('Users')
                           .doc("${driveremail}Driver")
                           .update({
-                        'rating': comment,
+                        'Comment': comment,
                       });
                       Navigator.pop(context);
                     },
