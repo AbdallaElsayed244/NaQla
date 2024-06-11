@@ -1,6 +1,8 @@
 import 'package:Naqla/helper/service/auth_methods.dart';
+import 'package:Naqla/screens/Driver/OrdersHistory/orders_history.dart';
+import 'package:Naqla/screens/Driver/OrdersList/Order_list.dart';
 import 'package:Naqla/screens/HomeScreen/home_screen.dart';
-import 'package:Naqla/screens/Driver/order_status.dart';
+import 'package:Naqla/screens/Driver/order_timeline/order_status.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
@@ -49,8 +51,8 @@ class _DriverDrawerState extends State<DriverDrawer> {
             return ListView(
               children: [
                 UserAccountsDrawerHeader(
-                  decoration:
-                      const BoxDecoration(color: Color.fromARGB(255, 75, 133, 115)),
+                  decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 75, 133, 115)),
                   accountName: Text(userData?['username'] ?? ""),
                   accountEmail: Text(userData?['email'] ?? "not signed in"),
                   arrowColor: Colors.black,
@@ -78,18 +80,23 @@ class _DriverDrawerState extends State<DriverDrawer> {
                 const SizedBox(
                   height: 13,
                 ),
-                // const ListTile(
-                //   dense: false,
-                //   style: ListTileStyle.list,
-                //   leading: Icon(
-                //     Icons.account_circle_outlined,
-                //     size: 40,
-                //   ),
-                //   title: Text(
-                //     'Your Profile',
-                //     style: TextStyle(fontSize: 20),
-                //   ),
-                // ),
+                ListTile(
+                  dense: false,
+                  style: ListTileStyle.list,
+                  leading: const Icon(
+                    Icons.list_alt_outlined,
+                    size: 40,
+                  ),
+                  title: const Text(
+                    'Order List',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(PageAnimationTransition(
+                        page: Orders(driverEmail: widget.email),
+                        pageAnimationType: RightToLeftTransition()));
+                  },
+                ),
                 const SizedBox(
                   height: 13,
                 ),
@@ -117,6 +124,26 @@ class _DriverDrawerState extends State<DriverDrawer> {
                   dense: false,
                   style: ListTileStyle.list,
                   leading: const Icon(
+                    Icons.history,
+                    size: 40,
+                  ),
+                  title: const Text(
+                    'Orders history',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(PageAnimationTransition(
+                        page: OrdersHistory2(driveremail: widget.email),
+                        pageAnimationType: RightToLeftTransition()));
+                  },
+                ),
+                const SizedBox(
+                  height: 13,
+                ),
+                ListTile(
+                  dense: false,
+                  style: ListTileStyle.list,
+                  leading: const Icon(
                     Icons.logout,
                     size: 40,
                   ),
@@ -129,7 +156,8 @@ class _DriverDrawerState extends State<DriverDrawer> {
 
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const HomeScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const HomeScreen()),
                     );
                   },
                 ),

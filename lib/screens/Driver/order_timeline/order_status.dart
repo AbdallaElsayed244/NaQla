@@ -1,7 +1,8 @@
+import 'package:Naqla/helper/order_history_add.dart';
 import 'package:Naqla/helper/show_message.dart';
 import 'package:Naqla/screens/Driver/driver_drawer.dart';
 import 'package:Naqla/screens/Driver/OrdersList/components/order_confirm.dart';
-import 'package:Naqla/screens/Driver/OrdersList/components/timeline_manage.dart';
+import 'package:Naqla/screens/Driver/order_timeline/components/timeline_manage.dart';
 import 'package:Naqla/stripe_payment/payment_manager.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -177,8 +178,14 @@ class _OrderinfoState extends State<OrderStatus>
                                   });
 
                                   try {
-                                    // Retrieve the user's email from the Acceptance object
-                                    useremail = Acceptance?['email'];
+                                    // Ensure Acceptance object is not null and has 'email' field
+                                    if (Acceptance != null &&
+                                        Acceptance.containsKey('email')) {
+                                      useremail = Acceptance['email'];
+                                    } else {
+                                      throw Exception(
+                                          "Acceptance object is null or does not contain 'email'");
+                                    }
 
                                     // Parse the price and handle any potential null values
                                     int amount = int.parse(price ?? '0');
@@ -198,6 +205,21 @@ class _OrderinfoState extends State<OrderStatus>
                                       'coming': true,
                                       'arrived': true,
                                     });
+
+                                    // Transfer document in Firestore
+                                    await transferDocument(
+                                        'orders',
+                                        useremail
+                                        ,
+                                        useremail,
+                                        "orders_History",
+                                        "completed");
+                                    await transferDocument(
+                                        'orders',
+                                        useremail,
+                                        widget.driverEmail,
+                                        "orders_History",
+                                        "completed");
 
                                     // Delete the document from the orders collection
                                     await FirebaseFirestore.instance
@@ -220,6 +242,7 @@ class _OrderinfoState extends State<OrderStatus>
                                         in subcollectionSnapshot.docs) {
                                       await document.reference.delete();
                                     }
+
                                     // Update the state and start the animation
                                     setState(() {
                                       startanimation = true;
@@ -235,6 +258,7 @@ class _OrderinfoState extends State<OrderStatus>
                                     });
                                   }
                                 },
+
                                 () {},
                                 'Begin Ride', // Title of the confirmation dialog
                                 "Pay Now", // Text for the positive action button

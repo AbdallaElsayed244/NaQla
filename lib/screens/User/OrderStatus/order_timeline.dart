@@ -91,8 +91,8 @@ class _TimelineComponentState extends State<TimelineComponent> {
             var data = snapshot.data!.data() as Map<String, dynamic>;
             bool? boolean1 = data['Confirmed'];
             bool? boolean2 = data['Pickup'];
-            bool? boolean3 = data['arrived'];
-            bool? boolean4 = data['coming'];
+            bool? boolean3 = data['coming'];
+            bool? boolean4 = data['arrived'];
             String? driveremail = data['email'];
 
             return Column(
@@ -312,35 +312,39 @@ class _TimelineComponentState extends State<TimelineComponent> {
                     },
                   ),
                   const SizedBox(height: 1.0),
-                  TextFrieght(
-                    name: 'Comment about the driver',
-                    type: TextInputType.text,
-                    icon: const Icon(Icons.add_reaction_sharp),
-                    onChanged: (data) {
-                      comment = data;
-                    },
+                  Flexible(
+                    child: TextFrieght(
+                      name: 'Comment about the driver',
+                      type: TextInputType.text,
+                      icon: const Icon(Icons.add_reaction_sharp),
+                      onChanged: (data) {
+                        comment = data;
+                      },
+                    ),
                   ),
-                  ElevatedButton(
-                    child: const AutoSizeText(
-                      'Submit',
-                      style: TextStyle(fontSize: 18.0, color: Colors.white),
+                  Flexible(
+                    child: ElevatedButton(
+                      child: const AutoSizeText(
+                        'Submit',
+                        style: TextStyle(fontSize: 18.0, color: Colors.white),
+                      ),
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStateProperty.all(ButtonsColor2),
+                      ),
+                      onPressed: () async {
+                        await FirebaseFirestore.instance
+                            .collection('TimeLine')
+                            .doc(userEmail)
+                            .delete();
+                        await FirebaseFirestore.instance
+                            .collection('Users')
+                            .doc("${driveremail}Driver")
+                            .update({
+                          'Comment': comment,
+                        });
+                        Navigator.pop(context);
+                      },
                     ),
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.all(ButtonsColor2),
-                    ),
-                    onPressed: () async {
-                      await FirebaseFirestore.instance
-                          .collection('TimeLine')
-                          .doc(userEmail)
-                          .delete();
-                      await FirebaseFirestore.instance
-                          .collection('Users')
-                          .doc("${driveremail}Driver")
-                          .update({
-                        'Comment': comment,
-                      });
-                      Navigator.pop(context);
-                    },
                   ),
                 ],
               ),

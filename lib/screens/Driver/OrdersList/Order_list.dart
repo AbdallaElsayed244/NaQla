@@ -1,7 +1,7 @@
 import 'package:Naqla/helper/app_colors.dart';
 import 'package:Naqla/helper/service/orders_methods.dart';
 import 'package:Naqla/screens/Driver/driver_drawer.dart';
-import 'package:Naqla/screens/Driver/order_status.dart';
+import 'package:Naqla/screens/Driver/order_timeline/order_status.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';

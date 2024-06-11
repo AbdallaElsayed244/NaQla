@@ -1,3 +1,4 @@
+import 'package:Naqla/helper/order_history_add.dart';
 import 'package:Naqla/screens/User/oder_info/orderinfo.dart';
 import 'package:Naqla/helper/app_colors.dart';
 import 'package:Naqla/helper/show_message.dart';
@@ -97,6 +98,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   .delete();
                               await transferDocument(
                                   'orders',
+                                  widget.widget.email,
                                   widget.widget.email,
                                   "orders_History",
                                   "canceled");
@@ -220,51 +222,5 @@ class _OrderDetailsState extends State<OrderDetails> {
         );
       },
     );
-  }
-
-  Future<void> transferDocument(
-    String sourceCollection,
-    String? documentId,
-    String destinationCollection,
-    String statusValue,
-  ) async {
-    try {
-      // Initialize Firestore instance
-      FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-      // Get the document from the source collection
-      DocumentSnapshot sourceDocSnapshot =
-          await firestore.collection(sourceCollection).doc(documentId).get();
-
-      if (sourceDocSnapshot.exists) {
-        // Get the document data
-        Map<String, dynamic>? data =
-            sourceDocSnapshot.data() as Map<String, dynamic>?;
-
-        if (data != null) {
-          // Add the status field to the data
-          data['status'] = statusValue;
-
-          // Write the modified document to the destination collection
-          await firestore
-              .collection(destinationCollection)
-              .doc(documentId)
-              .collection("Orders")
-              .doc()
-              .set(data);
-
-          // Optionally, delete the document from the source collection
-          await firestore.collection(sourceCollection).doc(documentId).delete();
-
-          print('Document transferred successfully with status field!');
-        } else {
-          print('No data found in the document.');
-        }
-      } else {
-        print('Document does not exist in the source collection.');
-      }
-    } catch (e) {
-      print('Error transferring document: $e');
-    }
   }
 }

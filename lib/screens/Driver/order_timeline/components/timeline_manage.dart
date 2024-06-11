@@ -2,6 +2,7 @@ import 'package:Naqla/helper/app_colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ListScreen extends StatefulWidget {
   const ListScreen({
@@ -71,8 +72,6 @@ class _ListScreenState extends State<ListScreen>
 
   @override
   Widget build(BuildContext context) {
-
-
     return Column(
       children: [
         const Padding(
@@ -111,11 +110,20 @@ class _ListScreenState extends State<ListScreen>
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () async {
-                Navigator.pop(context);
                 await FirebaseFirestore.instance
                     .collection('Acceptance')
                     .doc(widget.driveremail)
                     .delete();
+                Navigator.pop(context);
+                await Fluttertoast.showToast(
+                  msg: "Order Completed",
+                  toastLength: Toast.LENGTH_LONG,
+                  gravity: ToastGravity.TOP,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: MessageColor,
+                  textColor: Colors.white,
+                  fontSize: 16.0,
+                );
               },
               child: const Text(
                 "GO Back",
