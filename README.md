@@ -10,7 +10,7 @@ my Graduation Project Application.
 
 Home screen                     |   Order list             |  Order requests    |  Order timeline
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
-![](screenshots/Home_screen.jpg?raw=true)|![](screenshots/Order_list.jpg?raw=true)|![](screenshots/Order_requests.jpg?raw=true)|![](screenshots/Order_timeline.jpg?raw=true)
+![](screenshots/Home_screen.jpeg?raw=true)|![](screenshots/Order_list.jpg?raw=true)|![](screenshots/Order_requests.jpeg?raw=true)|![](screenshots/Order_timeline.jpg?raw=true)
 
 <br/>
 
