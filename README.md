@@ -12,13 +12,6 @@ Home screen                     |   Order list             |  Order requests    
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 ![](screenshots/Home_screen.jpg?raw=true)|![](screenshots/Order_list.jpg?raw=true)|![](screenshots/Order_requests.jpg?raw=true)|![](screenshots/Order_timeline.jpg?raw=true)
 
-<br/>
-
-
-
-
-
-<br/>
 
 ## Dependencies
 Package Name        |
