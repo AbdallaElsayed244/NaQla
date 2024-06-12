@@ -116,14 +116,14 @@ class _OrderDetailsState extends State<OrderDetails> {
                             }
                           },
                           () {},
-                          'Cancle Order', // Title of the confirmation dialog
-                          "Cancle", // Text for the positive action button
+                          'Cancel Order', // Title of the confirmation dialog
+                          "Cancel", // Text for the positive action button
                           "no", // Text for the negative action button
                           DialogType.error, // Type of the dialog
                         );
                       },
                       child: const Text(
-                        "Cancle Order",
+                        "Cancel Order",
                         style: TextStyle(color: Colors.white),
                       ),
                       style: ButtonStyle(

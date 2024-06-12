@@ -276,7 +276,7 @@ class _OrderRequestsState extends State<OrderRequests> {
                         context, 'Are you sure you want to accept this offer?',
                         () async {
                       await OfferAcceptance(context, userData);
-                    }, () {}, 'Accept Offer', "Accept", "cancle",
+                    }, () {}, 'Accept Offer', "Accept", "Cancel",
                         DialogType.noHeader);
                   },
                   child: const AutoSizeText(
