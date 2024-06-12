@@ -1,6 +1,6 @@
 # NaQla
 
-my Graduation Project Application.
+my Graduation Project Application, It's an application that connects Drivers who has trucks or semi trucks with people who need to deliver furniture or any heavy items for speedy operations with negotiatible prices.
 
 
 
